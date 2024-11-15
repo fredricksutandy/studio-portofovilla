@@ -38,57 +38,63 @@ const TriviaSection = () => {
   }
 
   return (
-    <section className="justify-between mx-auto bg-[#fff] px-4 py-10 md:py-[80px] relative">
+    <section className="justify-between mx-auto bg-[#fff] px-5 py-10 md:py-[80px] relative">
         <Image src={palmLeaf} alt="palm-leaf" className="absolute right-0 bottom-0 z-0"/>
 
-      <div className="max-w-[1296px] 2xl:max-w-[1440px] block m-auto">
-        <div className="mb-6 md:mb-[80px]">
+      <div className="max-w-[1296px] block m-auto">
+        <div className="mb-6 md:mb-[128px]">
           <Image src={asterisk} alt="Asterisk icon" width={60} height={60} className="mb-6"/>
           <h2 className="text-3xl md:text-4xl w-full lg:text-5xl text-black font-medium">{triviaData.subtitle}</h2>
         </div>
 
-        <div className="flex gap-4 md:gap-8 w-full items-center mb-[80px] md:mb-[104px] flex-wrap z-10 relative">
-          <div className="py-2 md:py-2 w-full md:w-[400px] border-r border-r-[#1D764A]">
+        <div className="flex gap-4 md:gap-[40px] w-full items-center mb-[80px] md:mb-[128px] flex-wrap z-10 relative">
+          <div className="py-2 md:py-2 w-full md:w-[calc(50%-20px)] border-b border-b-[#1D764A]">
               {/* <Image className="mb-6 w-7 h-7 md:w-10 md:h-10" src={happyCustomer} alt="happy customer" width={40} height={40}/> */}
-              <p className={`${kronaOne.className} text-[#1D764A] text-3xl md:text-5xl font-medium`}>{triviaData.triviaOneNumber}</p>    
-              <p className={`${kronaOne.className} text-[#1D764A] text-base md:text-2xl font-base mb-4`}>{triviaData.triviaOne}</p>    
-              <p className={`text-[#727272] text-base font-base`}>{triviaData.triviaOneDescription}</p>    
+              <p className={`${kronaOne.className} text-[#1A520F] text-xl md:text-4xl font-medium`}>{triviaData.triviaOneNumber}</p>    
+              <p className={`${kronaOne.className} text-[#1A520F] text-base md:text-xl font-base mb-2`}>{triviaData.triviaOne}</p>    
+              <p className={`text-black text-base font-base`}>{triviaData.triviaOneDescription}</p>    
           </div>
-          <div className="py-2 md:py-2 w-full md:w-[400px] border-r border-r-[#1D764A]">
+          <div className="py-2 md:py-2 w-full md:w-[calc(50%-32px)] border-b border-b-[#1D764A]">
               {/* <Image className="mb-6" src={rateReview} alt="rating star" width={40} height={40}/> */}
-              <p className={`${kronaOne.className} text-[#1D764A] text-3xl md:text-5xl font-medium`}>{triviaData.triviaTwoNumber}</p>    
-              <p className={`${kronaOne.className} text-[#1D764A] text-base md:text-2xl font-base mb-4`}>{triviaData.triviaTwo}</p>    
-              <p className={`text-[#727272] text-base font-base`}>{triviaData.triviaTwoDescription}</p>    
+              <p className={`${kronaOne.className} text-[#1A520F] text-xl md:text-4xl font-medium`}>{triviaData.triviaTwoNumber}</p>    
+              <p className={`${kronaOne.className} text-[#1A520F] text-base md:text-xl font-base mb-2`}>{triviaData.triviaTwo}</p>    
+              <p className={`text-black text-base font-base`}>{triviaData.triviaTwoDescription}</p>    
           </div>
-          <div className="py-2 md:py-2 w-full md:w-[400px] border-r border-r-[#1D764A]">
+          <div className="py-2 md:py-2 w-full md:w-[calc(50%-32px)] border-b border-b-[#1D764A]">
               {/* <Image className="mb-6" src={moon} alt="cloudy night" width={40} height={40}/> */}
-              <p className={`${kronaOne.className} text-[#1D764A] text-3xl md:text-5xl font-medium`}>{triviaData.triviaThreeNumber}</p>    
-              <p className={`${kronaOne.className} text-[#1D764A] text-base md:text-2xl font-base mb-4`}>{triviaData.triviaThree}</p>    
-              <p className={`text-[#727272] text-base font-base`}>{triviaData.triviaThreeDescription}</p>    
+              <p className={`${kronaOne.className} text-[#1A520F] text-xl md:text-4xl font-medium`}>{triviaData.triviaThreeNumber}</p>    
+              <p className={`${kronaOne.className} text-[#1A520F] text-base md:text-xl font-base mb-2`}>{triviaData.triviaThree}</p>    
+              <p className={`text-black text-base font-base`}>{triviaData.triviaThreeDescription}</p>    
+          </div>
+          <div className="py-2 md:py-2 w-full md:w-[calc(50%-32px)] border-b border-b-[#1D764A]">
+              {/* <Image className="mb-6" src={moon} alt="cloudy night" width={40} height={40}/> */}
+              <p className={`${kronaOne.className} text-[#1A520F] text-xl md:text-4xl font-medium`}>{triviaData.triviaFourNumber}</p>    
+              <p className={`${kronaOne.className} text-[#1A520F] text-base md:text-xl font-base mb-2`}>{triviaData.triviaFour}</p>    
+              <p className={`text-black text-base font-base`}>{triviaData.triviaFourDescription}</p>    
           </div>
         </div>
 
-        <div className="w-full mb-6 md:mb-[80px] z-10 relative">
+        <div className="w-full z-10 relative">
           <p className="text-xl md:text-2xl text-black mb-4 font-medium">Direkomendasikan oleh</p>
 
           <div className="flex gap-4 md:gap-4 w-full flex-wrap">
               <div className="w-full p-6 bg-[#F9FFEB] md:w-[calc(33%-16px)] min-w-[280px] relative">
                   <Image src={arrowLink} alt="palm-leaf" className="absolute right-4 top-4"/>
-                  <p className="text-[#047C36] text-xl md:text-2xl font-medium">{triviaData.reccomByOne}</p>
+                  <p className="text-[#1A520F] text-xl md:text-xl font-medium">{triviaData.reccomByOne}</p>
                   <a className="text-black underline hover:text-blue-600 transition-all cursor-pointer text-base" href={triviaData.reccomOneURL}>{triviaData.reccomOne}</a>
               </div>
 
               <div className="w-full p-6 bg-[#F9FFEB] md:w-[calc(33%-16px)] min-w-[280px] relative">
               <Image src={arrowLink} alt="palm-leaf" className="absolute right-4 top-4"/>
 
-                  <p className="text-[#047C36] text-xl md:text-2xl font-medium">{triviaData.reccomByTwo}</p>
+                  <p className="text-[#1A520F] text-xl md:text-xl font-medium">{triviaData.reccomByTwo}</p>
                   <a className="text-black underline hover:text-blue-600 transition-all cursor-pointer text-base" href={triviaData.reccomTwoURL}>{triviaData.reccomTwo}</a>
               </div>
 
               <div className="w-full p-6 bg-[#F9FFEB] md:w-[calc(33%-16px)] min-w-[280px] relative">
               <Image src={arrowLink} alt="palm-leaf" className="absolute right-4 top-4"/>
 
-                  <p className="text-[#047C36] text-xl md:text-2xl font-medium">{triviaData.reccomByThree}</p>
+                  <p className="text-[#1A520F] text-xl md:text-xl font-medium">{triviaData.reccomByThree}</p>
                   <a className="text-black underline hover:text-blue-600 transition-all cursor-pointer text-base" href={triviaData.reccomThreeURL}>{triviaData.reccomThree}</a>
               </div>
           </div>

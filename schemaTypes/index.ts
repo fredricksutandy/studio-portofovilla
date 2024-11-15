@@ -8,5 +8,6 @@ import { contact } from "./contactType";
 import { CTA } from "./ctaType";
 import { faq } from "./faqType";
 import { attraction } from "./attractionType";
+import { sectionMetadata } from "./sectionMetadataType";
 
-export const schemaTypes = [postType, hero, about, trivia, room, facility, contact, faq, CTA, attraction]
+export const schemaTypes = [sectionMetadata, hero, about, trivia, room, facility, contact, faq, CTA, attraction]

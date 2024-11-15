@@ -33,16 +33,16 @@ const FacilitySection = () => {
   }
 
   return (
-    <section className="max-w-[1440px] mx-auto bg-[#Fff] px-4 py-24">
+    <section className="max-w-[1296px] mx-auto bg-[#Fff] px-4 py-24">
         <Image src={facilityIco} alt="Asterisk icon" width={100} height={64} className="mb-8 flex"/>
 
       {/* <h2 className="text-3xl lg:text-6xl text-black font-medium mb-2 md:mb-4">
       </h2> */}
       
-      <h2 className="text-3xl lg:text-5xl text-black font-medium mb-0">
+      <h2 className="text-3xl lg:text-4xl text-black font-medium mb-0">
       {facilityData.title}
       </h2>
-      <h3 className="text-3xl lg:text-5xl text-black font-medium mb-10">
+      <h3 className="text-3xl lg:text-4xl text-black font-medium mb-10">
       {facilityData.subtitle}
       </h3>
 
@@ -58,7 +58,7 @@ const FacilitySection = () => {
                 unoptimized
               />
             )}
-            <span className="text-lg md:text-xl font-normal md:font-medium text-black text-center md:text-start">{facility.facilityTitle}</span>
+            <span className="text-base md:text-lg font-normal md:font-medium text-black text-center md:text-start">{facility.facilityTitle}</span>
           </div>
         ))}
       </div>

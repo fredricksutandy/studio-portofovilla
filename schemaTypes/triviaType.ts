@@ -64,6 +64,22 @@ export const trivia = defineType({
     }),
 
     defineField({
+      name: 'triviaFourNumber',
+      title: 'Trivia-four-number',
+      type: 'string',
+    }),
+    defineField({
+      name: 'triviaFour',
+      title: 'Trivia-four',
+      type: 'string',
+    }),
+    defineField({
+      name: 'triviaFourDescription',
+      title: 'Trivia-four-description',
+      type: 'string',
+    }),
+
+    defineField({
       name: 'reccomByOne',
       title: 'Reccomendation-by-one',
       type: 'string',

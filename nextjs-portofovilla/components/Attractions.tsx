@@ -43,12 +43,12 @@ const AttractionSection = () => {
   }
 
   return (
-    <section className="max-w-[1440px] mx-auto bg-[#FFF] px-4 py-24">
+    <section className="max-w-[1296px] mx-auto bg-[#FFF] px-4 py-24">
       <Image src={attractionIcon} alt="Attraction icon" width={100} height={100} className="mb-8" />
-      <h2 className="text-3xl lg:text-5xl text-black font-medium mb-0">
+      <h2 className="text-3xl lg:text-4xl text-black font-medium mb-0">
         {attractionData.title}
       </h2>
-      <h3 className="text-3xl lg:text-5xl text-black font-medium mb-10">
+      <h3 className="text-3xl lg:text-4xl text-black font-medium mb-10">
         {attractionData.subtitle}
       </h3>
 

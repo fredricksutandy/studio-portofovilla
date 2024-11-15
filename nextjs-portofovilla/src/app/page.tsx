@@ -12,6 +12,8 @@ import TriviaSection from "../../components/Trivia";
 import FacilitySection from "../../components/Facility";
 import AttractionSection from "../../components/Attractions";
 import RoomSection from "../../components/Room";
+import RoomSectionalt from "../../components/Roomaltone";
+import RoomSectionalttwo from "../../components/Roomalttwo";
 
 const montserrat = Montserrat({
   weight: ['400', '500', '600', '700'],
@@ -25,7 +27,9 @@ export default async function IndexPage() {
       <Hero />
       <AboutSection />
       <TriviaSection />
-      <RoomSection />
+      {/* <RoomSection /> */}
+      {/* <RoomSectionalt /> */}
+      <RoomSectionalttwo />
       <FacilitySection />
       <AttractionSection />
       <Contact />

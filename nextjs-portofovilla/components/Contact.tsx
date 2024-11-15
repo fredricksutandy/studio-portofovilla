@@ -48,25 +48,25 @@ const ContactSection = () => {
         {/* <Image src={mapico} alt="Logo" className="m-auto w-10 mb-8 h-auto"/> */}
       </div>
 
-      <div className="flex items-center gap-6 flex-wrap justify-center max-w-[1440px] m-auto w-full flex-col lg:flex-row">
+      <div className="flex items-center gap-6 flex-wrap justify-center max-w-[1296px] m-auto w-full flex-col lg:flex-row">
         <iframe src={contactData.mapEmbedLink} className="w-full lg:w-[calc(50%-24px)] border-0 h-[300px] md:h-[360px] lg:h-fill outline-none rounded" loading="lazy"></iframe>
 
         <div className="flex flex-col gap-8 h-fit p-5 w-full lg:w-1/2 rounded">
-          <h2 className={`${kronaOne.className} text-3xl lg:text-4xl text-white w-fit rounded max-w-[380px]`} >{contactData.subTitle}</h2>
-          <div className="flex gap-2">
+          <h2 className={`${kronaOne.className} text-3xl lg:text-3xl text-white w-fit rounded max-w-[380px]`} >{contactData.subTitle}</h2>
+          <div className="flex gap-4">
             {contactData.socialMedia.map((social: { link: string | undefined; icon: any; platform: any; }, index: Key | null | undefined) => (
-              <a key={index} href={social.link} className="p-5 bg-white rounded-full flex items-center">
+              <a key={index} href={social.link} className="p-4 bg-white rounded-full flex items-center">
                 {social.icon && <Image width={24} height={24} src={urlFor(social.icon).url()} alt={`${social.platform} icon`} className="w-6 h-6" />}
               </a>
             ))}
           </div>
           <div>
             {/* <p className="font-medium text-base lg:text-lg text-[#757575]">Address</p> */}
-            <a href={contactData.whatsappURL} className="mb-1 lg:mb-2 block text-lg lg:text-xl font-medium w-fit text-white">{contactData.whatsappNumber}</a>
+            <a href={contactData.whatsappURL} className="mb-1 lg:mb-2 block text-lg  font-medium w-fit text-white">{contactData.whatsappNumber}</a>
             {/* <p className="font-medium text-base lg:text-lg text-[#757575]">Email</p> */}
-            <a href={contactData.emailURL} className="mb-1 lg:mb-2 block text-lg lg:text-xl font-medium w-fit text-white">{contactData.email}</a>
+            <a href={contactData.emailURL} className="mb-1 lg:mb-2 block text-lg  font-medium w-fit text-white">{contactData.email}</a>
             {/* <p className="font-medium text-base lg:text-lg text-[#757575]">Whatsapp</p> */}
-            <a href={contactData.googleMapURL} className="mb-1 lg:mb-2 block text-lg lg:text-xl font-medium w-fit text-white">{contactData.address}</a>
+            <a href={contactData.googleMapURL} className="mb-1 lg:mb-2 block text-lg  font-medium w-fit text-white">{contactData.address}</a>
           </div>
           <ButtonWa 
           link={contactData.whatsappURL}

@@ -46,7 +46,7 @@ const CTASection = () => {
     : '';
 
   return (
-    <section className="flex justify-between flex-col lg:flex-row max-w-[1440px] mx-auto bg-[#Fff] px-4 py-24 gap-4 lg:gap-8">
+    <section className="flex justify-between flex-col lg:flex-row max-w-[1296px] mx-auto bg-[#Fff] px-4 py-24 gap-4 lg:gap-8">
       <div className="flex items-start flex-col flex-1 gap-4 lg:gap-8 order-2 lg:order-1 ">
         {rightImageUrl && (
           <img
@@ -55,7 +55,7 @@ const CTASection = () => {
             className="w-full rounded-lg max-w-[991px] max-h-[340px] lg:max-h-[440px] lg:max-h-auto object-cover"
           />
         )}
-        <h2 className="text-2xl md:text-5xl text-black font-medium">{ctaData.subtitle}</h2>
+        <h2 className="text-xl md:text-4xl text-black font-medium">{ctaData.subtitle}</h2>
         <a
           href={ctaData.buttonLink}
           className="font-bold transition-all bg-[#DBEEFE] text-[#1D764A] hover:bg-[#1D764A] hover:text-white rounded-md px-12 py-6 text-base flex mx-0 lg:w-fit me-auto"
