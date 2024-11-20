@@ -1,21 +1,11 @@
 'use client';
 
-import { Key, useEffect, useState } from "react";
-import { client } from "@/sanity/client"; 
+import { useEffect, useState } from "react";
+import { client } from "@/sanity/client"; // Adjust the import as per your file structure
 import imageUrlBuilder from "@sanity/image-url";
 import type { SanityDocument } from "next-sanity";
-import { Krona_One } from 'next/font/google';
 import Image from "next/image";
-import ButtonWa from './common/ButtonWa';
-import mapico from '../public/map-ico.png'
-import WaLogo from '../public/logos_whatsapp-icon.svg'
-
-// Initialize the Krona One font
-const kronaOne = Krona_One({
-  weight: '400', // Specify the weights you need
-  subsets: ['latin'], // Ensure the font supports the required subset
-  display: 'swap',
-});
+import asterisk from '../../public/asterisk-ico.svg'
 
 // Initialize image builder
 const builder = imageUrlBuilder(client);
@@ -26,7 +16,7 @@ const urlFor = (source: any) => builder.image(source).auto('format').fit('max');
 // Sanity query to fetch the 'contact' document
 const CONTACT_QUERY = `*[_type == "contact"][0]`;
 
-const ContactSection = () => {
+const FooterSection = () => {
   const [contactData, setContactData] = useState<any>(null);
 
   useEffect(() => {
@@ -41,42 +31,94 @@ const ContactSection = () => {
   if (!contactData) {
     return <div>Loading...</div>; // Loading state
   }
-
   return (
-    <section className="max-w-full gap-6 lg:gap-10 flex h-fit flex-col align-middle bg-[#Fff] px-4 py-10 lg:py-[80px] bg-contact-bg bg-no-repeat bg-fixed bg-cover bg-top">
-      <div className="mb-6">
-        {/* <Image src={mapico} alt="Logo" className="m-auto w-10 mb-8 h-auto"/> */}
-      </div>
+    <footer className="bg-[#06270B] px-[24px] py-[64px] text-white">
+      <div className="max-w-[1296px] mx-auto w-full flex flex-col justify-center items-center gap-[80px]">
+        <div className="flex w-full flex-col md:flex-row md:justify-between">
+          {/* Left Section */}
+          <div className="flex gap-4 justify-start items-center h-fit">
+          <Image src={asterisk} alt="Asterisk icon" className="" width={60} height={60}/>
 
-      <div className="flex items-center gap-6 flex-wrap justify-center max-w-[1296px] m-auto w-full flex-col lg:flex-row">
-        <div className="flex flex-col gap-8 h-fit p-5 w-full lg:w-1/2 rounded">
-          <h2 className={`${kronaOne.className} text-3xl lg:text-3xl text-white w-fit rounded max-w-[380px]`} >{contactData.subTitle}</h2>
-          <div className="flex gap-4">
+            <h2 className="text-2xl tracking-[4px] font-semibold">
+              Kemewahan Alam
+              <br />
+              Tiada Tara
+            </h2>
+          </div>
+
+          {/* Right Section */}
+          <div className="flex gap-10">
+            <div className="text-left flex flex-col gap-4">
+              <a href="#" className="hover:text-gray-300 font-semibold text-base transition">
+                Home
+              </a>
+              <a href="#" className="hover:text-gray-300 text-sm font-normal text-white/[0.5] transition">
+                About
+              </a>
+              <a href="#" className="hover:text-gray-300 text-sm font-normal text-white/[0.5] transition">
+                Facilities
+              </a>
+              <a href="#" className="hover:text-gray-300 text-sm font-normal text-white/[0.5] transition">
+                Nearby
+              </a>
+              <a href="#" className="hover:text-gray-300 text-sm font-normal text-white/[0.5] transition">
+                Testimonies
+              </a>
+              <a href="#" className="hover:text-gray-300 text-sm font-normal text-white/[0.5] transition">
+                FAQ
+              </a>
+            </div>
+            <div className="text-left flex flex-col gap-4">
+              <a href="#" className="hover:text-gray-300 font-semibold text-base transition">
+                Room
+              </a>
+              <a href="#" className="hover:text-gray-300 text-sm font-normal text-white/[0.5] transition">
+                Bandung room
+              </a>
+              <a href="#" className="hover:text-gray-300 text-sm font-normal text-white/[0.5] transition">
+                Jogja room
+              </a>
+              <a href="#" className="hover:text-gray-300 text-sm font-normal text-white/[0.5] transition">
+                Lombok room
+              </a>
+              <a href="#" className="hover:text-gray-300 text-sm font-normal text-white/[0.5] transition">
+                Bali room
+              </a>
+            </div>
+          </div>
+        </div>
+
+
+          {/* Center Section */}
+          <div className="flex flex-col items-center text-center px-4 py-[72px] bg-[#093510] rounded-xl w-full gap-6">
+<div className="flex gap-6 ">
             {contactData.socialMedia.map((social: { link: string | undefined; icon: any; platform: any; }, index: Key | null | undefined) => (
-              <a key={index} href={social.link} className="p-4 bg-white rounded-full flex items-center">
+              <a key={index} href={social.link} className="bg-transparent flex items-center grayscale invert">
                 {social.icon && <Image width={24} height={24} src={urlFor(social.icon).url()} alt={`${social.platform} icon`} className="w-6 h-6" />}
               </a>
             ))}
           </div>
-          <div>
-            {/* <p className="font-medium text-base lg:text-lg text-[#757575]">Address</p> */}
-            <a href={contactData.whatsappURL} className="mb-1 lg:mb-2 block text-lg  font-medium w-fit text-white">{contactData.whatsappNumber}</a>
-            {/* <p className="font-medium text-base lg:text-lg text-[#757575]">Email</p> */}
-            <a href={contactData.emailURL} className="mb-1 lg:mb-2 block text-lg  font-medium w-fit text-white">{contactData.email}</a>
-            {/* <p className="font-medium text-base lg:text-lg text-[#757575]">Whatsapp</p> */}
-            <a href={contactData.googleMapURL} className="mb-1 lg:mb-2 block text-lg  font-medium w-fit text-white">{contactData.address}</a>
+            <p className="text-2xl">+62 815-5319-0001</p>
+            <p className="text-2xl">reservations@hideoutbali.com</p>
+            <p className="text-2xl">Jalan Jangu, Selat Duda, Karangasem, Mbali</p>
           </div>
-          <ButtonWa 
-          link={contactData.whatsappURL}
-          text="Tanya jalur lebih jelas"
-          type="white" // or "white"
-          iconType={WaLogo.src}
-        />
+
+        <div className=" w-full flex flex-col justify-between items-center gap-6">
+        <Image src={asterisk} alt="Asterisk icon" width={100} height={100} className=""/>
+
+          <p>© 2024</p>
         </div>
-        
       </div>
-    </section>
+      {/* Background Image */}
+      <div className="relative">
+        {/* <img
+          src="/footer-image.jpg"
+          alt="Scenic view"
+          className="w-full h-32 md:h-48 object-cover"
+        /> */}
+      </div>
+    </footer>
   );
 };
 
-export default ContactSection;
+export default FooterSection;

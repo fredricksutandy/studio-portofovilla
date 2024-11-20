@@ -14,6 +14,7 @@ import AttractionSection from "../../components/Attractions";
 import RoomSection from "../../components/Room";
 import RoomSectionalt from "../../components/Roomaltone";
 import RoomSectionalttwo from "../../components/Roomalttwo";
+import FooterSection from "../../components/layout/Footer";
 
 const montserrat = Montserrat({
   weight: ['400', '500', '600', '700'],
@@ -35,6 +36,7 @@ export default async function IndexPage() {
       <Contact />
       <FaqSection />
       <CTASection />
+      <FooterSection />
     </main>
   );
 }
