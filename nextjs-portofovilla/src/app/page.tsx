@@ -5,6 +5,7 @@ import { client } from "@/sanity/client";
 import Hero from "../../components/Hero";
 import { Montserrat } from 'next/font/google'; // Import Montserrat
 import AboutSection from "../../components/About";
+import AboutSectionaltone from "../../components/Aboutaltone";
 import CTASection from "../../components/CTA";
 import FaqSection from "../../components/Faq";
 import Contact from "../../components/Contact";
@@ -26,7 +27,8 @@ export default async function IndexPage() {
   return (
     <main className={`${montserrat.className} bg-[#fff]`}>
       <Hero />
-      <AboutSection />
+      {/* <AboutSection /> */}
+      <AboutSectionaltone />
       <TriviaSection />
       {/* <RoomSection /> */}
       {/* <RoomSectionalt /> */}
