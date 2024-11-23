@@ -52,41 +52,28 @@ const AttractionSection = () => {
         {attractionData.subtitle}
       </h3>
 
-      {/* <div className="flex gap-4 flex-wrap wrap">
-        <div className="flex h-[380px] rounded bg-slate-300 min-w-[300px] w-1/3 flex-auto">
-
-        </div>
-        
-        <div className="flex h-[380px] rounded bg-slate-300 min-w-[300px] w-1/3 flex-auto">
-
-        </div>
-        
-        <div className="flex h-[380px] rounded bg-slate-300 min-w-[200px] flex-auto">
-
-        </div>
-      </div> */}
-
       <div className="flex gap-4 flex-wrap wrap">
-        {attractionData.attractions?.map((attraction: Attraction, index: number) => (
+        {attractionData.attractions?.slice(0, 2).map((attraction: Attraction, index: number) => (
           <div
-          key={index}
-          className="flex flex-col h-[380px] rounded min-w-[300px] w-1/3 flex-auto items-start justify-end p-4 hover:translate-y-[-6px] transition-all"
-          style={{
-            backgroundImage: `url(${urlFor(attraction.attractionImage) || ''})`,
-            backgroundSize: 'cover', // Cover the entire div
-            backgroundPosition: 'center', // Center the background image
-            backgroundRepeat: 'no-repeat' // Prevent background from repeating
-          }}
-        >
-          <span className="text-white font-bold text-lg flex items-center gap-2">
-          <Image src={distanceIcon} alt="Attraction icon" width={50} height={50} className="" />
-          {attraction.attractionRange}
-          </span>
-          <span className="text-white font-bold text-2xl">
-            {attraction.attractionTitle}
-          </span>
-        </div>
+            key={index}
+            className="flex flex-col h-[380px] rounded min-w-[300px] w-1/3 flex-auto items-start justify-end p-4 hover:translate-y-[-6px] transition-all"
+            style={{
+              backgroundImage: `url(${urlFor(attraction.attractionImage) || ''})`,
+              backgroundSize: 'cover', // Cover the entire div
+              backgroundPosition: 'center', // Center the background image
+              backgroundRepeat: 'no-repeat' // Prevent background from repeating
+            }}
+          >
+            <span className="text-white font-bold text-lg flex items-center gap-2">
+              <Image src={distanceIcon} alt="Attraction icon" width={50} height={50} />
+              {attraction.attractionRange}
+            </span>
+            <span className="text-white font-bold text-2xl">
+              {attraction.attractionTitle}
+            </span>
+          </div>
         ))}
+
         <a 
           href="" 
           className="cursor-pointer flex flex-col gap-4 h-[200px] md:h-[380px] rounded min-w-[200px] flex-auto bg-cover items-center justify-center hover:translate-y-[-6px] transition-all"

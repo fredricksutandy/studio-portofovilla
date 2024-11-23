@@ -1,8 +1,8 @@
 import { defineType, defineField } from 'sanity';
 
-export const hero = defineType({
-  name: 'hero',
-  title: 'Hero Section',
+export const heroImage = defineType({
+  name: 'heroImage',
+  title: 'Hero Image Section',
   type: 'document',
   fields: [
     defineField({
@@ -35,11 +35,11 @@ export const hero = defineType({
       },
     }),
     defineField({
-      name: 'video',
-      title: 'Video',
-      type: 'file', // Use the 'file' type for video
+      name: 'image',
+      title: 'Image',
+      type: 'image', // Sanity's image type
       options: {
-        accept: 'video/*', // Restrict file types to videos
+        hotspot: true, // Enables image cropping and focus area
       },
     }),
   ],

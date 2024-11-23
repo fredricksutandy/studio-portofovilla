@@ -22,7 +22,7 @@ const urlFor = (source: any) => {
   return builder.image(source);
 };
 
-const HERO_QUERY = '*[_type == "hero"][0]'; // Adjust the query as needed
+const HERO_QUERY = '*[_type == "heroImage"][0]'; // Adjust the query as needed
 
 const Hero = () => {
   const [heroData, setHeroData] = useState<any>(null); // Replace 'any' with your specific type if available
