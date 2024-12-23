@@ -26,7 +26,7 @@ const FaqSection = () => {
   }
 
   return (
-    <section className="flex justify-between max-w-[1296px] mx-auto bg-[#Fff] px-4 py-24">
+    <section className="flex justify-between max-w-[1296px] mx-auto bg-[#Fff] px-4 py-24" id="faq">
       <div className="flex flex-col gap-8 w-full h-auto">
         <div className="text-lg font-semibold  px-6 py-4 bg-[#D6F6E3] text-[#047C36] w-fit rounded">?</div>
         <div className="flex flex-wrap justify-between w-full gap-4">

@@ -34,7 +34,7 @@ const Hero = () => {
   const heroVideoUrl = heroData.video?.asset?.url;
 
   return (
-    <div className="relative w-full h-screen">
+    <div className="relative w-full h-screen" id="home">
       {/* Video Container */}
       {heroVideoUrl ? (
         <video
@@ -57,7 +57,7 @@ const Hero = () => {
       <div className="absolute top-3/4 left-1/4 transform text-white text-start">
       {/* Center text */}
       {/* absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center */}
-        <h1 className={`${kronaOne.className} text-2xl md:text-5xl font-bold mb-2`}>
+        <h1 className={`${kronaOne.className} text-2xl md:text-5xl font-bold mb-2 text-gray-100`}>
           {heroData.title}
         </h1>
         <h2 className="text-lg md:text-xl">{heroData.subtitle}</h2>

@@ -5,6 +5,7 @@ import { client } from "@/sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 import type { SanityDocument } from "next-sanity";
 import Image from "next/image";
+import palmLeaf from '../public/palm-leaf-shadow.png';
 
 // Import Swiper core and required modules
 import { Navigation, Pagination } from 'swiper/modules';
@@ -33,7 +34,7 @@ const ATTRACTION_QUERY = `*[_type == "attraction"][0]`;
 
 interface Attraction {
   attractionTitle: string;
-  attractionImage: any;
+  galleryImage: any;
   attractionRange: string;
 }
 
@@ -54,13 +55,15 @@ const AttractionSection = () => {
   }
 
   return (
-    <section className="max-w-full mx-auto bg-[#FFF] py-24 px-4 overflow-hidden">
+    <section className="max-w-full mx-auto bg-[#FFF] py-24 px-4 overflow-hidden relative" id="activities">
+<Image src={palmLeaf} alt="palm-leaf" className="absolute left-0 bottom-0 z-0 scale-x-[-1]" />
+
       <div className="max-w-[1296px] mx-auto">
         <Image src={attractionIcon} alt="Attraction icon" width={100} height={100} className="mb-8" />
-        <h2 className="text-3xl lg:text-4xl text-black font-medium mb-0">
+        <h2 className="text-xl lg:text-3xl text-black font-medium mb-0">
           {attractionData.title}
         </h2>
-        <h3 className="text-3xl lg:text-4xl text-black font-medium mb-10">
+        <h3 className="text-xl lg:text-3xl text-black font-medium mb-10">
           {attractionData.subtitle}
         </h3>
       </div>
@@ -83,7 +86,7 @@ const AttractionSection = () => {
         {attractionData.attractions?.map((attraction: Attraction, index: number) => (
           <SwiperSlide key={index}>
             <div
-              className="flex flex-col h-[380px] rounded min-w-[300px] items-start justify-end p-4 hover:translate-y-[-6px] transition-all"
+              className="flex flex-col h-[540px] rounded min-w-[300px] items-start justify-end p-4 hover:translate-y-[-6px] transition-all"
               style={{
                 backgroundImage: `url(${urlFor(attraction.attractionImage) || ''})`,
                 backgroundSize: 'cover',

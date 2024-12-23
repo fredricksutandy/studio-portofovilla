@@ -23,7 +23,7 @@ const ATTRACTION_QUERY = `*[_type == "attraction"][0]`;
 
 interface Attraction {
   attractionTitle: string;
-  attractionImage: any;
+  galleryImage: any;
 }
 
 const AttractionSection = () => {
@@ -43,7 +43,7 @@ const AttractionSection = () => {
   }
 
   return (
-    <section className="max-w-[1296px] mx-auto bg-[#FFF] px-4 py-24">
+    <section className="max-w-[1296px] mx-auto bg-[#FFF] px-4 py-24" id="activities">
       <Image src={attractionIcon} alt="Attraction icon" width={100} height={100} className="mb-8" />
       <h2 className="text-3xl lg:text-4xl text-black font-medium mb-0">
         {attractionData.title}
@@ -58,7 +58,7 @@ const AttractionSection = () => {
             key={index}
             className="flex flex-col h-[380px] rounded min-w-[300px] w-1/3 flex-auto items-start justify-end p-4 hover:translate-y-[-6px] transition-all"
             style={{
-              backgroundImage: `url(${urlFor(attraction.attractionImage) || ''})`,
+              backgroundImage: `url(${urlFor(attraction.galleryImage) || ''})`,
               backgroundSize: 'cover', // Cover the entire div
               backgroundPosition: 'center', // Center the background image
               backgroundRepeat: 'no-repeat' // Prevent background from repeating

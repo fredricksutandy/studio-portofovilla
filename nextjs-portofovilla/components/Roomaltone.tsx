@@ -72,7 +72,7 @@ const RoomSection = () => {
   }
 
   return (
-    <section className="justify-between mx-auto bg-[#06270B] px-5 py-10 md:py-[80px] relative">
+    <section className="justify-between mx-auto bg-[#06270B] px-5 py-10 md:py-[80px] relative" id="room">
       <div className="max-w-[1296px] block m-auto">
       <Image src={roomsIco} alt="Asterisk icon" width={80} height={80} className="mb-8 flex"/>
 

@@ -42,12 +42,12 @@ const TriviaSection = () => {
         <Image src={palmLeaf} alt="palm-leaf" className="absolute right-0 bottom-0 z-0"/>
 
       <div className="max-w-[1296px] block m-auto">
-        <div className="mb-6 md:mb-[128px]">
+        <div className="mb-6 md:mb-[80px]">
           <Image src={asterisk} alt="Asterisk icon" width={60} height={60} className="mb-6"/>
           <h2 className="text-3xl md:text-4xl w-full lg:text-5xl text-black font-medium">{triviaData.subtitle}</h2>
         </div>
 
-        <div className="flex gap-4 md:gap-[40px] w-full items-center mb-[80px] md:mb-[128px] flex-wrap z-10 relative">
+        <div className="flex gap-4 md:gap-[40px] w-full items-center mb-[80px] md:mb-[80px] flex-wrap z-10 relative">
           <div className="py-2 md:py-2 w-full md:w-[calc(50%-20px)] border-b border-b-[#1D764A]">
               {/* <Image className="mb-6 w-7 h-7 md:w-10 md:h-10" src={happyCustomer} alt="happy customer" width={40} height={40}/> */}
               <p className={`${kronaOne.className} text-[#1A520F] text-xl md:text-4xl font-medium`}>{triviaData.triviaOneNumber}</p>    

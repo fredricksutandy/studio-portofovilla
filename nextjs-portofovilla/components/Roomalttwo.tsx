@@ -72,22 +72,24 @@ const RoomSection = () => {
   }
 
   return (
-    <section className="justify-between mx-auto bg-[#F9FFEB] px-5 py-10 md:py-[80px] relative">
+    <section className="justify-between mx-auto bg-[#f3ffeb] px-5 py-10 md:py-[80px] relative" id="room">
       <div className="max-w-[1296px] block m-auto">
       <Image src={roomsIco} alt="Asterisk icon" width={80} height={80} className="mb-8 flex"/>
 
-      <h2 className="text-2xl lg:text-4xl text-[#1D764A] font-semibold mb-0">
+      <h2 className="text-3xl lg:text-4xl text-[#1D764A] font-semibold mb-0">
       {sectionMetadata.title}
       </h2>
-      <h3 className="text-2xl lg:text-4xl text-[#1D764A] font-semibold mb-20">
+      <h3 className="text-3xl lg:text-4xl text-[#1D764A] font-semibold mb-10 md:mb-20">
       {sectionMetadata.subtitle}</h3>
 
-      <div className="flex flex-wrap gap-10 md:gap-20">
+      <div className="flex flex-wrap gap-16 md:gap-20">
         {/* Room Data */}
         {roomData.map((room: any, index: number) => (
   <div
     key={room.slug.current}
-    className={`w-full gap-10 flex relative group overflow-hidden items-center ${index % 2 === 0 ? 'flex-row-reverse' : ''}`}
+    className={`w-full gap-4 md:gap-10 flex flex-col md:flex-row ${
+      index % 2 === 0 ? 'md:flex-row-reverse' : ''
+    } items-center group overflow-hidden`}
   >
     {room.image && (
       <div className="relative w-full md:w-[calc(50%-20px)] h-[300px] md:h-[400px] overflow-hidden mb-2 rounded">
@@ -101,7 +103,7 @@ const RoomSection = () => {
       </div>
     )}
 
-    <div className="w-full md:w-[calc(50%-20px)] h-fit flex justify-center flex-col gap-6">
+    <div className="w-full md:w-[calc(50%-20px)] h-fit flex justify-center flex-col gap-4 md:gap-6">
       <h2 className={`${kronaOne.className} text-xl md:text-3xl font-semibold text-black`}>{room.roomName}</h2>
       <div className="flex gap-5">
         <p className={`${kronaOne.className} text-black flex gap-2 font-medium items-center text-base`}><Image src={bedIco} alt="bedroom icon" width={28} height={28} className=""/> {room.bedroomsNumber} Bedrooms</p>

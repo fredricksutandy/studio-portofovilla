@@ -32,7 +32,7 @@ const FooterSection = () => {
     return <div>Loading...</div>; // Loading state
   }
   return (
-    <footer className="bg-[#06270B] px-[24px] py-[64px] text-white">
+    <footer className="bg-[#06270B] px-[24px] py-[64px] text-white relative z-50">
       <div className="max-w-[1296px] mx-auto w-full flex flex-col justify-center items-center gap-[80px]">
         <div className="flex w-full flex-col md:flex-row md:justify-between">
           {/* Left Section */}
@@ -106,7 +106,7 @@ const FooterSection = () => {
         <div className=" w-full flex flex-col justify-between items-center gap-6">
         <Image src={asterisk} alt="Asterisk icon" width={100} height={100} className=""/>
 
-          <p>© 2024</p>
+          <p>Powered by Portofovilla © 2024</p>
         </div>
       </div>
       {/* Background Image */}

@@ -7,7 +7,6 @@ import type { SanityDocument } from "next-sanity";
 import { Krona_One } from 'next/font/google';
 import Image from "next/image";
 import ButtonWa from './common/ButtonWa';
-import mapico from '../public/map-ico.png'
 import WaLogo from '../public/logos_whatsapp-icon.svg'
 
 // Initialize the Krona One font
@@ -43,14 +42,8 @@ const ContactSection = () => {
   }
 
   return (
-    <section className="max-w-full gap-6 lg:gap-10 flex h-fit flex-col align-middle bg-[#Fff] px-4 py-10 lg:py-[80px] bg-contact-bg bg-no-repeat bg-fixed bg-cover bg-top">
-      <div className="mb-6">
-        {/* <Image src={mapico} alt="Logo" className="m-auto w-10 mb-8 h-auto"/> */}
-      </div>
-
+    <section className="max-w-full gap-6 lg:gap-10 flex h-fit flex-col align-middle bg-[#Fff] px-4 py-10 lg:py-[160px] bg-contact-bg-2 bg-no-repeat bg-fixed bg-cover bg-top" id="contact">
       <div className="flex items-center gap-6 flex-wrap justify-center max-w-[1296px] m-auto w-full flex-col lg:flex-row">
-        <iframe src={contactData.mapEmbedLink} className="w-full lg:w-[calc(50%-24px)] border-0 h-[300px] md:h-[360px] lg:h-fill outline-none rounded" loading="lazy"></iframe>
-
         <div className="flex flex-col gap-8 h-fit p-5 w-full lg:w-1/2 rounded">
           <h2 className={`${kronaOne.className} text-3xl lg:text-3xl text-white w-fit rounded max-w-[380px]`} >{contactData.subTitle}</h2>
           <div className="flex gap-4">
@@ -69,13 +62,18 @@ const ContactSection = () => {
             <a href={contactData.googleMapURL} className="mb-1 lg:mb-2 block text-lg  font-medium w-fit text-white">{contactData.address}</a>
           </div>
           <ButtonWa 
-          link={contactData.whatsappURL}
-          text="Tanya jalur lebih jelas"
-          type="white" // or "white"
-          iconType={WaLogo.src}
-        />
+            link={contactData.whatsappURL}
+            text="Tanya jalur lebih jelas"
+            type="white" // or "white"
+            iconType={WaLogo.src}
+            radius={"lg"} 
+            width={"fit"} 
+            displayMobile={true} 
+            displayDesktop={true}
+          />
         </div>
-        
+        <iframe src={contactData.mapEmbedLink} className="w-full lg:w-[calc(50%-24px)] border-0 h-[300px] md:h-[360px] lg:h-fill outline-none rounded" loading="lazy"></iframe>
+
       </div>
     </section>
   );

@@ -41,7 +41,7 @@ const AboutSection = () => {
     : '';
 
   return (
-    <section className="flex flex-col md:flex-row justify-between max-w-[1296px] mx-auto bg-[#Fff] px-5 py-10 md:py-[80px] gap-4">
+    <section className="flex flex-col md:flex-row justify-between max-w-[1296px] mx-auto bg-[#Fff] px-5 py-10 md:py-[80px] gap-4" id="about">
       <div className="flex flex-col gap-4 md:gap-8 justify-end mb-6 md:mb-0">
         <Image src={aboutico} alt="Asterisk icon" width={100} height={100}/>
         {/* <h1 className="text-lg font-medium  px-6 py-4 bg-[#D6F6E3] text-[#047C36] w-fit rounded">{aboutData.tagTitle}</h1> */}

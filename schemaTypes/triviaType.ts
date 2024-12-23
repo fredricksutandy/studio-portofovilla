@@ -16,6 +16,11 @@ export const trivia = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'description',
+      title: 'Description',
+      type: 'text',
+    }),
+    defineField({
       name: 'triviaOneNumber',
       title: 'Trivia-one-number',
       type: 'string',
