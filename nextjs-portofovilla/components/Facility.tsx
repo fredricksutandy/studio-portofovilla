@@ -30,7 +30,7 @@ const FacilitySection = () => {
   }, []);
 
   if (!facilityData) {
-    return <div>Loading...</div>; // Loading state
+    return <div className="min-h-[100vh] flex justify-center items-center">Loading...</div>; // Loading state
   }
 
   return (

@@ -82,7 +82,7 @@ const RoomImage: React.FC<RoomImageProps> = ({ image, gallery }) => {
           </div>
         </div>
         <Image
-          src={urlFor(gallery[0]).url()}
+          src={urlFor(image).url()}
           alt="Room Main Image"
           width={760}
           height={450}
@@ -92,7 +92,7 @@ const RoomImage: React.FC<RoomImageProps> = ({ image, gallery }) => {
           className="rounded-0 md:rounded-lg w-full flex-1 md:max-w-[760px] h-full object-cover hidden md:flex"
         />
         <div className="hidden md:flex max-w-[540px] flex-wrap gap-4">
-          {gallery.slice(1, 5).map((img, index) => (
+          {gallery.slice(0, 4).map((img, index) => (
             <Image
               key={index}
               src={urlFor(img).url()}
@@ -100,7 +100,7 @@ const RoomImage: React.FC<RoomImageProps> = ({ image, gallery }) => {
               width={280}
               height={240}
               objectFit="cover"
-              className="rounded-lg w-[calc(50%-8px)] object-cover"
+              className="rounded-lg w-[calc(50%-8px)] object-cover h-[206px]"
             />
           ))}
         </div>
@@ -116,7 +116,7 @@ const RoomImage: React.FC<RoomImageProps> = ({ image, gallery }) => {
         <DialogPanel className="relative bg-white p-8 w-full max-w-[1296px] mx-auto rounded-lg">
         <button
             onClick={closeModal}
-            className="text-neutral-600 rounded mb-4 p-2 hover:bg-neutral-200 transition-all"
+            className="text-neutral-700 rounded mb-4 p-2 hover:bg-neutral-200 transition-all bg-white sticky -top-[20px] z-[999]"
           >
             Kembali
           </button>

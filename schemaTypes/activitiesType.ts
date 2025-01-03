@@ -1,8 +1,8 @@
 import { defineType, defineField } from 'sanity';
 
-export const attraction = defineType({
-  name: 'attraction',
-  title: 'Attraction Section',
+export const activities = defineType({
+  name: 'activities',
+  title: 'Activities Section',
   type: 'document',
   fields: [
     defineField({
@@ -16,35 +16,35 @@ export const attraction = defineType({
       type: 'string',
     }),
     defineField({
-      name: 'attractions',
-      title: 'Attractions',
+      name: 'activities',
+      title: 'Activities',
       type: 'array',
       of: [
         {
           type: 'object',
           fields: [
             defineField({
-                name: 'attractionTitle',
-                title: 'Attraction Title',
+                name: 'activitiesTitle',
+                title: 'Activities Title',
                 type: 'string',
               }),
               defineField({
-                name: 'attractionRange',
-                title: 'Attraction Range',
+                name: 'activitiesRange',
+                title: 'Activities Range',
                 type: 'string',
               }),
               defineField({
-                name: 'attractionDescription',
-                title: 'Attraction description',
+                name: 'activitiesDescription',
+                title: 'Activities description',
                 type: 'text',
               }),
               defineField({
-                name: 'attractionURL',
-                title: 'Attraction map link',
+                name: 'activitiesURL',
+                title: 'Activities map link',
                 type: 'text',
               }),
             defineField({
-              name: 'attractionImage',
+              name: 'activitiesImage',
               title: 'Image',
               type: 'image',
               options: {

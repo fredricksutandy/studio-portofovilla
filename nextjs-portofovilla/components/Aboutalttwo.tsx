@@ -29,7 +29,7 @@ const AboutSection = () => {
   }, []);
 
   if (!aboutData) {
-    return <div>Loading...</div>; // Loading state
+    return <div className="min-h-screen flex justify-center items-center">Loading...</div>; // Loading state
   }
 
   // Generate image URLs if available

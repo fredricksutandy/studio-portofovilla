@@ -18,7 +18,7 @@ import 'swiper/css/pagination';
 
 import '../src/styles/custom-swiper.css'; // Import custom styles here
 
-import attractionIcon from '../public/attraction-ico.svg';
+import activitiesIcon from '../public/activities-ico.svg';
 import distanceIcon from '../public/distance-ico.svg';
 
 // Initialize image builder
@@ -29,28 +29,28 @@ const urlFor = (source: any) => {
   return source ? builder.image(source).auto('format').fit('max').url() : '';
 };
 
-// Sanity query to fetch the 'attraction' document
-const ATTRACTION_QUERY = `*[_type == "attraction"][0]`;
+// Sanity query to fetch the 'activities' document
+const ACTIVITIES_QUERY = `*[_type == "activities"][0]`;
 
-interface Attraction {
-  attractionTitle: string;
+interface Activities {
+  activitiesTitle: string;
   galleryImage: any;
-  attractionRange: string;
+  activitiesRange: string;
 }
 
-const AttractionSection = () => {
-  const [attractionData, setAttractionData] = useState<SanityDocument | null>(null);
+const ActivitiesSection = () => {
+  const [activitiesData, setActivitiesData] = useState<SanityDocument | null>(null);
 
   useEffect(() => {
-    const fetchAttractionData = async () => {
-      const data = await client.fetch<SanityDocument>(ATTRACTION_QUERY);
-      setAttractionData(data);
+    const fetchActivitiesData = async () => {
+      const data = await client.fetch<SanityDocument>(ACTIVITIES_QUERY);
+      setActivitiesData(data);
     };
 
-    fetchAttractionData();
+    fetchActivitiesData();
   }, []);
 
-  if (!attractionData) {
+  if (!activitiesData) {
     return <div>Loading...</div>; // Loading state
   }
 
@@ -59,12 +59,12 @@ const AttractionSection = () => {
 <Image src={palmLeaf} alt="palm-leaf" className="absolute left-0 bottom-0 z-0 scale-x-[-1]" />
 
       <div className="max-w-[1296px] mx-auto">
-        <Image src={attractionIcon} alt="Attraction icon" width={100} height={100} className="mb-8" />
+        <Image src={activitiesIcon} alt="Activities icon" width={100} height={100} className="mb-8" />
         <h2 className="text-xl lg:text-3xl text-black font-medium mb-0">
-          {attractionData.title}
+          {activitiesData.title}
         </h2>
         <h3 className="text-xl lg:text-3xl text-black font-medium mb-10">
-          {attractionData.subtitle}
+          {activitiesData.subtitle}
         </h3>
       </div>
 
@@ -83,23 +83,23 @@ const AttractionSection = () => {
         style={{color: "red"}}
         className="max-w-[1296px] [&_.swiper-button-next]:text-black [&_.swiper-button-prev]:text-black"
       >
-        {attractionData.attractions?.map((attraction: Attraction, index: number) => (
+        {activitiesData.activities?.map((activities: Activities, index: number) => (
           <SwiperSlide key={index}>
             <div
               className="flex flex-col h-[540px] rounded min-w-[300px] items-start justify-end p-4 hover:translate-y-[-6px] transition-all"
               style={{
-                backgroundImage: `url(${urlFor(attraction.attractionImage) || ''})`,
+                backgroundImage: `url(${urlFor(activities.activitiesImage) || ''})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
               }}
             >
               <span className="text-white font-bold text-lg flex items-center gap-2">
-                <Image src={distanceIcon} alt="Attraction icon" width={50} height={50} />
-                {attraction.attractionRange}
+                <Image src={distanceIcon} alt="Activities icon" width={50} height={50} />
+                {activities.activitiesRange}
               </span>
               <span className="text-white font-bold text-2xl">
-                {attraction.attractionTitle}
+                {activities.activitiesTitle}
               </span>
             </div>
           </SwiperSlide>
@@ -109,4 +109,4 @@ const AttractionSection = () => {
   );
 };
 
-export default AttractionSection;
+export default ActivitiesSection;

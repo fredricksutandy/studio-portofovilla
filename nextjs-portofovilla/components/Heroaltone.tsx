@@ -27,7 +27,7 @@ const Hero = () => {
   }, []);
 
   if (!heroData) {
-    return <div>Loading...</div>; // Loading state
+    return <div className="min-h-screen flex justify-center items-center">Loading...</div>; // Loading state
   }
 
   // Extract video URL from the resolved reference

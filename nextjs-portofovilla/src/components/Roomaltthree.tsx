@@ -29,6 +29,17 @@ const ROOM_QUERY = `
   *[_type == "room"] {
     roomName,
     slug,
+    specifications[]{
+      name,
+      icon {
+        asset->{
+          url,
+          metadata {
+            lqip // Include lqip here
+          }
+        }
+      }
+    },
     description,
     price,
     bedroomsNumber,
@@ -68,7 +79,7 @@ const RoomSection = () => {
   }, []);
 
   if (!roomData || !sectionMetadata) {
-    return <div>Loading...</div>; // Loading state for both room data and section metadata
+    return <div className="min-h-screen flex justify-center items-center">Loading...</div>; // Loading state for both room data and section metadata
   }
 
   return (
@@ -102,12 +113,32 @@ const RoomSection = () => {
 
             <div className="w-full h-fit flex justify-start lg:justify-center flex-col gap-4 text-start lg:text-center">
               <h2 className={`${kronaOne.className} text-xl lg:text-2xl font-semibold text-black`}>{room.roomName}</h2>
-              <div className="flex gap-5 justify-start lg:justify-center">
+              {/* <div className="flex gap-5 justify-start lg:justify-center">
                 <p className={` text-black flex gap-2 font-medium items-center text-base`}><Image src={bedIco} alt="bedroom icon" width={28} height={28} className=""/> {room.bedroomsNumber} Bedrooms</p>
                 <p className={` text-black flex gap-2 font-medium items-center text-base`}><Image src={guestIco} alt="guest icon" width={28} height={28} className=""/> {room.guestNumber} Guests</p>
-              </div>
+              </div> */}
+              <p className={`${kronaOne.className} text-neutral-500 text-lg mb-4`}>IDR {room.price} / malam</p>
+
+            <ul className="flex flex-wrap gap-2 items-center justify-center">
+                      {room.specifications?.map((specification: any, index: number) => {
+                          return (
+                            <li key={index} className="w-fit rounded flex items-start gap-2 p-2 border border-[#d9d9d9]">
+                              {specification.icon?.asset?.url && (
+                                <img 
+                                src={urlFor(specification.icon).url()} 
+                                alt={specification.name} 
+                                width={20} 
+                                height={20} 
+                                className="object-cover"
+                              />
+                              )}
+                              <h3 className="text-[14px]">{specification.name}</h3>
+                            </li>
+                          );
+                        })}
+                      </ul>
               <div>
-                <p className="text-gray-700 text-base max-w-[420px]">{room.description}</p>
+                <p className="text-gray-700 text-base">{room.description}</p>
               </div>
                 
               <Link

@@ -1,110 +1,43 @@
-'use Client'
-import Link from "next/link";
-import { type SanityDocument } from "next-sanity";
-
-import { client } from "@/sanity/client";
-
-import Hero from "../../components/Hero";
 import Heroaltone from "../../components/Heroaltone";
-
-import { Montserrat } from 'next/font/google';
-
-import AboutSection from "../../components/About";
+import { Montserrat } from "next/font/google";
 import AboutSectionaltone from "../../components/Aboutaltone";
-
 import CTASection from "../../components/CTA";
-
 import FaqSection from "../../components/Faq";
-
 import Contact from "../../components/Contact";
-
-import TriviaSection from "../../components/Trivia";
 import TriviaSectionaltone from "../../components/Triviaaltone";
-import TriviaSectionalttwo from "../../components/Triviaalttwo";
-
-import FacilitySection from "../../components/Facility";
 import FacilitySectionaltone from "../../components/Facilityaltone";
-
-import AttractionSection from "../../components/Attractions";
-import AttractionSectionaltone from "../components/Attractionaltone";
-import AttractionSectionalttwo from "../../components/Attractionsalttwo";
-
-import RoomSection from "../../components/Room";
-import RoomSectionalt from "../../components/Roomaltone";
+import ActivitiesSectionaltone from "../components/Activitiesaltone";
+import TestimonyVideo from "../components/TestimonialVideo";
 import RoomSectionaltthree from "../components/Roomaltthree";
-import RoomSectionaltfour from "../components/Roomaltfour";
-import RoomSectionalttwo from "../../components/Roomalttwo";
-
 import FooterSection from "../../components/layout/Footer";
-import NavbarSection from "../../components/layout/Navbar";
 import NavbarSectionaltone from "../../components/layout/Navbaraltone";
-import NavbarSectionalttwo from "../../components/layout/Navbaralttwo";
 import FloatingButton from "../../components/layout/FloatingButton";
-
-import TestimonySection from "../../components/Testimonies";
-import TestimonySectionaltone from "../../components/Testimoniesaltone";
-import TestimonySectionalttwo from "../../components/Testimoniesalttwo";
-
-import Modal from "../../components/common/Modal";
-
 import Gallery from "../components/Gallery";
-import Galleryaltone from "../components/Galleryaltone";
 
 const montserrat = Montserrat({
-  weight: ['400', '500', '600', '700'],
-  subsets: ['latin'],
-  display: 'swap',
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  display: "swap",
 });
 
-export default async function IndexPage() {
+export default function IndexPage() {
+
   return (
     <main className={`${montserrat.className} bg-[#fff] relative`}>
-      
-      {/* <NavbarSection /> */}
       <NavbarSectionaltone />
-      {/* <NavbarSectionalttwo /> */}
-
       <FloatingButton />
-
-      {/* <Hero /> */}
       <Heroaltone />
-
-      {/* <RoomSection /> */}
-      {/* <RoomSectionalt /> */}
-      {/* <RoomSectionalttwo /> */}
-      {/* <RoomSectionaltthree /> */}
-      <RoomSectionaltfour />
-
-      {/* <AboutSection /> */}
+      <RoomSectionaltthree />
       <AboutSectionaltone />
-
-      {/* <TriviaSection /> */}
       <TriviaSectionaltone />
-      {/* <TriviaSectionalttwo /> */}
-
-      {/* <FacilitySection /> */}
       <FacilitySectionaltone />
-
-      {/* <AttractionSection /> */}
-      <AttractionSectionaltone />
-      {/* <AttractionSectionalttwo /> */}
-
-      {/* <TestimonySection /> */}
-      {/* <TestimonySectionaltone /> */}
-      <TestimonySectionalttwo />
-
+      <ActivitiesSectionaltone />
+      <TestimonyVideo />
       <FaqSection />
-
       <Gallery />
-      <Galleryaltone />
-
       <CTASection />
-
       <Contact />
-
       <FooterSection />
-
-      {/* <Modal /> */}
     </main>
   );
 }

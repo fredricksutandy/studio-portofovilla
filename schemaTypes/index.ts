@@ -11,7 +11,7 @@ import { testimonyVideo } from "./testimonyVideoType";
 import { CTA } from "./ctaType";
 import { faq } from "./faqType";
 import { gallery } from "./gallery";
-import { attraction } from "./attractionType";
+import { activities } from "./activitiesType";
 import { sectionMetadata } from "./sectionMetadataType";
 import { modalPromoType } from "./modalPromoType";
 
@@ -29,6 +29,6 @@ export const schemaTypes = [
     faq, 
     gallery, 
     CTA, 
-    attraction, 
+    activities, 
     modalPromoType
 ]

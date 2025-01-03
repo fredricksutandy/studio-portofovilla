@@ -24,8 +24,8 @@ declare type Gallery = {
   galleryButton: string;
   galleryUrl: string;
   galleryImage: Array<{
-    attractionTitle: string;
-    attractionURL: string;
+    activitiesTitle: string;
+    activitiesURL: string;
     galleryImage: {
       asset: {
         _ref: string;

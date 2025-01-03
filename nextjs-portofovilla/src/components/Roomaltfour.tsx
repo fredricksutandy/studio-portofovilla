@@ -29,6 +29,17 @@ const ROOM_QUERY = `
   *[_type == "room"] {
     roomName,
     slug,
+    specifications[]{
+      name,
+      icon {
+        asset->{
+          url,
+          metadata {
+            lqip // Include lqip here
+          }
+        }
+      }
+    },
     description,
     price,
     bedroomsNumber,
@@ -86,7 +97,7 @@ const RoomSection = () => {
         {roomData?.map((room: any, index: number) => (
           <div
             key={room.slug.current}
-            className="w-full lg:w-[calc(50%-24px)] gap-4 lg:gap-10 flex flex-col items-center group overflow-hidden"
+            className="w-full lg:w-[calc(50%-24px)] gap-4 lg:gap-6 flex flex-col items-center group overflow-hidden"
           >
             {room.image && (
               <div className="relative w-full h-[300px] lg:h-[440px] overflow-hidden mb-2 rounded-t-xl lg:rounded-t-full">
@@ -102,12 +113,30 @@ const RoomSection = () => {
 
             <div className="w-full h-fit flex justify-start lg:justify-center flex-col gap-4 text-start lg:text-center">
               <h2 className={`${kronaOne.className} text-xl lg:text-2xl font-semibold text-black`}>{room.roomName}</h2>
-              <div className="flex gap-5 justify-start lg:justify-center">
+              {/* <div className="flex gap-5 justify-start lg:justify-center">
                 <p className={` text-black flex gap-2 font-medium items-center text-base`}><Image src={bedIco} alt="bedroom icon" width={28} height={28} className=""/> {room.bedroomsNumber} Bedrooms</p>
                 <p className={` text-black flex gap-2 font-medium items-center text-base`}><Image src={guestIco} alt="guest icon" width={28} height={28} className=""/> {room.guestNumber} Guests</p>
-              </div>
+              </div> */}
+            <ul className="flex flex-wrap gap-2 items-center justify-center max-w-[440px] mx-0 md:mx-auto">
+              {room.specifications?.map((specification: any, index: number) => {
+                  return (
+                    <li key={index} className="w-fit rounded flex items-start gap-2 p-2 border border-[#d9d9d9]">
+                      {specification.icon?.asset?.url && (
+                        <img 
+                        src={urlFor(specification.icon).url()} 
+                        alt={specification.name} 
+                        width={20} 
+                        height={20} 
+                        className="object-cover"
+                      />
+                      )}
+                      <h3 className="text-[14px]">{specification.name}</h3>
+                    </li>
+                  );
+                })}
+              </ul>
               <div>
-                <p className="text-gray-700 text-base max-w-full lg:max-w-[420px] m-0 lg:m-auto">{room.description}</p>
+                <p className="text-gray-700 text-base max-w-[560px] m-0 lg:m-auto">{room.description}</p>
               </div>
                 
               <Link

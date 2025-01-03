@@ -29,6 +29,17 @@ const ROOM_QUERY = `
   *[_type == "room"] {
     roomName,
     slug,
+specifications[]{
+      name,
+      icon {
+        asset->{
+          url,
+          metadata {
+            lqip // Include lqip here
+          }
+        }
+      }
+    },
     description,
     price,
     bedroomsNumber,
@@ -72,14 +83,14 @@ const RoomSection = () => {
   }
 
   return (
-    <section className="justify-between mx-auto bg-[#06270B] px-5 py-10 md:py-[80px] relative" id="room">
+    <section className="justify-between mx-auto px-5 py-10 md:py-[80px] relative" id="room">
       <div className="max-w-[1296px] block m-auto">
       <Image src={roomsIco} alt="Asterisk icon" width={80} height={80} className="mb-8 flex"/>
 
-      <h2 className="text-2xl lg:text-4xl text-[#ffffff] font-semibold mb-0">
+      <h2 className="text-2xl lg:text-3xl text-black font-semibold mb-0">
       {sectionMetadata.title}
       </h2>
-      <h3 className="text-2xl lg:text-4xl text-[#ffffff] font-semibold mb-10">
+      <h3 className="text-2xl lg:text-3xl text-black font-semibold mb-10">
       {sectionMetadata.subtitle}</h3>
 
       <div className="flex flex-wrap gap-6">
@@ -98,13 +109,27 @@ const RoomSection = () => {
                   <div className="absolute transition-all w-full h-full bg-black/[0.35]"></div>
                 </div>
               )}
-              <div className="absolute top-4 left-4">
-              <h2 className={`${kronaOne.className} text-xl font-semibold text-white mb-3`}>{room.roomName}</h2>
+              <div className="absolute top-0 left-0 w-full p-4">
+              <h2 className={`${kronaOne.className} text-2xl font-semibold text-white mb-3`}>{room.roomName}</h2>
               {/* <p className={`${kronaOne.className} text-white font-bold text-base mb-2`}>IDR {room.price} / malam</p> */}
-                <div className="flex gap-5">
-                  <p className="text-white flex gap-2 font-medium items-center text-base"><Image src={bedIco} alt="bedroom icon" width={28} height={28} className="invert"/> {room.bedroomsNumber} Bedrooms</p>
-                  <p className="text-white flex gap-2 font-medium items-center"><Image src={guestIco} alt="guest icon" width={28} height={28} className="invert"/> {room.guestNumber} Guests</p>
-                </div>
+<ul className="flex flex-wrap gap-2 items-center justify-start my-4">
+                {room.specifications?.slice(0, 4).map((specification: any, index: number) => {
+                    return (
+                      <li key={index} className="w-fit rounded flex items-start gap-2 p-2 border border-[#d9d9d9]">
+                        {specification.icon?.asset?.url && (
+                          <img 
+                          src={urlFor(specification.icon).url()} 
+                          alt={specification.name} 
+                          width={20} 
+                          height={20} 
+                          className="object-cover invert"
+                        />
+                        )}
+                        <h3 className="text-[14px] text-white">{specification.name}</h3>
+                      </li>
+                    );
+                  })}
+                </ul>
               </div>
               {/* <ul className="mt-2 text-gray-500 text-sm">
                 {room.facilities?.map((facility: string, index: number) => (

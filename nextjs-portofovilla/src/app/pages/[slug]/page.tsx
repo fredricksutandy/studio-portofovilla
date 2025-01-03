@@ -6,6 +6,8 @@ import ButtonWa from "../../../../components/common/ButtonWa";
 import WaLogo from '../../../../public/logos_whatsapp-icon.svg'
 import SectionNav from "../../../../components/common/SectionNavigation";
 import FooterSection from "../../../../components/layout/Footer";
+import NavbarDetailSection from "../../../../components/layout/NavbarDetail";
+
 import RoomImage from "../../../../components/common/roomDetailGallery";
 import BookingSection from "../../../../components/common/BookingSection";
 
@@ -164,6 +166,8 @@ export default async function RoomDetails({ params }: { params: { slug: string }
 
   return (
     <>
+    <NavbarDetailSection />
+
     {room.image && <RoomImage image={room.image} gallery={room.gallery || []} />}    <SectionNav />
     <section className="bg-white flex gap-8 relative max-w-[1296px] mx-auto font-montserrat p-4">
 

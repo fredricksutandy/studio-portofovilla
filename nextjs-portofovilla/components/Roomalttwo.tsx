@@ -29,6 +29,17 @@ const ROOM_QUERY = `
   *[_type == "room"] {
     roomName,
     slug,
+specifications[]{
+      name,
+      icon {
+        asset->{
+          url,
+          metadata {
+            lqip // Include lqip here
+          }
+        }
+      }
+    },
     description,
     price,
     bedroomsNumber,
@@ -72,7 +83,7 @@ const RoomSection = () => {
   }
 
   return (
-    <section className="justify-between mx-auto bg-[#f3ffeb] px-5 py-10 md:py-[80px] relative" id="room">
+    <section className="justify-between mx-auto px-5 py-10 md:py-[80px] relative" id="room">
       <div className="max-w-[1296px] block m-auto">
       <Image src={roomsIco} alt="Asterisk icon" width={80} height={80} className="mb-8 flex"/>
 
@@ -103,12 +114,32 @@ const RoomSection = () => {
       </div>
     )}
 
-    <div className="w-full md:w-[calc(50%-20px)] h-fit flex justify-center flex-col gap-4 md:gap-6">
-      <h2 className={`${kronaOne.className} text-xl md:text-3xl font-semibold text-black`}>{room.roomName}</h2>
-      <div className="flex gap-5">
+    <div className="w-full md:w-[calc(50%-20px)] h-fit flex justify-center flex-col gap-5">
+      <h2 className={`${kronaOne.className} text-xl md:text-2xl font-semibold text-black`}>{room.roomName}</h2>
+              <p className={`${kronaOne.className} text-neutral-500 text-lg m-0`}>IDR {room.price} / malam</p>
+
+      {/* <div className="flex gap-5">
         <p className={`${kronaOne.className} text-black flex gap-2 font-medium items-center text-base`}><Image src={bedIco} alt="bedroom icon" width={28} height={28} className=""/> {room.bedroomsNumber} Bedrooms</p>
         <p className={`${kronaOne.className} text-black flex gap-2 font-medium items-center text-base`}><Image src={guestIco} alt="guest icon" width={28} height={28} className=""/> {room.guestNumber} Guests</p>
-      </div>
+      </div> */}
+<ul className="flex flex-wrap gap-2 items-center justify-start my-4 max-w-[90%]">
+                {room.specifications?.slice(0, 4).map((specification: any, index: number) => {
+                    return (
+                      <li key={index} className="w-fit rounded flex items-start gap-2 p-2 border border-[#d9d9d9]">
+                        {specification.icon?.asset?.url && (
+                          <img 
+                          src={urlFor(specification.icon).url()} 
+                          alt={specification.name} 
+                          width={20} 
+                          height={20} 
+                          className="object-cover"
+                        />
+                        )}
+                        <h3 className="text-[14px]">{specification.name}</h3>
+                      </li>
+                    );
+                  })}
+                </ul>
       <div>
       <p className="text-gray-700 text-base max-w-[420px]">{room.description}</p>
       {/* <ul className="mt-2 text-gray-500 text-sm flex flex-wrap gap-2 max-w-[420px]">

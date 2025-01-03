@@ -4,6 +4,9 @@ import WaLogo from '../../public/logos_whatsapp-icon.svg';
 import airbnbLogo from '../../public/logos_airbnb-icon.svg';
 import tiketComLogo from '../../public/logos_tiket-com-icon.svg';
 import bookingComLogo from '../../public/logos_booking-com-icon.svg';
+import agodaLogo from '../../public/Agoda-logo-WhiteText-01.svg';
+import tripComLogo from '../../public/logos_trip-com-icon.svg';
+import travelokaLogo from '../../public/Traveloka-logo-icon.svg';
 import Image from "next/image";
 
 interface BookingSectionProps {
@@ -20,10 +23,13 @@ interface BookingSectionProps {
 }
 
 const platformImages: Record<string, string> = {
-  whatsapp: WaLogo,
-  airbnb: airbnbLogo,
-  'tiket-com': tiketComLogo,
-  'booking-com': bookingComLogo,
+  Whatsapp: WaLogo,
+  Airbnb: airbnbLogo,
+  'Tiket-com': tiketComLogo,
+  'Booking-com': bookingComLogo,
+  Agoda: agodaLogo,
+  'Trip-com': tripComLogo,
+  Traveloka: travelokaLogo
 };
 
 const BookingSection: React.FC<BookingSectionProps> = ({
@@ -98,10 +104,13 @@ const BookingSection: React.FC<BookingSectionProps> = ({
               target="_blank"
               rel="noopener noreferrer"
               className={`p-3 md:p-4 text-sm flex md:hidden items-center justify-center font-bold rounded-md w-full text-center ${
-                method.platform === 'whatsapp' ? 'bg-[#25d366] text-white' :
-                method.platform === 'airbnb' ? 'bg-[#ff5A60] text-white' :
-                method.platform === 'tiket-com' ? 'bg-[#0064D3] text-white' :
-                method.platform === 'booking-com' ? 'bg-[#003580] text-white' :
+                method.platform === 'Whatsapp' ? 'bg-[#25d366] text-white' :
+                method.platform === 'Airbnb' ? 'bg-[#ff5A60] text-white' :
+                method.platform === 'Tiket-com' ? 'bg-[#0064D3] text-white' :
+                method.platform === 'Booking-com' ? 'bg-[#003580] text-white' :
+                method.platform === 'Agoda' ? 'bg-[#003580] text-white' :
+                  method.platform === 'Trip-com' ? 'bg-white text-black border-1 border-[#d9d9d9]' :
+                  method.platform === 'Traveloka' ? 'bg-[#0A9AF2] text-white' :
                 'bg-gray-300 text-black'
               }`}
             >
@@ -137,11 +146,14 @@ const BookingSection: React.FC<BookingSectionProps> = ({
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`p-3 md:p-4 text-sm flex items-center justify-center font-bold rounded-md w-full text-center ${
-                  method.platform === 'whatsapp' ? 'bg-[#25d366] text-white' :
-                  method.platform === 'airbnb' ? 'bg-[#ff5A60] text-white' :
-                  method.platform === 'tiket-com' ? 'bg-[#0064D3] text-white' :
-                  method.platform === 'booking-com' ? 'bg-[#003580] text-white' :
-                  'bg-gray-300 text-black'
+                  method.platform === 'Whatsapp' ? 'bg-[#25d366] text-white' :
+                  method.platform === 'Airbnb' ? 'bg-[#ff5A60] text-white' :
+                  method.platform === 'Tiket-com' ? 'bg-[#0064D3] text-white' :
+                  method.platform === 'Booking-com' ? 'bg-[#003580] text-white' :
+                  method.platform === 'Agoda' ? 'bg-[#003580] text-white' :
+                  method.platform === 'Trip-com' ? 'bg-white text-black border-1 border-[#d9d9d9]' :
+                  method.platform === 'Traveloka' ? 'bg-[#0A9AF2] text-white' :
+                  'bg-[#1D764A] text-white'
                 }`}
               >
                 {platformImages[method.platform] && (
@@ -168,11 +180,14 @@ const BookingSection: React.FC<BookingSectionProps> = ({
               target="_blank"
               rel="noopener noreferrer"
               className={`p-3 md:p-4 text-sm flex items-center justify-center font-bold rounded-md w-full text-center ${
-                method.platform === 'whatsapp' ? 'bg-[#25d366] text-white' :
-                method.platform === 'airbnb' ? 'bg-[#ff5A60] text-white' :
-                method.platform === 'tiket-com' ? 'bg-[#0064D3] text-white' :
-                method.platform === 'booking-com' ? 'bg-[#003580] text-white' :
-                'bg-gray-300 text-black'
+                 method.platform === 'Whatsapp' ? 'bg-[#25d366] text-white' :
+                  method.platform === 'Airbnb' ? 'bg-[#ff5A60] text-white' :
+                  method.platform === 'Tiket-com' ? 'bg-[#0064D3] text-white' :
+                  method.platform === 'Booking-com' ? 'bg-[#003580] text-white' :
+                  method.platform === 'Agoda' ? 'bg-black text-white' :
+                  method.platform === 'Trip-com' ? 'bg-white text-black border border-[#d9d9d9]' :
+                  method.platform === 'Traveloka' ? 'bg-[#0A9AF2] text-white' :
+                'bg-[#1D764A] text-white'
               }`}
             >
               {platformImages[method.platform] && (

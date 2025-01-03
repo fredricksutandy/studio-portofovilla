@@ -56,7 +56,7 @@ const FooterSection = () => {
                 About
               </a>
               <a href="#" className="hover:text-gray-300 text-sm font-normal text-white/[0.5] transition">
-                Facilities
+                Amenities
               </a>
               <a href="#" className="hover:text-gray-300 text-sm font-normal text-white/[0.5] transition">
                 Nearby
