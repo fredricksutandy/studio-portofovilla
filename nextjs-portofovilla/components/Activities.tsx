@@ -20,11 +20,6 @@ const urlFor = (source: any) => {
 
 const ACTIVITIES_QUERY = `*[_type == "activities"][0]`;
 
-interface Activities {
-  activitiesTitle: string;
-  galleryImage: any;
-}
-
 const ActivitiesSection = () => {
   const [activitiesData, setActivitiesData] = useState<SanityDocument | null>(null);
 

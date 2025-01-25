@@ -109,10 +109,10 @@ const ActivitiesSplide = () => {
 
       <div className="max-w-[1296px] mx-auto">
         <Image src={activitiesIcon} alt="Activities icon" width={100} height={100} className="mb-8" />
-        <h2 className="text-xl lg:text-3xl text-black font-medium mb-0">
+        <h2 className="font-krona text-2xl lg:text-4xl text-[#1A520F] font-semibold mb-4">
           {activitiesData.title}
         </h2>
-        <h3 className="text-xl lg:text-3xl text-black font-medium mb-10">
+        <h3 className="text-lg text-gray-600 font-medium mb-4 max-w-[460px]">
           {activitiesData.subtitle}
         </h3>
       </div>

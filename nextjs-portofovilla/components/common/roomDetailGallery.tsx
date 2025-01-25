@@ -6,6 +6,8 @@ import Image from "next/image";
 import imageUrlBuilder from "@sanity/image-url";
 import Splide from "@splidejs/splide";
 import "@splidejs/splide/dist/css/splide.min.css";
+import chevronLeft from '../../public/carbon_chevron-left.svg'
+
 import {
   Dialog,
   DialogBackdrop,
@@ -18,11 +20,6 @@ const builder = imageUrlBuilder(client);
 
 // Helper to generate optimized image URLs
 const urlFor = (source: any) => builder.image(source).auto("format").fit("max");
-
-interface RoomImageProps {
-  image: any; // Main image for the room
-  gallery: any[]; // List of other images for the room
-}
 
 const RoomImage: React.FC<RoomImageProps> = ({ image, gallery }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -59,13 +56,12 @@ const RoomImage: React.FC<RoomImageProps> = ({ image, gallery }) => {
   return (
     <section
       className="relative max-w-[1296px] mx-auto w-full h-fit cursor-pointer"
-      onClick={openModal}
     >
       {/* Gallery images (desktop) */}
-      <div className="flex flex-wrap gap-4 p-0 md:p-4 h-[460px] md:flex-row">
-        <div className="splide splide-gallery md:hidden">
+      <div className="flex flex-wrap gap-4 p-0 md:p-4 h-fit md:h-[460px] md:flex-row">
+        <div className="splide splide-gallery md:hidden" >
           <div className="splide__track">
-            <ul className="splide__list">
+            <ul className="splide__list" onClick={openModal}>
               {gallery.map((img, index) => (
                 <li key={index} className="splide__slide">
                   <Image
@@ -90,8 +86,9 @@ const RoomImage: React.FC<RoomImageProps> = ({ image, gallery }) => {
           placeholder="blur"
           blurDataURL={image.asset.metadata.lqip}
           className="rounded-0 md:rounded-lg w-full flex-1 md:max-w-[760px] h-full object-cover hidden md:flex"
+          onClick={openModal}
         />
-        <div className="hidden md:flex max-w-[540px] flex-wrap gap-4">
+        <div className="hidden md:flex max-w-[540px] flex-wrap gap-4 flex-1" onClick={openModal}>
           {gallery.slice(0, 4).map((img, index) => (
             <Image
               key={index}
@@ -110,17 +107,19 @@ const RoomImage: React.FC<RoomImageProps> = ({ image, gallery }) => {
       <Dialog
         open={isModalOpen}
         onClose={closeModal}
-        className="fixed inset-0 z-[999] flex items-start justify-center overflow-auto py-4"
+        className="fixed inset-0 z-[999] flex items-start justify-center overflow-auto pt-0 lg:pt-6"
       >
         <DialogBackdrop className="fixed inset-0 bg-black bg-opacity-50" />
-        <DialogPanel className="relative bg-white p-8 w-full max-w-[1296px] mx-auto rounded-lg">
-        <button
+        <DialogPanel className="relative bg-white px-8 pb-8 w-full max-w-[1296px] mx-auto rounded-lg">
+          <div className="flex gap-3 items-center sticky top-0 py-6 z-50 bg-white">
+          <button
             onClick={closeModal}
-            className="text-neutral-700 rounded mb-4 p-2 hover:bg-neutral-200 transition-all bg-white sticky -top-[20px] z-[999]"
+            className="rounded p-2 h-fit hover:bg-neutral-200 bg-neutral-100 transition-all font-montserrat flex items-center gap-1"
           >
-            Kembali
+            <Image src={chevronLeft} alt="back" width={20} height={20} className=""/>
           </button>
-          <DialogTitle className="text-5xl font-semibold mb-6">Foto kamar</DialogTitle>
+          <DialogTitle className="text-3xl font-semibold font-krona">Foto kamar</DialogTitle>
+          </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {gallery.map((img, index) => (
@@ -132,7 +131,7 @@ const RoomImage: React.FC<RoomImageProps> = ({ image, gallery }) => {
                   height={300}
                   loading="lazy"
                   objectFit="cover"
-                  className="rounded-lg w-full h-full object-cover cursor-pointer transition-all hover:opacity-80"
+                  className="rounded-lg w-full h-[300px] object-cover cursor-pointer transition-all hover:opacity-80"
                   blurDataURL={image.asset.metadata.lqip}
                   placeholder="blur"
                   onClick={() => openFullScreenModal(img)} // Open full-screen modal
@@ -162,10 +161,10 @@ const RoomImage: React.FC<RoomImageProps> = ({ image, gallery }) => {
               <Image
                 src={urlFor(selectedImage).url()}
                 alt="Full-Screen Room Image"
-                width={1200} // or whatever is appropriate for full-screen
-                height={800}
+                width={1340}
+                height={960}
                 objectFit="contain" // Use contain to ensure the image is fully visible
-                className="rounded-lg w-auto h-auto max-h-[75 vh]"
+                className="rounded-lg w-auto flex h-full max-h-[80vh]"
                 loading="lazy"
                 blurDataURL={image.asset.metadata.lqip}
                 placeholder="blur"

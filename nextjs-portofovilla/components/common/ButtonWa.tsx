@@ -2,17 +2,6 @@ import React from 'react';
 import Image from 'next/image';
 import clsx from 'clsx';
 
-interface ButtonProps {
-  link: string;
-  text: string;
-  type: 'green' | 'white';
-  iconType?: string; // Optional icon
-  radius: 'full' | 'lg';
-  width: 'full' | 'fit';
-  displayMobile: boolean;
-  displayDesktop: boolean;
-}
-
 const ButtonWa: React.FC<ButtonProps> = ({
   link,
   text,
@@ -46,7 +35,7 @@ const ButtonWa: React.FC<ButtonProps> = ({
   );
 
   const buttonClass = clsx(
-    'justify-center items-center px-[48px] py-[24px] gap-[16px] text-[16px] font-bold cursor-pointer',
+    'justify-center items-center px-[48px] py-[24px] gap-2 text-[16px] font-bold cursor-pointer',
     buttonWidth,
     buttonRadius,
     buttonStyles,

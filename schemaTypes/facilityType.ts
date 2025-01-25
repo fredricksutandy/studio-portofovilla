@@ -2,39 +2,50 @@ import { defineType, defineField } from 'sanity';
 
 export const facility = defineType({
   name: 'facility',
-  title: 'Facility Section',
+  title: 'Fasilitas Villa',
   type: 'document',
+  // description: 'Gunakan bagian ini untuk mengelola informasi tentang fasilitas yang tersedia di villa Anda. Pastikan untuk menambahkan gambar dan deskripsi yang tepat untuk setiap fasilitas.',
   fields: [
     defineField({
       name: 'title',
-      title: 'Title',
+      title: 'Judul',
       type: 'string',
+      description: 'Masukkan judul utama untuk section fasilitas ini. [Contoh: "Fasilitas lengkap"]',
+      validation: (rule) => rule.required().error('Judul wajib diisi.'),
     }),
     defineField({
       name: 'subtitle',
-      title: 'Sub-title',
+      title: 'Sub-judul',
       type: 'string',
+      description: 'Berikan sambungan kata untuk judul diatas agar menjadi kalimat yang lengkap dengan judul pilihanmu. [Contoh: "Demi kenyamananmu"]',
+      validation: (rule) => rule.required().error('Sub-judul wajib diisi.'),
+      
     }),
     defineField({
       name: 'facilities',
-      title: 'Facilities',
+      title: 'Daftar Fasilitas',
       type: 'array',
+      description: 'Tambahkan daftar fasilitas yang tersedia di villa Anda, lengkap dengan gambar ikon dan nama fasilitas.',
       of: [
         {
           type: 'object',
           fields: [
             defineField({
-                name: 'facilityTitle',
-                title: 'Facility Title',
-                type: 'string',
-              }),
+              name: 'facilityTitle',
+              title: 'Nama Fasilitas',
+              type: 'string',
+              description: 'Masukkan nama fasilitas. Contoh: "Kolam Renang", "Spa", atau "Wi-Fi Gratis".',
+              validation: (rule) => rule.required().error('Nama fasilitas wajib diisi.'),
+            }),
             defineField({
               name: 'facilityImage',
-              title: 'Image',
+              title: 'Gambar Fasilitas',
               type: 'image',
+              description: 'Unggah gambar fasilitas untuk memberikan gambaran visual kepada pengunjung.',
               options: {
-                hotspot: true, // Allows for flexible image cropping in Sanity's UI
+                hotspot: true, // Memungkinkan cropping gambar di Sanity
               },
+              validation: (rule) => rule.required().error('Gambar fasilitas wajib diunggah.'),
             }),
           ],
           preview: {

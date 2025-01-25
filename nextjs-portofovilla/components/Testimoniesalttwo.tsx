@@ -197,6 +197,10 @@ if (!testimonyData) {
           text="Tanya jalur lebih jelas"
           type="white"
           iconType={WaLogo.src}
+          radius='lg'
+          width='fit'
+          displayDesktop={true}
+          displayMobile={true}
         />
       </div>
     </section>

@@ -22,10 +22,6 @@ const urlFor = (source: any) => {
 // Sanity query to fetch the 'activities' document
 const ACTIVITIES_QUERY = `*[_type == "activities"][0]`;
 
-interface Activities {
-  activitiesTitle: string;
-  galleryImage: any;
-}
 
 const ActivitiesSection = () => {
   const [activitiesData, setActivitiesData] = useState<SanityDocument | null>(null);

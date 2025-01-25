@@ -9,19 +9,6 @@ import tripComLogo from '../../public/logos_trip-com-icon.svg';
 import travelokaLogo from '../../public/Traveloka-logo-icon.svg';
 import Image from "next/image";
 
-interface BookingSectionProps {
-  price: string;
-  cancellationPolicy: {
-    freeCancellationText: string;
-    cancellationDeadline: string;
-  };
-  guestsOptions: number[];
-  nightsOptions: number[];
-  totalPrice: string;
-  limitedOfferText: string;
-  bookingMethods: { platform: string; link: string }[];
-}
-
 const platformImages: Record<string, string> = {
   Whatsapp: WaLogo,
   Airbnb: airbnbLogo,

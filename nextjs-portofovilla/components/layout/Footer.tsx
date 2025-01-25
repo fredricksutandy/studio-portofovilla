@@ -32,7 +32,7 @@ const FooterSection = () => {
     return <div>Loading...</div>; // Loading state
   }
   return (
-    <footer className="bg-[#06270B] px-[24px] py-[64px] text-white relative z-50">
+    <footer className="bg-[#06270B] px-[24px] py-[64px] text-white relative z-20">
       <div className="max-w-[1296px] mx-auto w-full flex flex-col justify-center items-center gap-[80px]">
         <div className="flex w-full flex-col md:flex-row md:justify-between">
           {/* Left Section */}

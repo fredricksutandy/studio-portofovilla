@@ -30,7 +30,7 @@ const FaqSection = () => {
       <div className="flex flex-col gap-8 w-full h-auto">
         <div className="text-lg font-semibold  px-6 py-4 bg-[#D6F6E3] text-[#047C36] w-fit rounded">?</div>
         <div className="flex flex-wrap justify-between w-full gap-4">
-            <h2 className="text-3xl lg:text-4xl text-black max-w-[470px] font-medium">{faqData.subtitleone}</h2>
+            <h2 className="font-krona text-3xl lg:text-4xl text-[#1A520F] max-w-[470px] font-semibold">{faqData.title}</h2>
             <div className="max-w-full lg:max-w-full xl:max-w-[640px]">
             <AccordionRow question={faqData.faqs[0].question} answer={faqData.faqs[0].answer}/>
             <AccordionRow question={faqData.faqs[1].question} answer={faqData.faqs[1].answer}/>

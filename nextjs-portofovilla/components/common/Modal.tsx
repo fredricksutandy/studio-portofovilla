@@ -13,25 +13,7 @@ const montserrat = Montserrat({
   display: 'swap',
 });
 
-declare type ModalPromo = {
-  title: string;
-  subtitle: string;
-  imageModal: {
-    asset: {
-      _ref: string;
-      _type: string;
-      url: string; // Ensuring `url` is included
-    };
-  };
-  details: Array<{
-    detailTitle: string;
-    detailDescription: string;
-  }>;
-  slug: {
-    _type: 'slug';
-    current: string;
-  };
-};
+
 
 const MODAL_QUERY = `
   *[_type == "modalPromo"]{

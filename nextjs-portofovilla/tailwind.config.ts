@@ -21,6 +21,8 @@ const config: Config = {
         'contact-bg': "url('/contact-bg.jpg')",
         'contact-bg-2': "url('/contact-placeholder.jpg')",
         'contact-bg-3': "url('/contact-placeholder2.jpg')",
+        'announcement-bg': "url('/mingcute_leaf-line-group.svg')",
+        'cta': "url('/palm-bg-cta.png')"
       },
     },
   },

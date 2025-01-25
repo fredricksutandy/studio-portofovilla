@@ -1,11 +1,6 @@
 // Accordion.tsx
 import React, { useState } from 'react';
 
-interface AccordionRowProps {
-  question: string;
-  answer: string;
-}
-
 const AccordionRow: React.FC<AccordionRowProps> = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);

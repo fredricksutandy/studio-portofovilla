@@ -8,7 +8,7 @@ import '@splidejs/splide/dist/css/splide.min.css';
 
 import palmLeaf from '../../public/palm-leaf-shadow.png';
 import testimony from '../../public/testimony-ico.svg';
-import WaLogo from '../../public/logos_whatsapp-icon.svg';
+import GmapLogo from '../../public/google-maps-2020-icon.svg';
 import star from '../../public/star-ico.svg';
 import staroutline from '../../public/staroutline-ico.svg';
 import ButtonWa from '../../components/common/ButtonWa';
@@ -35,7 +35,7 @@ const TestimonySplide = () => {
     if (!testimonyData || splideRef.current) return;
 
     const splide = new Splide('.splidetestimonial', {
-      perPage: 3,
+      perPage: 2,
       lazyLoad: 'nearby',
       gap: '16px',
       perMove: 1,
@@ -107,16 +107,17 @@ const TestimonySplide = () => {
       <Image src={palmLeaf} alt="palm-leaf" className="absolute right-0 bottom-0 z-0" />
 
       <div className="max-w-[1296px] block m-auto">
-        <div className="mb-6 md:mb-12">
-          <Image src={testimony} alt="Asterisk icon" width={100} height={64} className="mb-6" />
-          <h2 className="text-xl md:text-3xl w-full text-black font-medium">{testimonyData.subtitle}</h2>
+        <div className="mb-6">
+          <Image src={testimony} alt="Asterisk icon" width={100} height={64} className="mb-6 mx-auto" />
+          <h2 className="font-krona text-lg text-[#1A520F] font-semibold text-center">{testimonyData.title}</h2>
+          {/* <h3 className="text-lg text-gray-600 font-medium mb-10 max-w-[460px]">{testimonyData.subtitle}</h3> */}
         </div>
 
-        <div className="flex gap-2 mb-6 md:mb-12 items-start md:items-center">
+        <div className="flex gap-2 mb-6 md:mb-12 items-start md:items-center justify-center">
           <Image src={staroutline} alt="Star outline icon" width={40} height={40} className="w-[24px] h-[24px] md:w-[40px] md:h-[40px] mt-1 md:mt-0" />
-          <p className="text-lg md:text-2xl text-[#047C36]">
-            <span className="text-2xl md:text-4xl font-semibold">4.8 </span> dari{' '}
-            <span className="text-2xl md:text-4xl font-semibold">5 </span> Pengunjung kami merasa
+          <p className="text-lg md:text-3xl font-medium text-[#047C36]">
+            <span className="text-2xl md:text-5xl font-semibold">4.8 </span> dari{' '}
+            <span className="text-2xl md:text-5xl font-semibold">5 </span> Pengunjung kami merasa
             puas!
           </p>
         </div>
@@ -127,7 +128,7 @@ const TestimonySplide = () => {
           <ul className="splide__list">
             {testimonyData.testimonies?.map((testimony: any, index: number) => (
               <li className="splide__slide" key={index}>
-                <div className="flex flex-col h-[320px] rounded bg-white border border-[#d9d9d9] p-6 justify-between gap-2 hover:translate-y-[-6px] transition-all">
+                <div className="flex flex-col h-[280px] rounded bg-white border border-[#d9d9d9] p-6 justify-between gap-2 hover:translate-y-[-6px] transition-all">
                   <p className="text-[#1A520F] text-xl md:text-2xl font-semibold">
                     {testimony.testimonyHighlight}
                   </p>
@@ -141,7 +142,7 @@ const TestimonySplide = () => {
                   <p className="text-black text-base">{testimony.testimony}</p>
                   <p className="text-black text-sm font-medium">
                     {testimony.testimonyName}{' '}
-                    {testimony.testimonyFrom && <span className="text-gray-500">(from {testimony.testimonyFrom})</span>}
+                    {testimony.testimonyFrom && <span className="text-gray-500">(dari {testimony.testimonyFrom})</span>}
                   </p>
                 </div>
               </li>
@@ -153,7 +154,7 @@ const TestimonySplide = () => {
         <button ref={nextArrowRef} className="custom-arrow custom-arrow--next" />
       </div>
 
-      <h3 className="text-lg md:text-xl w-full text-start md:text-center text-black font-medium max-w-[1296px] mx-auto mb-6">
+      <h3 className="text-lg md:text-xl w-full text-start md:text-center text-black font-medium max-w-[1296px] mx-auto mb-8">
         Kisah dalam video
       </h3>
       <div className="flex flex-col md:flex-row gap-4 max-w-[1296px] mx-auto">
@@ -173,8 +174,17 @@ const TestimonySplide = () => {
         ))}
       </div>
 
-      <div className="max-w-[1296px] mx-auto flex justify-center">
-        <ButtonWa link={testimonyData.linkCTA} text="Tanya jalur lebih jelas" type="white" iconType={WaLogo.src} />
+      <div className="max-w-[1296px] mx-auto flex justify-center mt-8">
+        <ButtonWa 
+        link={testimonyData.linkCTA}
+          text="Lihat testimoni lain"
+          type="white"
+          iconType={GmapLogo.src}
+          radius='lg'
+          width='fit'
+          displayDesktop={true}
+          displayMobile={true}
+        />
       </div>
     </section>
   );

@@ -5,6 +5,7 @@ import { postType } from "./postType";
 import { trivia } from "./triviaType";
 import { room } from "./roomType";
 import { facility } from "./facilityType";
+import { service } from "./servicesType";
 import { contact } from "./contactType";
 import { testimony } from "./testimonyType";
 import { testimonyVideo } from "./testimonyVideoType";
@@ -23,6 +24,7 @@ export const schemaTypes = [
     trivia, 
     room, 
     facility, 
+    service,
     contact, 
     testimony, 
     testimonyVideo, 

@@ -9,13 +9,6 @@ import Image from "next/image";
 import ButtonWa from './common/ButtonWa';
 import WaLogo from '../public/logos_whatsapp-icon.svg'
 
-// Initialize the Krona One font
-const kronaOne = Krona_One({
-  weight: '400', // Specify the weights you need
-  subsets: ['latin'], // Ensure the font supports the required subset
-  display: 'swap',
-});
-
 // Initialize image builder
 const builder = imageUrlBuilder(client);
 
@@ -44,22 +37,23 @@ const ContactSection = () => {
   return (
     <section className="max-w-full gap-6 lg:gap-10 flex h-fit flex-col align-middle bg-[#Fff] px-4 py-10 lg:py-[160px] bg-contact-bg-2 bg-no-repeat bg-fixed bg-cover bg-top" id="contact">
       <div className="flex items-center gap-6 flex-wrap justify-center max-w-[1296px] m-auto w-full flex-col lg:flex-row">
-        <div className="flex flex-col gap-8 h-fit p-5 w-full lg:w-1/2 rounded">
-          <h2 className={`${kronaOne.className} text-3xl lg:text-3xl text-white w-fit rounded max-w-[380px]`} >{contactData.subTitle}</h2>
-          <div className="flex gap-4">
+        <div className="h-fit p-5 w-full lg:w-1/2 rounded">
+          <h2 className="font-krona text-2xl lg:text-4xl text-white font-semibold mb-2" >{contactData.title}</h2>
+          <h3 className="text-base text-gray-300 mb-8 max-w-[520px]">{contactData.subTitle}</h3>
+          <div className="flex gap-4 mb-8">
             {contactData.socialMedia.map((social: { link: string | undefined; icon: any; platform: any; }, index: Key | null | undefined) => (
               <a key={index} href={social.link} className="p-4 bg-white rounded-full flex items-center">
                 {social.icon && <Image width={24} height={24} src={urlFor(social.icon).url()} alt={`${social.platform} icon`} className="w-6 h-6" />}
               </a>
             ))}
           </div>
-          <div>
+          <div className="mb-8">
             {/* <p className="font-medium text-base lg:text-lg text-[#757575]">Address</p> */}
-            <a href={contactData.whatsappURL} className="mb-1 lg:mb-2 block text-lg  font-medium w-fit text-white">{contactData.whatsappNumber}</a>
+            <a href={contactData.whatsappURL} className="mb-2 break-all lg:mb-2 block text-xl  font-semibold w-fit text-white">{contactData.whatsappNumber}</a>
             {/* <p className="font-medium text-base lg:text-lg text-[#757575]">Email</p> */}
-            <a href={contactData.emailURL} className="mb-1 lg:mb-2 block text-lg  font-medium w-fit text-white">{contactData.email}</a>
+            <a href={contactData.emailURL} className="mb-2 break-all lg:mb-2 block text-xl  font-semibold w-fit text-white">{contactData.email}</a>
             {/* <p className="font-medium text-base lg:text-lg text-[#757575]">Whatsapp</p> */}
-            <a href={contactData.googleMapURL} className="mb-1 lg:mb-2 block text-lg  font-medium w-fit text-white">{contactData.address}</a>
+            <a href={contactData.googleMapURL} className="mb-2 break-all lg:mb-2 block text-xl  font-semibold w-fit text-white">{contactData.address}</a>
           </div>
           <ButtonWa 
             link={contactData.whatsappURL}

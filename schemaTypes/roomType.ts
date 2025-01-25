@@ -2,42 +2,50 @@ import { defineType, defineField } from 'sanity';
 
 export const room = defineType({
   name: 'room',
-  title: 'Room',
+  title: 'Kamar',
   type: 'document',
   fields: [
     // Basic Details
     defineField({
       name: 'roomName',
-      title: 'Room Name',
+      title: 'Nama Kamar',
       type: 'string',
+      description: 'Nama kamar yang akan ditampilkan di halaman kamar.',
+      validation: (Rule) => Rule.required().min(3).max(100).error('Nama kamar harus antara 3-100 karakter.'),
     }),
     defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
       options: { source: 'roomName', maxLength: 96 },
+      description: 'Slug untuk URL halaman kamar.',
     }),
     defineField({
       name: 'description',
-      title: 'Description',
+      title: 'Deskripsi',
       type: 'text',
+      description: 'Deskripsi lengkap tentang kamar, fasilitas, dan kelebihannya.',
+      validation: (Rule) => Rule.required().min(10).max(500).error('Deskripsi harus antara 10-500 karakter.'),
     }),
     defineField({
       name: 'price',
-      title: 'Price',
+      title: 'Harga',
       type: 'string',
+      description: 'Harga per malam atau tarif kamar.',
+      validation: (Rule) => Rule.required().regex(/^\d+$/, { name: 'Harga', invert: false }).error('Harga harus berupa angka.'),
     }),
     defineField({
       name: 'guestsBooked',
-      title: 'Jumlah reservasi',
+      title: 'Jumlah Reservasi',
       type: 'number',
-      description: 'Jumlah pengunjung yang pernah menginap/reservasi',
+      description: 'Jumlah pengunjung yang pernah menginap atau melakukan reservasi.',
+      validation: (Rule) => Rule.required().min(0).error('Jumlah reservasi tidak bisa kurang dari 0.'),
     }),
 
     defineField({
       name: 'specifications',
       title: 'Spesifikasi Kamar',
-      description: 'cantumkan detail dan spesifikasi kamar (contoh: jumlah kamar, jumlah ranjang, jumlah kamar mandi, Jumlah tamu yang diperbolehkan, dan ukuran ruangan)',
+      description: 'Cantumkan detail dan spesifikasi kamar (contoh: jumlah kamar, ranjang, kamar mandi, kapasitas tamu, dan ukuran ruangan)',
       type: 'array',
       of: [
         {
@@ -45,14 +53,16 @@ export const room = defineType({
           fields: [
             defineField({
               name: 'name',
-              title: 'Name',
+              title: 'Nama Spesifikasi',
               type: 'string',
+              description: 'Nama atau judul dari spesifikasi kamar.',
             }),
             defineField({
               name: 'icon',
-              title: 'Icon/Image',
+              title: 'Ikon/Gambar',
               type: 'image',
               options: { hotspot: true },
+              description: 'Ikon atau gambar yang mewakili spesifikasi kamar.',
             }),
           ],
           preview: {
@@ -68,7 +78,7 @@ export const room = defineType({
     // Facilities with Images
     defineField({
       name: 'facilities',
-      title: 'Facilities',
+      title: 'Fasilitas',
       type: 'array',
       of: [
         {
@@ -76,14 +86,16 @@ export const room = defineType({
           fields: [
             defineField({
               name: 'name',
-              title: 'Name',
+              title: 'Nama Fasilitas',
               type: 'string',
+              description: 'Nama fasilitas yang tersedia di kamar.',
             }),
             defineField({
               name: 'icon',
-              title: 'Icon/Image',
+              title: 'Ikon/Gambar',
               type: 'image',
               options: { hotspot: true },
+              description: 'Ikon atau gambar yang mewakili fasilitas kamar.',
             }),
           ],
           preview: {
@@ -94,53 +106,54 @@ export const room = defineType({
           },
         },
       ],
-      description: 'List of facilities with icons/images specific to this room.',
+      description: 'Daftar fasilitas dengan ikon atau gambar untuk kamar ini.',
     }),
 
     // Address and Map
     defineField({
       name: 'address',
-      title: 'Address',
+      title: 'Alamat',
       type: 'string',
+      description: 'Alamat lengkap tempat kamar berada.',
     }),
     defineField({
       name: 'gmapUrl',
-      title: 'Google Maps URL',
+      title: 'URL Google Maps',
       type: 'url',
-      description: 'Embed URL for the room location.',
+      description: 'URL untuk menampilkan lokasi kamar di Google Maps.',
     }),
 
     // Rules and Policies (Individual Fields)
     defineField({
       name: 'checkIn',
-      title: 'Check-In Hour',
+      title: 'Jam Check-In',
       type: 'string',
-      description: 'Specify the check-in time, e.g., 2:00 PM.',
+      description: 'Waktu check-in untuk kamar, misalnya: 14:00 WIB.',
     }),
     defineField({
       name: 'checkOut',
-      title: 'Check-Out Hour',
+      title: 'Jam Check-Out',
       type: 'string',
-      description: 'Specify the check-out time, e.g., 11:00 AM.',
+      description: 'Waktu check-out untuk kamar, misalnya: 11:00 WIB.',
     }),
     defineField({
       name: 'rulesList',
-      title: 'Rules List',
+      title: 'Daftar Aturan',
       type: 'array',
       of: [{ type: 'string' }],
-      description: 'Add any specific rules for the room.',
+      description: 'Aturan-aturan khusus untuk kamar yang harus diikuti oleh pengunjung.',
     }),
     defineField({
       name: 'disclaimer',
-      title: 'Disclaimer',
+      title: 'Penafian',
       type: 'text',
-      description: 'Add disclaimers or additional policies if needed.',
+      description: 'Tambahkan penafian atau kebijakan tambahan jika diperlukan.',
     }),
 
     // Extra Amenities
     defineField({
       name: 'extraAmenities',
-      title: 'Extra Amenities',
+      title: 'Fasilitas Tambahan',
       type: 'array',
       of: [
         {
@@ -148,13 +161,15 @@ export const room = defineType({
           fields: [
             defineField({
               name: 'name',
-              title: 'Name',
+              title: 'Nama Fasilitas Tambahan',
               type: 'string',
+              description: 'Nama fasilitas tambahan yang tersedia.',
             }),
             defineField({
               name: 'price',
-              title: 'Price',
+              title: 'Harga',
               type: 'string',
+              description: 'Harga fasilitas tambahan tersebut.',
             }),
           ],
           preview: {
@@ -165,13 +180,13 @@ export const room = defineType({
           },
         },
       ],
-      description: 'Add extra amenities with their names and prices.',
+      description: 'Fasilitas tambahan yang dapat ditambahkan ke dalam kamar beserta harga.',
     }),
 
-    // Facilities with Images
+    // Booking Methods
     defineField({
       name: 'bookingMethod',
-      title: 'Metode Booking',
+      title: 'Metode Pemesanan',
       type: 'array',
       of: [
         {
@@ -192,39 +207,42 @@ export const room = defineType({
                   { title: 'Traveloka', value: 'Traveloka' },
                 ],
               },
+              validation: Rule => Rule.required().error('Platform wajib diisi'),
             },
             {
               name: 'link',
               title: 'Link',
               type: 'url',
-              description: 'The URL for booking on the selected platform.',
+              description: 'URL untuk melakukan pemesanan di platform yang dipilih.',
+              validation: Rule => Rule.required().uri().error('Link wajib diisi dan valid'),
             },
           ],
         },
       ],
-      description: 'List of booking methods with platforms and their respective links.',
+      description: 'Daftar metode pemesanan dengan platform dan link terkait.',
     }),
-
 
     // Main Image and Gallery
     defineField({
       name: 'image',
-      title: 'Main Image',
+      title: 'Gambar Utama',
       type: 'image',
-      description: 'The primary image used for the room.',
+      description: 'Gambar utama yang digunakan untuk kamar.',
       options: { hotspot: true },
+      validation: Rule => Rule.required().error('Gambar utama wajib diisi'),
     }),
     defineField({
       name: 'gallery',
-      title: 'Image Gallery',
+      title: 'Galeri Gambar',
       type: 'array',
       of: [
         {
           type: 'image',
-          options: { hotspot: true }, // Ensure each image in the array can use hotspot individually
+          options: { hotspot: true }, // Memastikan setiap gambar di dalam array bisa menggunakan hotspot secara individu
         },
       ],
-      description: 'Additional images to showcase the room.',
+      description: 'Gambar tambahan untuk menampilkan kamar dari berbagai sudut.',
+      validation: Rule => Rule.required().min(1).error('Galeri gambar wajib diisi dengan minimal satu gambar'),
     }),
   ],
 });

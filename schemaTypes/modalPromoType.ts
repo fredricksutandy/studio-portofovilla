@@ -7,39 +7,46 @@ export const modalPromoType = defineType({
   fields: [
     defineField({
       name: 'title',
-      title: 'Title',
+      title: 'Judul Modal Promo',
       type: 'string',
+      description: 'Tuliskan judul promosi yang menarik perhatian pelanggan. Pastikan singkat dan mudah dipahami. [Contoh: "Diskon Spesial Akhir Pekan"]',
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'subtitle',
-      title: 'Sub-title',
+      title: 'Sub-judul Modal Promo',
       type: 'string',
+      description: 'Berikan sub-judul singkat yang menjelaskan lebih detail tentang promosi.'
     }),
     defineField({
         name: 'imageModal',
-        title: 'Image Modal',
+        title: 'Gambar Modal Promo',
         type: 'image',
+        description: 'Unggah gambar yang mendukung promosi. Gambar ini akan ditampilkan di modal promosi untuk menarik perhatian pengunjung.',
         options: {
           hotspot: true,
         },
       }),
     defineField({
       name: 'details',
-      title: 'Details',
+      title: 'Detail Promosi',
+      description: 'Tambahkan poin-poin penting yang menjelaskan detail promosi. Setiap poin memiliki judul dan deskripsi singkat. Poin bisa berupa jumlah diskon, promo ataupun juga syarat ketentuan',
       type: 'array',
       of: [
         {
           type: 'object',
           fields: [
-            defineField({
-                name: 'detailTitle',
-                title: 'Detail Title',
-                type: 'string',
-              }),
+          defineField({
+              name: 'detailTitle',
+              title: 'Nama/detail promo',
+              type: 'string',
+              description: 'Tuliskan judul singkat untuk detail promosi.'
+            }),
             defineField({
             name: 'detailDescription',
-            title: 'Detail Description',
+            title: 'Deskripsi promo',
             type: 'string',
+            description: 'Jelaskan poin atau syarat promosi secara lebih rinci.'
             }),
           ],
         },

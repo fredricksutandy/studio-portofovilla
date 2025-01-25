@@ -35,15 +35,15 @@ const FacilitySection = () => {
   }
 
   return (
-    <section className="max-w-[1296px] flex flex-col md:flex-row mx-auto bg-[#Fff] px-4 py-24 relative gap-8" id="facilities">
+    <section className="max-w-[1296px] flex flex-col md:flex-row mx-auto bg-[#Fff] px-4 py-10 md:py-[160px] relative gap-8" id="facilities">
 
-      <div className="w-full md:w-7/12 px-0 pt-8">
+      <div className="w-full md:w-7/12 px-0">
         <Image src={facilityIco} alt="Asterisk icon" width={100} height={64} className="mb-8 flex"/>
         
-        <h2 className="text-xl lg:text-3xl text-black font-medium mb-0">
+        <h2 className="font-krona text-2xl lg:text-4xl text-[#1A520F] font-semibold mb-4">
         {facilityData.title}
         </h2>
-        <h3 className="text-xl lg:text-3xl text-black font-medium mb-10">
+        <h3 className="text-lg text-gray-600 font-medium mb-10 max-w-[460px]">
         {facilityData.subtitle}
         </h3>
 
@@ -65,7 +65,7 @@ const FacilitySection = () => {
         </div>
       </div>
 
-      <Image src={placeholder} alt="palm-leaf" className="w-full md:w-5/12 object-cover"/>
+      <Image src={placeholder} alt="palm-leaf" className="w-full md:w-5/12 object-cover rounded-[16px]"/>
 
     </section>
   );

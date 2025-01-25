@@ -7,6 +7,7 @@ import portofovillalogomono from '../../public/portofovilla logo mono.svg'
 import WaLogo from '../../public/logos_whatsapp-icon.svg'
 import { client } from "@/sanity/client"; 
 import type { SanityDocument } from "next-sanity";
+import AnnouncementBanner from "../../components/common/AnnouncementBanner";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -52,6 +53,7 @@ const Navbar = () => {
           : 'bg-transparent text-white' // Default styles
       }`}
     >
+      <AnnouncementBanner />
       <div className="max-w-[1296px] mx-auto flex items-center justify-between p-4">
       <Link href="/">
           <Image src={portofovillalogomono} alt='logo' width={80} className={` ${
@@ -85,6 +87,11 @@ const Navbar = () => {
           <li>
             <Link href="#facilities">
               <p className="hover:underline">Facilities</p>
+            </Link>
+          </li>
+          <li>
+            <Link href="#services">
+              <p className="hover:underline">Services</p>
             </Link>
           </li>
           <li>
@@ -139,6 +146,11 @@ const Navbar = () => {
                 Facilities
               </p>
             </Link>
+            <li>
+            <Link href="#services">
+              <p className="hover:underline">Services</p>
+            </Link>
+          </li>
             <Link href="#activities">
               <p className="hover:underline" onClick={() => setIsMenuOpen(false)}>
                 Activities

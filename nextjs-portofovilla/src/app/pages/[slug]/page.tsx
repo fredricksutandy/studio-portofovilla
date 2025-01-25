@@ -277,7 +277,7 @@ export default async function RoomDetails({ params }: { params: { slug: string }
         price={room.price}
         cancellationPolicy={{
           freeCancellationText: 'Free cancellation',
-          cancellationDeadline: 'Sebelum Senin, 23 Oct',
+          cancellationDeadline: 'H - 7 tanggal menginap',
         }}
         guestsOptions={[1, 2, 3, 4, 5]}
         nightsOptions={[1, 2, 3, 4, 5]}

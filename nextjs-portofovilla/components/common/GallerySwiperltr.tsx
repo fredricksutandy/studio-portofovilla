@@ -16,12 +16,6 @@ const urlFor = (source: any) => {
   return source ? builder.image(source).auto('format').fit('max').url() : '';
 };
 
-interface SplideComponentProps {
-  data: any[]; // Expect galleryImage data
-  autoScrollSpeed?: number; // Speed for auto-scroll
-  reverse?: boolean; // Reverse scrolling direction
-}
-
 const SplideComponent: React.FC<SplideComponentProps> = ({ data, autoScrollSpeed = 1, reverse = false }) => {
   const splideRef = useRef<HTMLDivElement | null>(null);
 
@@ -65,9 +59,9 @@ const SplideComponent: React.FC<SplideComponentProps> = ({ data, autoScrollSpeed
             <li key={index} className="splide__slide">
               <div className="flex flex-col h-[180px] md:h-[320px] rounded bg-white border border-[#d9d9d9] p-6 justify-between gap-2 hover:translate-y-[-6px] transition-all">
                 {/* Display the image */}
-                {item?.galleryImage ? (
+                {item?.image ? (
                   <Image
-                    src={urlFor(item.galleryImage).toString()}
+                    src={urlFor(item.image).toString()}
                     alt={`Gallery Image ${index + 1}`}
                     layout="fill"
                     objectFit="cover"

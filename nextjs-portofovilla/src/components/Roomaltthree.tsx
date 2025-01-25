@@ -18,12 +18,6 @@ const builder = imageUrlBuilder(client);
 // Helper to generate optimized image URLs
 const urlFor = (source: any) => builder.image(source).auto('format').fit('max');
 
-const kronaOne = Krona_One({
-  weight: '400', // Specify the weights you need
-  subsets: ['latin'], // Ensure the font supports the required subset
-  display: 'swap',
-});
-
 // Define queries for room data and section metadata
 const ROOM_QUERY = `
   *[_type == "room"] {
@@ -83,14 +77,14 @@ const RoomSection = () => {
   }
 
   return (
-    <section className="justify-between mx-auto bg-[#fff] px-5 py-10 lg:py-[80px] relative" id="room">
+    <section className="justify-between mx-auto bg-[#fff] px-5 py-10 lg:py-[160px] relative" id="room">
       <div className="max-w-[1296px] block m-auto">
       <Image src={roomsIco} alt="Asterisk icon" width={80} height={80} className="mb-8 flex mr-auto lg:mx-auto"/>
 
-      <h2 className="text-3xl lg:text-3xl text-start lg:text-center text-black font-semibold mb-0">
+      <h2 className="font-krona text-center text-2xl lg:text-4xl text-[#1A520F] font-semibold mb-4">
       {sectionMetadata.title}
       </h2>
-      <h3 className="text-3xl lg:text-3xl text-start lg:text-center text-black font-semibold mb-10 lg:mb-20">
+      <h3 className="text-lg text-center  text-gray-600 font-medium mb-10 max-w-[460px] m-auto">
       {sectionMetadata.subtitle}</h3>
 
       <div className="flex flex-wrap gap-8">
@@ -112,12 +106,12 @@ const RoomSection = () => {
             )}
 
             <div className="w-full h-fit flex justify-start lg:justify-center flex-col gap-4 text-start lg:text-center">
-              <h2 className={`${kronaOne.className} text-xl lg:text-2xl font-semibold text-black`}>{room.roomName}</h2>
+              <h2 className="font-krona text-xl lg:text-2xl font-semibold text-black">{room.roomName}</h2>
               {/* <div className="flex gap-5 justify-start lg:justify-center">
                 <p className={` text-black flex gap-2 font-medium items-center text-base`}><Image src={bedIco} alt="bedroom icon" width={28} height={28} className=""/> {room.bedroomsNumber} Bedrooms</p>
                 <p className={` text-black flex gap-2 font-medium items-center text-base`}><Image src={guestIco} alt="guest icon" width={28} height={28} className=""/> {room.guestNumber} Guests</p>
               </div> */}
-              <p className={`${kronaOne.className} text-neutral-500 text-lg mb-4`}>IDR {room.price} / malam</p>
+              <p className="font-montserrat text-neutral-600 font-semibold text-lg mb-4">IDR {room.price} / malam</p>
 
             <ul className="flex flex-wrap gap-2 items-center justify-center">
                       {room.specifications?.map((specification: any, index: number) => {
@@ -138,7 +132,7 @@ const RoomSection = () => {
                         })}
                       </ul>
               <div>
-                <p className="text-gray-700 text-base">{room.description}</p>
+                <p className="text-neutral-500 text-base">{room.description}</p>
               </div>
                 
               <Link
