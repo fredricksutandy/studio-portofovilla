@@ -51,11 +51,11 @@ const CTASection = () => {
 
   return (
     <section className="bg-[#Fff] px-4 py-[240px]">
-      <div className="max-w-[1296px] bg-[#1A520F] rounded-xl mx-auto px-4 py-[96px] flex flex-col items-center justify-center relative bg-cta bg-auto bg-no-repeat bg-center">
+      <div className="max-w-[1296px] bg-[#1A520F] rounded-xl mx-auto px-4 py-[80px] flex flex-col items-center justify-center relative bg-cta bg-auto bg-no-repeat bg-center">
 
 
-        <h2 className="text-xl md:text-5xl text-[#fff] font-krona text-center mb-6 font-bold max-w-[600px]">Karena Dirimu Layak untuk Beristirahat</h2>
-        <p className="text-base max-w-[560px] text-center mb-6 text-neutral-200 font-montserrat">Beristirahatlah di tengah harmoni alam yang memelukmu. Biarkan setiap momen menjadi cerita indah yang tak terlupakan.</p>
+        <h2 className="text-xl md:text-5xl text-[#fff] font-krona text-center mb-6 font-bold max-w-[680px]">{ctaData.title}</h2>
+        <p className="text-base max-w-[560px] text-center mb-6 text-neutral-200 font-montserrat">{ctaData.subtitle}</p>
         <a
           href={ctaData.buttonLink}
           className="font-bold transition-all bg-[#fff] text-[#1A520F] hover:translate-y-[-4px] hover:opacity-80 rounded-md px-12 py-6 text-base flex lg:w-fit mx-auto"

@@ -38,10 +38,17 @@ export const activities = defineType({
             }),
             defineField({
               name: 'activitiesRange',
-              title: 'Jarak dari Villa',
+              title: 'Jarak dari Villa ke Lokasi',
               type: 'string',
-              description: 'Berikan informasi tentang jarak atau waktu tempuh ke lokasi kegiatan. Contoh: "5 menit berjalan kaki" atau "3 km".',
+              description: 'Berikan informasi tentang jarak tempuh ke lokasi kegiatan. Contoh: "200m, 300m, 1.4km.',
               validation: (rule) => rule.required().error('Jarak kegiatan wajib diisi.'),
+            }),
+            defineField({
+              name: 'activitiesDuration',
+              title: 'Waktu dari Villa ke Lokasi',
+              type: 'string',
+              description: 'Berikan informasi tentang waktu tempuh ke lokasi kegiatan. Contoh: "5 menit berjalan kaki" atau "30 menit".',
+              validation: (rule) => rule.required().error('Waktu perjalanan wajib diisi.'),
             }),
             defineField({
               name: 'activitiesDescription',

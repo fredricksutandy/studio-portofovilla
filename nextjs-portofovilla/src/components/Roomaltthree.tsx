@@ -77,7 +77,7 @@ const RoomSection = () => {
   }
 
   return (
-    <section className="justify-between mx-auto bg-[#fff] px-5 py-10 lg:py-[160px] relative" id="room">
+    <section className="justify-between mx-auto bg-[#fff] px-5 py-10 lg:py-[144px] relative" id="room">
       <div className="max-w-[1296px] block m-auto">
       <Image src={roomsIco} alt="Asterisk icon" width={80} height={80} className="mb-8 flex mr-auto lg:mx-auto"/>
 
@@ -91,10 +91,10 @@ const RoomSection = () => {
         {roomData?.slice(0, 3).map((room: any, index: number) => (
           <div
             key={room.slug.current}
-            className="w-full lg:w-[calc(33%-24px)] gap-4 lg:gap-10 flex flex-auto lg:flex-1 flex-col items-center group overflow-hidden"
+            className="w-full lg:w-[calc(33%-24px)] gap-4 lg:gap-6 flex flex-auto lg:flex-1 flex-col items-center group overflow-hidden"
           >
             {room.image && (
-              <div className="relative w-full h-[300px] lg:h-[440px] overflow-hidden mb-2 rounded-t-xl lg:rounded-t-full">
+              <div className="relative w-full h-[300px] lg:h-[380px] overflow-hidden mb-2 rounded-t-xl lg:rounded-t-full">
                 <Image
                   src={urlFor(room.image).url()}
                   alt={room.roomName}
@@ -111,7 +111,7 @@ const RoomSection = () => {
                 <p className={` text-black flex gap-2 font-medium items-center text-base`}><Image src={bedIco} alt="bedroom icon" width={28} height={28} className=""/> {room.bedroomsNumber} Bedrooms</p>
                 <p className={` text-black flex gap-2 font-medium items-center text-base`}><Image src={guestIco} alt="guest icon" width={28} height={28} className=""/> {room.guestNumber} Guests</p>
               </div> */}
-              <p className="font-montserrat text-neutral-600 font-semibold text-lg mb-4">IDR {room.price} / malam</p>
+              <p className="font-montserrat text-neutral-600 font-semibold text-lg">IDR {room.price} / malam</p>
 
             <ul className="flex flex-wrap gap-2 items-center justify-center">
                       {room.specifications?.map((specification: any, index: number) => {
@@ -131,13 +131,13 @@ const RoomSection = () => {
                           );
                         })}
                       </ul>
-              <div>
+              {/* <div>
                 <p className="text-neutral-500 text-base">{room.description}</p>
-              </div>
+              </div> */}
                 
               <Link
               href={`pages/${room.slug.current}`} prefetch={true}
-                className="flex items-center mt-4 mx-auto transition-all hover:translate-x-1 gap-2 border border-[#1A520F] justify-center w-full lg:w-fit py-4 px-6">
+                className="flex items-center mt-2 mx-auto transition-all hover:translate-x-1 gap-2 border border-[#1A520F] justify-center w-full lg:w-fit py-4 px-6">
                 <p className="block m-0 text-[#1A520F] hover:underline">
                   View Details
                 </p>

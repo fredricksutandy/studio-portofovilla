@@ -11,6 +11,7 @@ import palmLeaf from '../../public/palm-leaf-shadow.png';
 import activitiesIcon from '../../public/activities-ico.svg';
 import distanceIcon from '../../public/distance-ico.svg';
 import arrowRight from '../../public/carbon_arrow-right.svg';
+import arrowRightBlue from '../../public/carbon_arrow-right-blue.svg';
 
 import '../styles/custom-swiper.css';
 
@@ -107,23 +108,23 @@ const ActivitiesSplide = () => {
     <section className="splide max-w-full mx-auto bg-[#FFF] py-24 px-4 overflow-hidden relative" id="activities">
       <Image src={palmLeaf} alt="palm-leaf" className="absolute left-0 bottom-0 z-0 scale-x-[-1]" />
 
-      <div className="max-w-[1296px] mx-auto">
-        <Image src={activitiesIcon} alt="Activities icon" width={100} height={100} className="mb-8" />
-        <h2 className="font-krona text-2xl lg:text-4xl text-[#1A520F] font-semibold mb-4">
+      <div className="max-w-[1296px] mx-auto mb-8">
+        <Image src={activitiesIcon} alt="Activities icon" width={100} height={100} className="mb-8 mx-auto" />
+        <h2 className="font-krona text-2xl lg:text-5xl text-[#1A520F] font-semibold mb-4 text-center">
           {activitiesData.title}
         </h2>
-        <h3 className="text-lg text-gray-600 font-medium mb-4 max-w-[460px]">
+        <p className="text-lg text-gray-600 mb-4 max-w-[580px] mx-auto text-center">
           {activitiesData.subtitle}
-        </h3>
+        </p>
       </div>
 
       <div className="max-w-[1296px] mx-auto relative">
         <div className="splide__track max-w-[1296px] mb-[120px] md:mb-12 mx-auto overflow-initial">
           <ul className="splide__list overflow-initial">
             {activitiesData.activities?.map((activities: any, index: number) => (
-              <li className="splide__slide" key={index}>
+              <li className="splide__slide bg-white border border-[#d9d9d9] rounded overflow-hidden" key={index}>
                 <div
-                  className="flex flex-col h-[540px] rounded min-w-[300px] items-start justify-end p-4 hover:translate-y-[-6px] transition-all"
+                  className="flex flex-col h-[280px] items-start justify-end p-4   transition-all"
                   style={{
                     backgroundImage: `url(${urlFor(activities.activitiesImage) || ''})`,
                     backgroundSize: 'cover',
@@ -131,21 +132,39 @@ const ActivitiesSplide = () => {
                     backgroundRepeat: 'no-repeat',
                   }}
                 >
-                  <span className="text-white font-bold text-lg flex items-center gap-2">
+                  
+                </div>
+                <div className="p-4 flex flex-col gap-4">
+                
+                  <div className='border-b-2 pb-4'>
+                    <h3 className="font-medium text-xl">
+                      {index + 1}. {activities.activitiesTitle}
+                    </h3>
+                    <span className='text-sm font-semibold text-[#666666]'>Adventurous</span>
+                  </div>
+
+                  <div className="flex gap-4">
+                    <span className="text-lg flex items-center gap-2">
                     <Image src={distanceIcon} alt="Activities icon" width={50} height={50} />
                     {activities.activitiesRange}
                   </span>
-                  <span className="text-white font-bold text-2xl">
-                    {activities.activitiesTitle}
+                  <span className="text-lg flex items-center gap-2">
+                    <Image src={distanceIcon} alt="Activities icon" width={50} height={50} />
+                    {activities.activitiesRange}
                   </span>
-                  <a href={activities.activitiesURL} className="absolute right-2 top-2 text-sm text-white flex gap-2">
+                  </div>
+
+                  <p className="text-neutral-600 font-normal text-[14px]">
+                    {activities.activitiesDescription}
+                  </p>
+
+                  
+                
+                  <a href={activities.activitiesURL} className="text-sm flex items-center gap-2 text-[#0064D3] hover:translate-x-2 transition-all">
                     lihat di peta
-                    <Image src={arrowRight} alt="guest icon" width={16} height={16} />
+                    <Image src={arrowRightBlue} alt="guest icon" width={16} height={16} className='mt-1' />
                   </a>
                 </div>
-                <p className="text-black font-normal text-[14px] mt-2">
-                  {activities.activitiesDescription}
-                </p>
               </li>
             ))}
           </ul>

@@ -21,6 +21,15 @@ export const trivia = defineType({
       type: 'text',
     }),
 
+    defineField({
+      name: 'imageAbout',
+      title: 'Image About',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+
     // Trivia Section
     defineField({
       name: 'triviaSection',

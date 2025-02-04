@@ -72,7 +72,7 @@ const ServiceSection = () => {
                 alt={service.serviceTitle}
                 width={1320}
                 height={640}
-                className="w-full h-[240px] lg:h-[550px] object-cover"
+                className="w-full h-[240px] lg:h-[460px] object-cover"
               />
               <div className="mt-4">
                 <h3 className="tracking-wider text-lg lg:text-2xl font-semibold text-neutral-400 mb-2">

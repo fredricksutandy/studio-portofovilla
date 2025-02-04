@@ -5,6 +5,7 @@ import CTASection from "../../components/CTA";
 import CTASectionaltone from "../../components/CTAaltone";
 import FaqSection from "../../components/Faq";
 import Contact from "../../components/Contact";
+import MultipleContact from "../../components/MultipleContact";
 import TriviaSectionaltone from "../../components/Triviaaltone";
 import FacilitySectionaltone from "../../components/Facilityaltone";
 import ActivitiesSectionaltone from "../components/Activitiesaltone";
@@ -49,7 +50,8 @@ export default function IndexPage() {
       <Gallery />
       {/* <CTASection /> */}
       <CTASectionaltone />
-      <Contact />
+      {/* <Contact /> */}
+      <MultipleContact />
       <FooterSection />
       <Modal />
     </main>

@@ -7,6 +7,7 @@ import { room } from "./roomType";
 import { facility } from "./facilityType";
 import { service } from "./servicesType";
 import { contact } from "./contactType";
+import { multipleContact } from "./multipleContactType";
 import { testimony } from "./testimonyType";
 import { testimonyVideo } from "./testimonyVideoType";
 import { CTA } from "./ctaType";
@@ -26,6 +27,7 @@ export const schemaTypes = [
     facility, 
     service,
     contact, 
+    multipleContact, 
     testimony, 
     testimonyVideo, 
     faq, 

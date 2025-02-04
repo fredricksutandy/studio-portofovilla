@@ -35,7 +35,7 @@ const ContactSection = () => {
   }
 
   return (
-    <section className="max-w-full gap-6 lg:gap-10 flex h-fit flex-col align-middle bg-[#Fff] px-4 py-10 lg:py-[160px] bg-contact-bg-2 bg-no-repeat bg-fixed bg-cover bg-top" id="contact">
+    <section className="max-w-full gap-6 lg:gap-10 flex h-fit flex-col align-middle bg-[#Fff] px-4 py-10 lg:py-[144px] bg-contact-bg-2 bg-no-repeat bg-fixed bg-cover bg-top" id="contact">
       <div className="flex items-center gap-6 flex-wrap justify-center max-w-[1296px] m-auto w-full flex-col lg:flex-row">
         <div className="h-fit p-5 w-full lg:w-1/2 rounded">
           <h2 className="font-krona text-2xl lg:text-4xl text-white font-semibold mb-2" >{contactData.title}</h2>

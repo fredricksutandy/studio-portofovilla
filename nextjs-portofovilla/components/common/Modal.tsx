@@ -82,7 +82,7 @@ const Modal = () => {
                 alt={modalData.title || 'Modal image'}
                 width={800}
                 height={1600}
-                className="w-full h-[160px] md:h-full object-cover"
+                className="w-full h-[144px] md:h-full object-cover"
               />
             </div>
 

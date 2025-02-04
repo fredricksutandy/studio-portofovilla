@@ -75,7 +75,7 @@ const ActivitiesSection = () => {
             backgroundImage: `url(${topMount.src})`, // Access the src property here
           }}
         >
-          <p className="text-lg font-bold w-[160px] text-center">Lihat Destinasi wisata lain</p>
+          <p className="text-lg font-bold w-[144px] text-center">Lihat Destinasi wisata lain</p>
           <div className="bg-white rounded-full h-16 w-16 flex justify-center align-middle">
             <Image src={arrowRight} alt="Activities icon" width={18} height={15} className="" />
           </div>

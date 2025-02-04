@@ -35,7 +35,7 @@ const FacilitySection = () => {
   }
 
   return (
-    <section className="max-w-[1296px] flex flex-col md:flex-row mx-auto bg-[#Fff] px-4 py-10 md:py-[160px] relative gap-8" id="facilities">
+    <section className="max-w-[1296px] flex flex-col md:flex-row mx-auto bg-[#Fff] px-4 py-10 md:py-[144px] relative gap-8" id="facilities">
 
       <div className="w-full md:w-7/12 px-0">
         <Image src={facilityIco} alt="Asterisk icon" width={100} height={64} className="mb-8 flex"/>

@@ -38,7 +38,7 @@ const TriviaSection = () => {
   }
 
   return (
-    <section className="justify-between mx-auto bg-[#f1f7ed] pb-10 md:pb-[80px] relative">
+    <section className="justify-between mx-auto bg-[#f8f8f8] pb-10 md:pb-[144px] relative">
         <Image src={palmLeaf} alt="palm-leaf" className="absolute right-0 bottom-0 z-0"/>
 
       <div className="max-w-[1296px] px-5 block m-auto">
@@ -71,7 +71,7 @@ const TriviaSection = () => {
         </div>
 
         <div className="w-full z-10 relative">
-          <p className="text-xl md:text-2xl text-black mb-4 font-medium">Direkomendasikan oleh</p>
+          <p className="text-xl text-black mb-4 font-semibold">Direkomendasikan oleh</p>
 
           <div className="flex gap-2 md:gap-4 w-full flex-wrap">
               <div className="w-full p-6 bg-[#fff] md:w-[calc(33%-16px)] min-w-[280px] relative">
