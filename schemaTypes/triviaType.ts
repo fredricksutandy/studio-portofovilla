@@ -9,96 +9,50 @@ export const trivia = defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
+      description: 'isi dengan : "Trivia"',
     }),
-    defineField({
-      name: 'subtitle',
-      title: 'Sub-title',
-      type: 'string',
-    }),
-    defineField({
-      name: 'description',
-      title: 'Description',
-      type: 'text',
-    }),
-
-    defineField({
-      name: 'imageAbout',
-      title: 'Image About',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-    }),
-
-    // Trivia Section
     defineField({
       name: 'triviaSection',
       title: 'Trivia Section',
-      type: 'object',
-      fields: [
+      type: 'array',
+      description: 'Bagian ini menampilkan fakta menarik tentang villa (maksimal 4 item)',
+      validation: (Rule) => Rule.max(4).error('Maksimal hanya bisa menambahkan 4 trivia'),
+      of: [
         defineField({
-          name: 'triviaOne',
-          title: 'Trivia One',
+          name: 'triviaItem',
+          title: 'Trivia',
           type: 'object',
           fields: [
             defineField({
+              name: 'triviaImage',
+              title: 'Icon Informasi',
+              type: 'image',
+              description: 'Unggah gambar icon informasi untuk memberikan gambaran visual kepada pengunjung.',
+              options: {
+                hotspot: true, // Memungkinkan cropping gambar di Sanity
+              },
+              validation: (rule) => rule.required().error('Gambar icon informasi wajib diunggah.'),
+            }),
+            defineField({
               name: 'number',
-              title: 'Number',
+              title: 'Angka',
               type: 'string',
+              description: 'Angka yang merepresentasikan fakta (contoh: 100+)',
+              validation: (Rule) => Rule.required().error('Angka harus diisi'),
             }),
             defineField({
               name: 'title',
-              title: 'Title',
+              title: 'Judul',
               type: 'string',
+              description: 'Judul singkat dari fakta menarik ini',
+              validation: (Rule) => Rule.required().max(50).error('Judul harus diisi dan maksimal 50 karakter'),
             }),
             defineField({
               name: 'description',
-              title: 'Description',
-              type: 'string',
-            }),
-          ],
-        }),
-        defineField({
-          name: 'triviaTwo',
-          title: 'Trivia Two',
-          type: 'object',
-          fields: [
-            defineField({
-              name: 'number',
-              title: 'Number',
-              type: 'string',
-            }),
-            defineField({
-              name: 'title',
-              title: 'Title',
-              type: 'string',
-            }),
-            defineField({
-              name: 'description',
-              title: 'Description',
-              type: 'string',
-            }),
-          ],
-        }),
-        defineField({
-          name: 'triviaThree',
-          title: 'Trivia Three',
-          type: 'object',
-          fields: [
-            defineField({
-              name: 'number',
-              title: 'Number',
-              type: 'string',
-            }),
-            defineField({
-              name: 'title',
-              title: 'Title',
-              type: 'string',
-            }),
-            defineField({
-              name: 'description',
-              title: 'Description',
-              type: 'string',
+              title: 'Deskripsi',
+              type: 'text',
+              description: 'Penjelasan singkat tentang fakta menarik ini',
+              validation: (Rule) => Rule.required().max(200).error('Deskripsi harus diisi dan maksimal 200 karakter'),
             }),
           ],
         }),
@@ -108,86 +62,57 @@ export const trivia = defineType({
     // Recommendations Section
     defineField({
       name: 'recommendationSection',
-      title: 'Recommendation Section',
-      type: 'object',
-      fields: [
+      title: 'Rekomendasi',
+      type: 'array',
+      description: 'Bagian ini menampilkan rekomendasi dari pelanggan atau pihak lain (maksimal 4 item)',
+      validation: (Rule) => Rule.max(4).error('Maksimal hanya bisa menambahkan 4 rekomendasi'),
+      of: [
         defineField({
-          name: 'recommendationOne',
-          title: 'Recommendation One',
+          name: 'recommendationItem',
+          title: 'Rekomendasi',
           type: 'object',
           fields: [
             defineField({
               name: 'recommendedBy',
-              title: 'Recommended By',
+              title: 'Direkomendasikan Oleh',
               type: 'string',
+              description: 'Nama orang atau organisasi yang memberikan rekomendasi',
+              validation: (Rule) => Rule.required().error('Nama pemberi rekomendasi harus diisi'),
             }),
             defineField({
               name: 'recommendation',
-              title: 'Recommendation',
-              type: 'string',
+              title: 'Judul Artikel/Rekomendasi',
+              type: 'text',
+              description: 'Isi judul dan highlight rekomendasi atau testimoni',
+              validation: (Rule) => Rule.required().max(300).error('Rekomendasi harus diisi dan maksimal 300 karakter'),
             }),
             defineField({
               name: 'url',
               title: 'URL',
               type: 'url',
-            }),
-          ],
-        }),
-        defineField({
-          name: 'recommendationTwo',
-          title: 'Recommendation Two',
-          type: 'object',
-          fields: [
-            defineField({
-              name: 'recommendedBy',
-              title: 'Recommended By',
-              type: 'string',
-            }),
-            defineField({
-              name: 'recommendation',
-              title: 'Recommendation',
-              type: 'string',
-            }),
-            defineField({
-              name: 'url',
-              title: 'URL',
-              type: 'url',
-            }),
-          ],
-        }),
-        defineField({
-          name: 'recommendationThree',
-          title: 'Recommendation Three',
-          type: 'object',
-          fields: [
-            defineField({
-              name: 'recommendedBy',
-              title: 'Recommended By',
-              type: 'string',
-            }),
-            defineField({
-              name: 'recommendation',
-              title: 'Recommendation',
-              type: 'string',
-            }),
-            defineField({
-              name: 'url',
-              title: 'URL',
-              type: 'url',
+              description: 'Tautan ke sumber rekomendasi jika ada',
+              validation: (Rule) =>
+                Rule.uri({
+                  scheme: ['http', 'https'],
+                }).error('URL harus valid (contoh: https://example.com)'),
             }),
           ],
         }),
       ],
     }),
+    
 
+    // Slug
     defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
+      description: 'Slug digunakan sebagai URL unik untuk halaman ini',
       options: {
         source: 'title',
         maxLength: 96,
       },
+      validation: (Rule) => Rule.required().error('Slug harus diisi'),
     }),
   ],
 });

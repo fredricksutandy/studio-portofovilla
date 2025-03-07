@@ -96,7 +96,7 @@ if (!testimonyData) {
 }
 
   return (
-    <section className="splide splidetestimonial max-w-full mx-auto bg-[#f1f7ed] py-10 md:py-[80px] px-4 relative" id="testimonies">
+    <section className="splide splidetestimonial max-w-full mx-auto bg-lightbg py-10 md:py-[80px] px-4 relative" id="testimonies">
       {/* Background Image */}
       <Image src={palmLeaf} alt="palm-leaf" className="absolute right-0 bottom-0 z-0" />
 
@@ -118,7 +118,7 @@ if (!testimonyData) {
             height={40}
             className="w-[24px] h-[24px] md:w-[40px] md:h-[40px] mt-1 md:mt-0"
           />
-          <p className="text-lg md:text-2xl text-[#047C36]">
+          <p className="text-lg md:text-2xl text-secondary">
             <span className="text-2xl md:text-4xl font-semibold">4.8 </span> dari{' '}
             <span className="text-2xl md:text-4xl font-semibold">5 </span> Pengunjung kami merasa
             puas!
@@ -132,10 +132,10 @@ if (!testimonyData) {
           <ul className="splide__list">
             {testimonyData.testimonies?.map((testimony: any, index: number) => (
               <li className="splide__slide" key={index}>
-                <div className="flex flex-col h-[320px] rounded bg-white border border-[#d9d9d9] p-6 justify-between gap-2 hover:translate-y-[-6px] transition-all">
+                <div className="flex flex-col h-[320px] rounded bg-white border border-graymuted p-6 justify-between gap-2 hover:translate-y-[-6px] transition-all">
                   {/* Testimony Content */}
                   <div className="flex flex-col gap-6">
-                    <p className="text-[#1A520F] text-xl md:text-2xl font-semibold">
+                    <p className="text-primary text-xl md:text-2xl font-semibold">
                       {testimony.testimonyHighlight}
                     </p>
                     <div className="flex gap-1">

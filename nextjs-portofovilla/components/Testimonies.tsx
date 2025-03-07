@@ -31,7 +31,7 @@ const TestimonySection = () => {
   }
 
   return (
-    <section className="justify-between mx-auto bg-[#fff] px-5 py-10 md:py-[80px] relative" id="testimonies">
+    <section className="justify-between mx-auto bg-white px-5 py-10 md:py-[80px] relative" id="testimonies">
       <Image src={palmLeaf} alt="palm-leaf" className="absolute right-0 bottom-0 z-0" />
 
       <div className="max-w-[1296px] block m-auto">
@@ -42,17 +42,17 @@ const TestimonySection = () => {
 
         <div className="flex gap-2 mb-6 md:mb-12 items-center ">
         <Image src={staroutline} alt="Asterisk icon" width={40} height={40} className="w-[24px] h-[24px] md:w-[40px] md:h-[40px]"/>
-        <p className="text-lg md:text-2xl text-[#047C36]"><span className="text-xl md:text-2xl font-semibold">4.8 </span> dari <span className="text-xl md:text-2xl font-semibold">5 </span> Pengunjung kami merasa puas!</p>
+        <p className="text-lg md:text-2xl text-secondary"><span className="text-xl md:text-2xl font-semibold">4.8 </span> dari <span className="text-xl md:text-2xl font-semibold">5 </span> Pengunjung kami merasa puas!</p>
         </div>
 
         <div className="flex gap-4 md:gap-[64px] w-full items-center mb-[80px] md:mb-[80px] flex-wrap z-10 relative">
           {testimonyData.testimonies?.slice(0, 4).map((testimony, index) => (
             <div
               key={index}
-              className="py-2 md:py-2 w-full md:w-[calc(50%-32px)] border-b border-b-[#1D764A] flex flex-col gap-4"
+              className="py-2 md:py-2 w-full md:w-[calc(50%-32px)] border-b border-b-secondary flex flex-col gap-4"
             >
               {/* Highlight and testimony text */}
-              <p className="text-[#1A520F] text-xl md:text-3xl font-semibold">
+              <p className="text-primary text-xl md:text-3xl font-semibold">
                 {testimony.testimonyHighlight}
               </p>
               <div className="flex gap-1">

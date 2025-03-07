@@ -9,11 +9,11 @@ import imageUrlBuilder from '@sanity/image-url';
 import type { SanityDocument } from 'next-sanity';
 import palmLeaf from '../../public/palm-leaf-shadow.png';
 import activitiesIcon from '../../public/activities-ico.svg';
-import distanceIcon from '../../public/distance-ico.svg';
-import arrowRight from '../../public/carbon_arrow-right.svg';
-import arrowRightBlue from '../../public/carbon_arrow-right-blue.svg';
+import { ArrowRight, PanHorizontal, Time } from '@carbon/icons-react';
+
 
 import '../styles/custom-swiper.css';
+import '../styles/custom-swiper-alt-top.css';
 
 const builder = imageUrlBuilder(client);
 
@@ -73,12 +73,12 @@ const ActivitiesSplide = () => {
       const isLast = splide.index === splide.length - perPage;
 
       if (prevAttArrowRef.current) {
-        prevAttArrowRef.current.style.opacity = isFirst ? '0.7' : '1';
+        prevAttArrowRef.current.style.opacity = isFirst ? '0.5' : '1';
         prevAttArrowRef.current.disabled = isFirst;
       }
 
       if (nextAttArrowRef.current) {
-        nextAttArrowRef.current.style.opacity = isLast ? '0.7' : '1';
+        nextAttArrowRef.current.style.opacity = isLast ? '0.5' : '1';
         nextAttArrowRef.current.disabled = isLast;
       }
     };
@@ -105,73 +105,81 @@ const ActivitiesSplide = () => {
   }
 
   return (
-    <section className="splide max-w-full mx-auto bg-[#FFF] py-24 px-4 overflow-hidden relative" id="activities">
+    <section className="splide max-w-full mx-auto bg-white px-4 md:px-6 py-10 md:py-[120px] overflow-hidden relative" id="activities">
       <Image src={palmLeaf} alt="palm-leaf" className="absolute left-0 bottom-0 z-0 scale-x-[-1]" />
 
       <div className="max-w-[1296px] mx-auto mb-8">
-        <Image src={activitiesIcon} alt="Activities icon" width={100} height={100} className="mb-8 mx-auto" />
-        <h2 className="font-krona text-2xl lg:text-5xl text-[#1A520F] font-semibold mb-4 text-center">
+      <div className="flex flex-row  items-end gap-2 mb-6">
+            <Image src={activitiesIcon} alt="Asterisk icon" width={48} height={48} className=""/>
+            <h2 className="font-krona text-base md:text-lg text-primary font-medium leading-[100%!important]">{activitiesData.title}</h2>
+          </div>
+        {/* <Image src={activitiesIcon} alt="Activities icon" width={100} height={100} className="mb-8 mx-auto" />
+        <h2 className="font-krona text-2xl lg:text-4xl text-primary font-semibold mb-4 text-center">
           {activitiesData.title}
-        </h2>
-        <p className="text-lg text-gray-600 mb-4 max-w-[580px] mx-auto text-center">
+        </h2> */}
+        <h3 className="font-montserrat text-2xl md:text-4xl font-bold text-black mb-2 max-w-[990px]">
           {activitiesData.subtitle}
-        </p>
+        </h3>
       </div>
 
       <div className="max-w-[1296px] mx-auto relative">
-        <div className="splide__track max-w-[1296px] mb-[120px] md:mb-12 mx-auto overflow-initial">
-          <ul className="splide__list overflow-initial">
+        <div className="splide__track max-w-[1296px] mb-[120px] md:mb-12 mx-auto">
+          <ul className="splide__list">
             {activitiesData.activities?.map((activities: any, index: number) => (
-              <li className="splide__slide bg-white border border-[#d9d9d9] rounded overflow-hidden" key={index}>
-                <div
-                  className="flex flex-col h-[280px] items-start justify-end p-4   transition-all"
-                  style={{
-                    backgroundImage: `url(${urlFor(activities.activitiesImage) || ''})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                  }}
-                >
-                  
-                </div>
-                <div className="p-4 flex flex-col gap-4">
+              <li className="splide__slide bg-white border border-graymuted rounded overflow-hidden" key={index}>
+                <Image
+                    src={urlFor(activities.activitiesImage) || ''}
+                    alt="Activity Image"
+                    width={420}
+                    height={300}
+                    objectFit="cover"
+                    objectPosition="center"
+                    priority
+                    className='w-full h-[220px] md:h-[260px] object-cover'
+                  />
+                <div className="p-4 flex flex-col gap-2 md:gap-4">
                 
-                  <div className='border-b-2 pb-4'>
+                  <div className='border-b-2 pb-2 md:pb-4'>
                     <h3 className="font-medium text-xl">
                       {index + 1}. {activities.activitiesTitle}
                     </h3>
-                    <span className='text-sm font-semibold text-[#666666]'>Adventurous</span>
+                    <span className='text-sm font-semibold text-gray-500'>Adventurous</span>
                   </div>
 
-                  <div className="flex gap-4">
-                    <span className="text-lg flex items-center gap-2">
-                    <Image src={distanceIcon} alt="Activities icon" width={50} height={50} />
-                    {activities.activitiesRange}
-                  </span>
-                  <span className="text-lg flex items-center gap-2">
-                    <Image src={distanceIcon} alt="Activities icon" width={50} height={50} />
-                    {activities.activitiesRange}
-                  </span>
-                  </div>
+                  
 
                   <p className="text-neutral-600 font-normal text-[14px]">
                     {activities.activitiesDescription}
                   </p>
 
-                  
-                
-                  <a href={activities.activitiesURL} className="text-sm flex items-center gap-2 text-[#0064D3] hover:translate-x-2 transition-all">
+                  <div className="flex gap-2 flex-col mb-4">
+                    <span className="text-base font-medium flex items-center gap-2">
+                    <div className="p-1 bg-secondary rounded-full">
+                    <PanHorizontal width={18} height={18} className="text-white"/>
+
+                      </div>
+                    {activities.activitiesRange}
+                  </span>
+                  <span className="text-base font-medium flex items-center gap-2">
+                  <div className="p-1 bg-secondary rounded-full">
+                    <Time width={18} height={18} className="text-white"/>
+                  </div>                    {activities.activitiesDuration}
+                  </span>
+                  </div>
+                  {activities.activitiesURL && activities.activitiesURL.trim() !== "" && (
+                  <a href={activities.activitiesURL} className="text-sm flex items-center gap-2 text-bluelink hover:translate-x-2 transition-all w-fit duration-700">
                     lihat di peta
-                    <Image src={arrowRightBlue} alt="guest icon" width={16} height={16} className='mt-1' />
+                    <ArrowRight className='text-bluelink mt-[2px]' width={16} height={16}/>
                   </a>
+                  )}
                 </div>
               </li>
             ))}
           </ul>
         </div>
 
-        <button ref={prevAttArrowRef} className="custom-arrow custom-arrow--prev opacity-70" />
-        <button ref={nextAttArrowRef} className="custom-arrow custom-arrow--next" />
+        <button ref={prevAttArrowRef} className="custom-arrow  less-top custom-arrow--prev opacity-50" />
+        <button ref={nextAttArrowRef} className="custom-arrow  less-top custom-arrow--next" />
       </div>
     </section>
   );

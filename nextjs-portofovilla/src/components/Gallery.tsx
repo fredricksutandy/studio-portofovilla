@@ -35,24 +35,26 @@ const GalleryPage = () => {
   const swiperData2 = galleryData.galleryImages.slice(5, 10);
 
   return (
-    <section className="max-w-full mx-auto bg-[#fff] py-24 px-4 overflow-hidden relative" id="gallery">
+    <section className="max-w-full mx-auto bg-white py-10 md:py-[144px] px-4 md:px-6 overflow-hidden relative" id="gallery">
 
-      <SplideComponent data={swiperData1} autoScrollSpeed={0.3} />
-      <SplideComponent data={swiperData2} autoScrollSpeed={0.3} reverse={true} />
-
-      <div className=" w-fit flex justify-center flex-col flex-wrap mt-6 items-center mx-auto">
-      <h2 className="font-krona text-2xl lg:text-4xl text-[#1A520F] font-semibold mb-4">
-          {galleryData.title}
-        </h2>
-        <h2 className="text-lg text-gray-600 font-medium mb-10 max-w-[460px]">
-          {galleryData.subtitle}
-        </h2>
+      <div className="w-full px-4 flex justify-between items-end flex-wrap mx-auto max-w-[1296px] mb-10">
+        <div className='mb-4 md:mb-0 mx-auto md:mx-0'>
+          <h2 className="text-center md:text-start font-krona text-2xl lg:text-4xl text-primary font-semibold mb-2">
+            {galleryData.title}
+          </h2>
+          <p className="text-center md:text-start text-lg text-gray-600 font-medium max-w-[460px]">
+            {galleryData.subtitle}
+          </p>
+        </div>
         <ButtonWa 
           link={galleryData.galleryButtonUrl}
           text={galleryData.galleryButton}
           type="white" // or "green"
           iconType={InstagramIcon.src} radius={'lg'} width={'fit'} displayMobile={true} displayDesktop={true}/>
       </div>
+      <SplideComponent data={swiperData1} autoScrollSpeed={0.3} />
+      <SplideComponent data={swiperData2} autoScrollSpeed={0.3} reverse={true} />
+
     </section>
   );
 };

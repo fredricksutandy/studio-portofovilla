@@ -1,0 +1,139 @@
+/* General container overflow fix */
+.overflow-initial {
+    overflow: initial !important;
+  }
+  
+  .custom-arrow-top {
+    width: 48px;
+    height: 48px;
+    background-color: white;
+  }
+
+  .custom-arrow-top.less-top {
+    top: 45%;
+  }
+  
+  /* Arrow content styling */
+  .custom-arrows::before {
+    font-size: 20px;
+    color: #1D764A;
+  }
+  
+  /* Adjusting margins for arrows */
+  .custom-arrow-top--prev {
+    left: -24px;
+    margin-right: 2px;
+  }
+  
+  .custom-arrow-top--next {
+    right: -24px;
+    margin-left: 2px;
+  }
+  
+  /* Smooth scrolling styles */
+  .linear-scroll-splide .splide__list {
+    transition-timing-function: linear; /* Smooth scrolling */
+  }
+  
+  .linear-scroll-splide .splide__slide {
+    overflow: hidden;
+    background-position: center;
+    background-size: cover;
+  }
+  
+  /* Responsive adjustments */
+  @media only screen and (max-width: 768px) {
+    .custom-arrows--next {
+      right: 16px;
+    }
+  
+    .custom-arrows--prev {
+      left: auto;
+      right: 70px;
+    }
+  
+    .custom-arrows, .custom-arrow.less-top {
+      bottom: -80px;
+      top: auto !important;
+    }
+  }
+  
+
+
+
+.custom-arrow-top{
+    width: 48px;
+    height: 48px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-arrow-top::after {
+    font-size: 20px;
+    color: #1D764A;
+}
+
+.custom-arrow-top--prev::after{
+    content: "";
+    display: flex;
+    margin-left: 3px;
+    border-right: 1px solid #1D764A;
+    border-bottom: 1px solid #1D764A;
+    width: 10px;
+    height: 10px;
+    transform: rotate(135deg);
+}
+
+.custom-arrow-top--next::after{
+  content: "";
+  display: flex;
+  margin-right: 3px;
+  border-right: 1px solid #1D764A;
+  border-bottom: 1px solid #1D764A;
+  width: 10px;
+  height: 10px;
+  transform: rotate(-45deg);
+}
+
+.custom-arrow-top--next{
+    right: -24px;
+}
+
+.custom-arrow-top--prev{
+    left: -24px;
+}
+
+/* @media only screen and (max-width: 1296px) {
+    .custom-arrow-top--next{
+        right: 0px;
+    }
+    
+    .custom-arrow-top--prev{
+        right: 56px;
+        left: auto;
+    }
+
+    .custom-arrow-top--next, .custom-arrow-top--prev{
+        bottom: -56px;
+        top: auto !important;
+    }
+} */
+
+  
+@media only screen and (max-width: 768px) {
+    .custom-arrow-top--next{
+        right: 0px;
+    }
+    
+    .custom-arrow-top--prev{
+        right: 56px;
+        left: auto;
+    }
+
+    .custom-arrow-top--next, .custom-arrow-top--prev{
+        bottom: -80px;
+        top: auto;
+    }
+}

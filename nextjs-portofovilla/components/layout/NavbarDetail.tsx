@@ -31,7 +31,7 @@ const Navbar = ({ isHomePage }: { isHomePage: boolean }) => {
   const navLinks = [
     { name: 'Room', href: '#room' },
     { name: 'About', href: '#about' },
-    { name: 'Facilities', href: '#facilities' },
+    // { name: 'Facilities', href: '#facilities' },
     { name: 'Activities', href: '#activities' },
     { name: 'Testimonies', href: '#testimonies' },
     { name: 'FAQ', href: '#faq' },
@@ -43,7 +43,7 @@ const Navbar = ({ isHomePage }: { isHomePage: boolean }) => {
 
   return (
     <nav
-      className="top-0 left-0 w-full z-50 transition-colors duration-300 bg-white text-black"
+      className="top-0 left-0 w-full font-montserrat z-50 transition-colors duration-300 bg-white text-black"
     >
       <div className="max-w-[1296px] mx-auto flex items-center justify-between p-4">
         <Link href="/">
@@ -79,7 +79,7 @@ const Navbar = ({ isHomePage }: { isHomePage: boolean }) => {
         <Link
           href={resolveHref('#contact')}
           className="hidden lg:flex font-semibold gap-2 p-3 
-            isScrolled bg-[#047C36] text-white text-[14px] rounded items-center"
+            isScrolled bg-secondary text-white text-[14px] rounded items-center"
         >
           <Image src={WaLogo} alt="WAlogo" width={20} height={20} />
           Hubungi kami
@@ -87,7 +87,7 @@ const Navbar = ({ isHomePage }: { isHomePage: boolean }) => {
 
         {/* Mobile Menu */}
         <div
-          className={`fixed top-[64px] p-4 left-0 w-full flex flex-col justify-between h-[calc(100vh-64px)] bg-white text-black transition-transform duration-300 border-t border-[#d9d9d9] ${
+          className={`fixed top-[64px] p-4 left-0 w-full flex flex-col justify-between h-[calc(100vh-64px)] bg-white text-black transition-transform duration-300 border-t border-graymuted ${
             isMenuOpen ? 'translate-x-0' : 'translate-x-full'
           } lg:hidden z-50`}
         >
@@ -104,7 +104,7 @@ const Navbar = ({ isHomePage }: { isHomePage: boolean }) => {
           </div>
           <Link
             href={resolveHref('#contact')}
-            className="w-full flex font-semibold gap-2 p-4 text-center justify-center bg-[#047C36] text-white text-[14px] rounded items-center"
+            className="w-full flex font-semibold gap-2 p-4 text-center justify-center bg-secondary text-white text-[14px] rounded items-center"
           >
             <Image src={WaLogo} alt="WAlogo" width={20} height={20} />
             Hubungi kami

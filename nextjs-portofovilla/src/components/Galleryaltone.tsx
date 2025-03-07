@@ -36,7 +36,7 @@ const GalleryPage = () => {
   }
 
   return (
-    <section className="max-w-[1296px] mx-auto bg-[#fff] py-10 md:py-[80px] px-4" id="gallery">
+    <section className="max-w-[1296px] mx-auto bg-white py-10 md:py-[80px] px-4" id="gallery">
       <div className="grid md:auto-rows-[1fr] grid-cols-2 md:grid-cols-3 gap-2 max-w-[1296px] mx-auto">
         {galleryData.galleryImage?.slice(0, 3).map((item, index) => (
           <Image

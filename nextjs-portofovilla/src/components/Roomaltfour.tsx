@@ -6,25 +6,14 @@ import Image from "next/image";
 import roomsIco from '../../public/rooms-ico.svg'
 import guestIco from '../../public/guest-ico.svg'
 import bedIco from '../../public/bed-ico.svg'
-import arrowRight from '../../public/carbon_arrow-right.svg'
 import Link from "next/link";
 import imageUrlBuilder from '@sanity/image-url';
-import { Krona_One } from 'next/font/google'; // Use the correct font import
+import { ArrowRight } from '@carbon/icons-react';
 
 
-// Initialize image builder
 const builder = imageUrlBuilder(client);
-
-// Helper to generate optimized image URLs
 const urlFor = (source: any) => builder.image(source).auto('format').fit('max');
 
-const kronaOne = Krona_One({
-  weight: '400', // Specify the weights you need
-  subsets: ['latin'], // Ensure the font supports the required subset
-  display: 'swap',
-});
-
-// Define queries for room data and section metadata
 const ROOM_QUERY = `
   *[_type == "room"] {
     roomName,
@@ -83,15 +72,24 @@ const RoomSection = () => {
   }
 
   return (
-    <section className="justify-between mx-auto bg-[#fff] px-5 py-10 lg:py-[80px] relative" id="room">
+    <section className="justify-between mx-auto bg-white px-5 py-10 lg:py-[80px] relative" id="room">
       <div className="max-w-[1296px] block m-auto">
-      <Image src={roomsIco} alt="Asterisk icon" width={80} height={80} className="mb-8 flex mr-auto lg:mx-auto"/>
+      {/* <Image src={roomsIco} alt="Asterisk icon" width={80} height={80} className="mb-8 flex mr-auto lg:mx-auto"/> */}
 
-      <h2 className="text-3xl lg:text-3xl text-start lg:text-center text-black font-semibold mb-0">
+      {/* <h2 className="text-3xl lg:text-3xl text-start lg:text-center text-black font-semibold mb-0">
       {sectionMetadata.title}
-      </h2>
-      <h3 className="text-3xl lg:text-3xl text-start lg:text-center text-black font-semibold mb-10 lg:mb-20">
+      </h2> */}
+      
+
+      <div className="flex flex-col items-center gap-2 mb-10">
+        <Image src={roomsIco} alt="Asterisk icon" width={64} height={64} className="flex items-center" />
+        <h2 className="font-krona text-base md:text-2xl text-primary font-medium leading-[100%!important]">
+        {sectionMetadata.title}
+        </h2>
+        <h3 className="text-2xl lg:text-4xl text-start md:text-center text-black font-bold max-w-[680px]">
       {sectionMetadata.subtitle}</h3>
+      </div>
+      
 
       <div className="flex flex-wrap gap-x-8 gap-y-16 justify-center">
         {roomData?.map((room: any, index: number) => (
@@ -100,7 +98,7 @@ const RoomSection = () => {
             className="w-full lg:w-[calc(50%-24px)] gap-4 lg:gap-6 flex flex-col items-center group overflow-hidden"
           >
             {room.image && (
-              <div className="relative w-full h-[300px] lg:h-[440px] overflow-hidden mb-2 rounded-t-xl lg:rounded-t-full">
+              <div className="relative w-full h-[300px] lg:h-[380px] overflow-hidden mb-2 rounded-lg">
                 <Image
                   src={urlFor(room.image).url()}
                   alt={room.roomName}
@@ -112,7 +110,7 @@ const RoomSection = () => {
             )}
 
             <div className="w-full h-fit flex justify-start lg:justify-center flex-col gap-4 text-start lg:text-center">
-              <h2 className={`${kronaOne.className} text-xl lg:text-2xl font-semibold text-black`}>{room.roomName}</h2>
+              <h2 className={`text-xl lg:text-2xl font-semibold text-black`}>{room.roomName}</h2>
               {/* <div className="flex gap-5 justify-start lg:justify-center">
                 <p className={` text-black flex gap-2 font-medium items-center text-base`}><Image src={bedIco} alt="bedroom icon" width={28} height={28} className=""/> {room.bedroomsNumber} Bedrooms</p>
                 <p className={` text-black flex gap-2 font-medium items-center text-base`}><Image src={guestIco} alt="guest icon" width={28} height={28} className=""/> {room.guestNumber} Guests</p>
@@ -120,7 +118,7 @@ const RoomSection = () => {
             <ul className="flex flex-wrap gap-2 items-center justify-center max-w-[440px] mx-0 md:mx-auto">
               {room.specifications?.map((specification: any, index: number) => {
                   return (
-                    <li key={index} className="w-fit rounded flex items-start gap-2 p-2 border border-[#d9d9d9]">
+                    <li key={index} className="w-fit rounded flex items-start gap-2 p-2 border border-graymuted">
                       {specification.icon?.asset?.url && (
                         <img 
                         src={urlFor(specification.icon).url()} 
@@ -141,11 +139,11 @@ const RoomSection = () => {
                 
               <Link
               href={`pages/${room.slug.current}`} prefetch={true}
-                className="flex items-center mt-4 mx-auto transition-all hover:translate-x-1 gap-2 border border-[#1A520F] justify-center w-full lg:w-fit py-4 px-6">
-                <p className="block m-0 text-[#1A520F] hover:underline">
+                className="flex items-center mt-4 mx-auto transition-all hover:translate-x-1 gap-2 border border-primary justify-center w-full lg:w-fit py-4 px-6">
+                <p className="block m-0 text-primary hover:underline">
                   View Details
                 </p>
-                <Image src={arrowRight} alt="guest icon" width={16} height={16} className="invert"/>
+                <ArrowRight width={16} height={16} className="text-primary mt-[1px]"/>
               </Link>
             </div>
           </div>

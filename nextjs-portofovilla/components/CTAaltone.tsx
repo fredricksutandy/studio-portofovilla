@@ -38,10 +38,9 @@ const CTASection = () => {
   }, []);
 
   if (!ctaData) {
-    return <div>Loading...</div>; // Loading state
+    return <div>Loading...</div>;
   }
 
-  // Generate image URLs if available
   const leftImageUrl = ctaData.imageLeft
     ? urlFor(ctaData.imageLeft).url()
     : '';
@@ -50,32 +49,31 @@ const CTASection = () => {
     : '';
 
   return (
-    <section className="bg-[#Fff] px-4 py-[240px]">
-      <div className="max-w-[1296px] bg-[#1A520F] rounded-xl mx-auto px-4 py-[80px] flex flex-col items-center justify-center relative bg-cta bg-auto bg-no-repeat bg-center">
+    <section className="bg-white px-4 py-[240px] overflow-hidden">
+      <div className="max-w-[1296px] bg-primary rounded-xl mx-auto px-4 md:px-6 py-[80px] flex flex-col items-center justify-center relative bg-cta bg-auto bg-no-repeat bg-center">
 
 
-        <h2 className="text-xl md:text-5xl text-[#fff] font-krona text-center mb-6 font-bold max-w-[680px]">{ctaData.title}</h2>
+        <h2 className="text-3xl md:text-5xl text-white font-krona text-center mb-6 font-bold max-w-[680px]">{ctaData.title}</h2>
         <p className="text-base max-w-[560px] text-center mb-6 text-neutral-200 font-montserrat">{ctaData.subtitle}</p>
         <a
           href={ctaData.buttonLink}
-          className="font-bold transition-all bg-[#fff] text-[#1A520F] hover:translate-y-[-4px] hover:opacity-80 rounded-md px-12 py-6 text-base flex lg:w-fit mx-auto"
+          className="font-bold transition-all bg-white text-primary hover:translate-y-[-4px] hover:opacity-80 rounded-md px-12 py-6 text-base flex lg:w-fit mx-auto"
         >
           {ctaData.buttonName}
         </a>
         <Image 
-      src={intersect}
-      alt="int1"
-      width={280}
-      className="absolute -top-[14%] -right-[8%]"
-    />
-    <Image 
-      src={intersect1}
-      alt="int1"
-      width={280}
-      className="absolute -bottom-[14%] -left-[8%]"
-    />
+          src={intersect}
+          alt="int1"
+          width={280}
+          className="absolute -bottom-[12%] sm:-bottom-[16%] md:-bottom-[20%] lg:-bottom-[14%] -right-[4%] md:-right-[4%] lg:-right-[10%] w-[110px] sm:w-[160px] md:w-[200px] lg:w-[280px]"
+        />
+        <Image 
+          src={intersect1}
+          alt="int2"
+          width={280}
+          className="absolute -top-[12%] sm:-top-[16%] md:-top-[26%] lg:-top-[14%] -left-[4%] md:-left-[6%] lg:-left-[12%] w-[110px] sm:w-[160px] md:w-[200px] lg:w-[280px]"
+        />
       </div>
-    
     </section>
   );
 };

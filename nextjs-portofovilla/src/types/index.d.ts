@@ -43,7 +43,7 @@ declare type Gallery = {
 interface ButtonProps {
   link: string;
   text: string;
-  type: 'green' | 'white';
+  type: 'green' | 'white' | 'transparent' | 'transparent-border';
   iconType?: string; // Optional icon
   radius: 'full' | 'lg';
   width: 'full' | 'fit';

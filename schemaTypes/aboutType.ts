@@ -9,45 +9,53 @@ export const about = defineType({
       name: 'title',
       title: 'Judul',
       type: 'string',
-      description: 'Untuk judul section ini tolong tuliskan jargon/tagline yang menggambarkan tentang villa mu. [Contoh: "Liburan Mewah di Surga Tropis"]',
+      description: 'Tuliskan slogan atau tagline yang mewakili villa Anda. [Contoh: "Liburan Mewah di Surga Tropis"]',
       validation: (rule) => rule.required().error('Judul wajib diisi.'),
     }),
     defineField({
       name: 'subtitle',
       title: 'Sub-judul',
       type: 'string',
-      description: 'Tuliskan jargon, tagline, atau quotes yang bisa memberikan gambaran villamu. [Contoh: "Keindahan alam dan villa menawan"]'
+      description: 'Tambahkan tagline atau kutipan singkat yang menggambarkan villa Anda. [Contoh: "Keindahan alam dan villa menawan"]',
+      validation: (rule) => rule.required().error('Sub-judul wajib diisi.'),
     }),
     defineField({
       name: 'aboutDescription',
       title: 'Deskripsi',
-      type: 'string',
-      description: 'Tuliskan deskripsi singkat yang memberikan gambaran tentang villa kamu. Fokus pada daya tarik utama, suasana, atau pengalaman yang ditawarkan. [Contoh: "Villa mewah dengan pemandangan laut yang memukau, dilengkapi fasilitas modern dan suasana yang tenang untuk liburan sempurna."]'
+      type: 'text',
+      description: 'Tulis deskripsi singkat tentang villa Anda. Fokus pada keunikan, fasilitas, dan suasana yang ditawarkan. [Contoh: "Villa mewah dengan pemandangan laut yang memukau, dilengkapi fasilitas modern dan suasana tenang untuk liburan sempurna."]',
+      validation: (rule) => rule.required().min(50).error('Deskripsi wajib diisi dan minimal 50 karakter.'),
     }),
     defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
+      description: 'Slug digunakan sebagai URL unik untuk halaman ini. Klik "Generate" untuk membuat slug otomatis berdasarkan judul.',
       options: {
-        source: 'tagTitle',
+        source: 'title',
         maxLength: 96,
       },
+      validation: (rule) => rule.required().error('Slug wajib diisi.'),
     }),
     defineField({
-      name: 'imageLeft',
-      title: 'Image-left',
+      name: 'aboutImage',
+      title: 'Gambar tentang villa ',
       type: 'image',
+      description: 'Unggah gambar yang mewakili villa Anda. Gambar ini akan ditampilkan di sebelah kiri dalam halaman.',
       options: {
         hotspot: true,
       },
+      validation: (rule) => rule.required().error('Gambar wajib diunggah.'),
     }),
     defineField({
-      name: 'imageRight',
-      title: 'Image-right',
+      name: 'secondAboutImage',
+      title: 'Gambar kedua tentang villa ',
       type: 'image',
+      description: 'Unggah gambar kedua yang mewakili villa Anda. Gambar ini akan ditampilkan di sebelah kiri dalam halaman.',
       options: {
         hotspot: true,
       },
+      validation: (rule) => rule.required().error('Gambar wajib diunggah.'),
     }),
   ],
 });

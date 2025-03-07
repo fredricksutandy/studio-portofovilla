@@ -1,6 +1,7 @@
 import { hero } from "./heroType";
 import { heroImage } from "./heroImageType";
 import { about } from "./aboutType";
+import { certificate } from "./certificateType";
 import { postType } from "./postType";
 import { trivia } from "./triviaType";
 import { room } from "./roomType";
@@ -16,12 +17,14 @@ import { gallery } from "./gallery";
 import { activities } from "./activitiesType";
 import { sectionMetadata } from "./sectionMetadataType";
 import { modalPromoType } from "./modalPromoType";
+import { siteSettings } from "./siteSettingsType";
 
 export const schemaTypes = [
     sectionMetadata, 
     hero, 
     heroImage, 
     about, 
+    certificate, 
     trivia, 
     room, 
     facility, 
@@ -34,5 +37,6 @@ export const schemaTypes = [
     gallery, 
     CTA, 
     activities, 
-    modalPromoType
+    modalPromoType,
+    siteSettings,
 ]

@@ -9,8 +9,7 @@ import '@splidejs/splide/dist/css/splide.min.css';
 import palmLeaf from '../../public/palm-leaf-shadow.png';
 import testimony from '../../public/testimony-ico.svg';
 import GmapLogo from '../../public/google-maps-2020-icon.svg';
-// import star from '../../public/star-ico.svg';
-// import staroutline from '../../public/staroutline-ico.svg';
+import { LicenseDraft } from "@carbon/icons-react";
 import starTemplate from '../../public/star-template.png';
 import starBackhold from '../../public/star-backhold.png';
 import starTemplateWhite from '../../public/star-template-white.png';
@@ -21,6 +20,8 @@ import bookingComLogo from '../../public/colored-ico/Booking.com-Logo.wine.svg';
 import agodaLogo from '../../public/colored-ico/Agoda_transparent_logo.svg';
 import tripComLogo from '../../public/colored-ico/Trip.com_logo.svg.svg';
 import travelokaLogo from '../../public/colored-ico/traveloka-logo-brandlogo.net.svg';
+import googleLogo from '../../public/colored-ico/devicon_google.svg';
+
 import imageUrlBuilder from "@sanity/image-url";
 
 const builder = imageUrlBuilder(client);
@@ -49,7 +50,8 @@ const TestimonySplide = () => {
     'Booking-com': bookingComLogo,
     Agoda: agodaLogo,
     'Trip-com': tripComLogo,
-    Traveloka: travelokaLogo
+    Traveloka: travelokaLogo,
+    Google: googleLogo
   };
 
   // Initialize Splide
@@ -125,17 +127,18 @@ const TestimonySplide = () => {
   }
 
   return (
-    <section className="splide splidetestimonial max-w-full mx-auto bg-[#f3f8ef] py-10 md:py-[80px] px-4 relative" id="testimonies">
+    <section className="splide splidetestimonial max-w-full mx-auto bg-lightbg py-10 md:py-[144px] px-4 md:px-6 relative" id="testimonies">
       <Image src={palmLeaf} alt="palm-leaf" className="absolute right-0 bottom-0 z-0" />
 
       <div className="max-w-[1296px] block m-auto">
-        <div className="mb-20">
-          <Image src={testimony} alt="Asterisk icon" width={90} height={64} className="mb-10 mx-auto" />
-          <h2 className="font-krona text-3xl lg:text-5xl text-[#1A520F] text-center">{testimonyData.title}</h2>
-          {/* <h3 className="text-lg text-gray-600 font-medium mb-10 max-w-[460px]">{testimonyData.subtitle}</h3> */}
+        <div className="flex flex-col items-center gap-2 mb-2 md:mb-6">
+          <Image src={testimony} alt="Asterisk icon" width={80} height={64} className="w-16 md:w-20 mb-2 mx-auto" />
+          <h2 className="font-krona text-base md:text-lg text-primary font-medium leading-[100%!important]">{testimonyData.title}</h2>
         </div>
 
-        <div className="flex gap-10 flex-wrap mb-8 md:mb-20 items-start md:items-center justify-center">
+        <h3 className="font-montserrat mx-auto text-center mb-10 md:mb-16 text-2xl md:text-4xl font-bold text-black max-w-[990px]">{testimonyData.subtitle}</h3>
+
+        <div className="flex gap-10 flex-wrap mb-8 md:mb-16 items-start md:items-center justify-center">
         {testimonyData?.platformRating?.length > 0 ? (
             testimonyData.platformRating.map((platform: any) => (
 
@@ -170,7 +173,7 @@ const TestimonySplide = () => {
 
                 <div className="flex gap-1 items-center">
                 <p className="text-base font-normal text-neutral-600">
-  Rated {platform.rating} in
+  Rated <span className="font-semibold">{platform.rating}</span> in
 </p>
                 <Image
                   src={platformImages[platform.platformName]}
@@ -186,7 +189,7 @@ const TestimonySplide = () => {
             <p className="text-center col-span-full">No platform ratings available.</p>
           )}
           {/* <Image src={staroutline} alt="Star outline icon" width={40} height={40} className="w-[24px] h-[24px] md:w-[40px] md:h-[40px] mt-1 md:mt-0" />
-          <p className="text-lg md:text-3xl font-medium text-[#047C36]">
+          <p className="text-lg md:text-3xl font-medium text-secondary">
             <span className="text-lg md:text-3xl font-semibold">4.8 </span> dari{' '}
             <span className="text-lg md:text-3xl font-semibold">5 </span> Pengunjung kami merasa
             puas!
@@ -201,7 +204,7 @@ const TestimonySplide = () => {
           <ul className="splide__list">
             {testimonyData.testimonies?.map((testimony: any, index: number) => (
               <li className="splide__slide" key={index}>
-                <div className="flex flex-col h-[280px] rounded-xl bg-white p-6 justify-between gap-2 transition-all">
+                <div className="flex flex-col h-[280px] rounded bg-white p-6 justify-between gap-2 transition-all">
                   
                   {/* <div className="flex gap-1">
                     {Array(testimony.testimonyRating || 0)
@@ -235,7 +238,7 @@ const TestimonySplide = () => {
                     }}
                   ></div>
                 </div>
-                <p className="text-[#1A520F] text-xl md:text-2xl font-semibold">
+                <p className="text-primary text-xl md:text-2xl font-semibold">
                     {testimony.testimonyHighlight}
                   </p>
                   <p className="text-black text-base text-start">{testimony.testimony}</p>
@@ -263,7 +266,7 @@ const TestimonySplide = () => {
         <button ref={prevArrowRef} className="custom-arrow custom-arrow--prev opacity-70" />
         <button ref={nextArrowRef} className="custom-arrow custom-arrow--next" />
       </div>
-        <div className="flex flex-col md:flex-row gap-4 max-w-[1296px] mx-auto mb-20">
+        <div className="flex flex-col md:flex-row gap-4 max-w-[1296px] mx-auto mb-10md:mb-20">
         {testimonyData.videos.map((video, index) => (
           <iframe
             key={index}
@@ -275,16 +278,27 @@ const TestimonySplide = () => {
             allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
-            className="flex flex-auto md:flex-1 rounded-xl w-full h-[200px] sm:h-[240px] md:h-[320px]"
+            className="flex flex-auto md:flex-1 rounded w-full h-[200px] sm:h-[240px] md:h-[320px]"
           ></iframe>
         ))}
       </div>
 
         
 
-      <div className="max-w-[1296px] mx-auto flex justify-center mt-8">
+      <div className="max-w-[1296px] mx-auto flex flex-wrap justify-center mt-8 gap-4">
+
+      <ButtonWa 
+        link={testimonyData.linkFeedback}
+          text="Tulis ulasanmu"
+          type="transparent-border"
+          iconType={<LicenseDraft size={24} />}
+          radius='lg'
+          width='fit'
+          displayDesktop={true}
+          displayMobile={true}
+        />
         <ButtonWa 
-        link={testimonyData.linkCTA}
+        link={testimonyData.linkReview}
           text="Lihat testimoni lain"
           type="white"
           iconType={GmapLogo.src}
@@ -293,6 +307,7 @@ const TestimonySplide = () => {
           displayDesktop={true}
           displayMobile={true}
         />
+        
       </div>
     </section>
   );

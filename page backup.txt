@@ -58,7 +58,7 @@ const montserrat = Montserrat({
 
 export default async function IndexPage() {
   return (
-    <main className={`${montserrat.className} bg-[#fff] relative`}>
+    <main className={`${montserrat.className} bg-white relative`}>
       
       {/* <NavbarSection /> */}
       <NavbarSectionaltone />

@@ -37,9 +37,9 @@ const BookingSection: React.FC<BookingSectionProps> = ({
   };
 
   return (
-    <section className="bg-white rounded-0 mb-0 w-full left-0 fixed bottom-0 top-auto md:bottom-auto md:w-[calc(32%-16px)] md:sticky md:top-[80px] h-fit mt-8 p-4 md:p-6 border border-[#d9d9d9] md:rounded-xl md:mb-4">
+    <section className="bg-white rounded-0 mb-0 w-full left-0 fixed bottom-0 top-auto md:bottom-auto md:w-[calc(32%-16px)] md:sticky md:top-[80px] h-fit mt-8 p-4 md:p-6 border border-graymuted md:rounded-xl md:mb-4">
       <div>
-        <p className="text-base md:text-xl text-center md:text-start font-bold pb-4 border-0 md:border-b border-[#d9d9d9] mb-0 md:mb-4 font-krona">
+        <p className="text-base md:text-xl text-center md:text-start font-bold pb-4 border-0 md:border-b border-graymuted mb-0 md:mb-4 font-krona">
           Rp.{price} <span className="text-sm font-normal"> per malam</span>
         </p>
 
@@ -48,7 +48,7 @@ const BookingSection: React.FC<BookingSectionProps> = ({
           <p className="text-neutral-700">{cancellationPolicy.cancellationDeadline}</p>
         </div>
 
-        <div className="hidden md:flex gap-4 mb-6">
+        {/* <div className="hidden md:flex gap-4 mb-6">
           <div className="flex flex-col flex-1">
             <p className="mb-2 font-semibold">Tamu</p>
             <select name="guests" id="guests" className="w-full p-3 text-sm bg-white rounded-md border border-[#000]">
@@ -70,12 +70,12 @@ const BookingSection: React.FC<BookingSectionProps> = ({
               ))}
             </select>
           </div>
-        </div>
+        </div> */}
 
-        <div className="total hidden md:flex w-full justify-between mb-8">
+        {/* <div className="total hidden md:flex w-full justify-between mb-8">
           <p className="font-semibold text-base">Total</p>
           <p className="font-semibold text-base">{totalPrice}</p>
-        </div>
+        </div> */}
 
         <p className="hidden md:block text-sm text-center text-gray-600 mt-2 bg-amber-100 p-4 rounded-lg mx-auto mb-0">
           {limitedOfferText}
@@ -93,10 +93,10 @@ const BookingSection: React.FC<BookingSectionProps> = ({
               className={`p-3 md:p-4 text-sm flex md:hidden items-center justify-center font-bold rounded-md w-full text-center ${
                 method.platform === 'Whatsapp' ? 'bg-[#25d366] text-white' :
                 method.platform === 'Airbnb' ? 'bg-[#ff5A60] text-white' :
-                method.platform === 'Tiket-com' ? 'bg-[#0064D3] text-white' :
+                method.platform === 'Tiket-com' ? 'bg-bluelink text-white' :
                 method.platform === 'Booking-com' ? 'bg-[#003580] text-white' :
                 method.platform === 'Agoda' ? 'bg-[#003580] text-white' :
-                  method.platform === 'Trip-com' ? 'bg-white text-black border-1 border-[#d9d9d9]' :
+                  method.platform === 'Trip-com' ? 'bg-white text-black border-1 border-graymuted' :
                   method.platform === 'Traveloka' ? 'bg-[#0A9AF2] text-white' :
                 'bg-gray-300 text-black'
               }`}
@@ -135,12 +135,12 @@ const BookingSection: React.FC<BookingSectionProps> = ({
                 className={`p-3 md:p-4 text-sm flex items-center justify-center font-bold rounded-md w-full text-center ${
                   method.platform === 'Whatsapp' ? 'bg-[#25d366] text-white' :
                   method.platform === 'Airbnb' ? 'bg-[#ff5A60] text-white' :
-                  method.platform === 'Tiket-com' ? 'bg-[#0064D3] text-white' :
+                  method.platform === 'Tiket-com' ? 'bg-bluelink text-white' :
                   method.platform === 'Booking-com' ? 'bg-[#003580] text-white' :
                   method.platform === 'Agoda' ? 'bg-[#003580] text-white' :
-                  method.platform === 'Trip-com' ? 'bg-white text-black border-1 border-[#d9d9d9]' :
+                  method.platform === 'Trip-com' ? 'bg-white text-black border-1 border-graymuted' :
                   method.platform === 'Traveloka' ? 'bg-[#0A9AF2] text-white' :
-                  'bg-[#1D764A] text-white'
+                  'bg-secondary text-white'
                 }`}
               >
                 {platformImages[method.platform] && (
@@ -169,12 +169,12 @@ const BookingSection: React.FC<BookingSectionProps> = ({
               className={`p-3 md:p-4 text-sm flex items-center justify-center font-bold rounded-md w-full text-center ${
                  method.platform === 'Whatsapp' ? 'bg-[#25d366] text-white' :
                   method.platform === 'Airbnb' ? 'bg-[#ff5A60] text-white' :
-                  method.platform === 'Tiket-com' ? 'bg-[#0064D3] text-white' :
+                  method.platform === 'Tiket-com' ? 'bg-bluelink text-white' :
                   method.platform === 'Booking-com' ? 'bg-[#003580] text-white' :
                   method.platform === 'Agoda' ? 'bg-black text-white' :
-                  method.platform === 'Trip-com' ? 'bg-white text-black border border-[#d9d9d9]' :
+                  method.platform === 'Trip-com' ? 'bg-white text-black border border-graymuted' :
                   method.platform === 'Traveloka' ? 'bg-[#0A9AF2] text-white' :
-                'bg-[#1D764A] text-white'
+                'bg-secondary text-white'
               }`}
             >
               {platformImages[method.platform] && (

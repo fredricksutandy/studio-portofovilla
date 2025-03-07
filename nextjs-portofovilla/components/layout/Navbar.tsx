@@ -25,9 +25,9 @@ const Navbar = () => {
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 ${
         isMenuOpen
-          ? 'bg-white text-black border-b border-b-[#d9d9d9]' // Menu open styles
+          ? 'bg-white text-black border-b border-b-graymuted' // Menu open styles
           : isScrolled
-          ? 'bg-white text-black border-b border-b-[#d9d9d9]' // Scrolled styles
+          ? 'bg-white text-black border-b border-b-graymuted' // Scrolled styles
           : 'bg-transparent text-white' // Default styles
       }`}
     >
@@ -95,7 +95,7 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         <div
-          className={`fixed top-[64px] left-0 w-full h-screen bg-white text-black transition-transform duration-300 border-t border-[#d9d9d9] ${
+          className={`fixed top-[64px] left-0 w-full h-screen bg-white text-black transition-transform duration-300 border-t border-graymuted ${
             isMenuOpen ? 'translate-x-0' : 'translate-x-full'
           } md:hidden z-40`}
         >

@@ -56,6 +56,7 @@ export const testimonyVideo = defineType({
                   { title: 'Agoda', value: 'Agoda' },
                   { title: 'Trip.com', value: 'Trip-com' },
                   { title: 'Traveloka', value: 'Traveloka' },
+                  { title: 'Google', value: 'Google' },
                 ],
                 layout: 'dropdown',
               },
@@ -125,6 +126,7 @@ export const testimonyVideo = defineType({
                   { title: 'Agoda', value: 'Agoda' },
                   { title: 'Trip.com', value: 'Trip-com' },
                   { title: 'Traveloka', value: 'Traveloka' },
+                  { title: 'Google', value: 'Google' },
                 ],
                 layout: 'dropdown',
               },
@@ -182,6 +184,28 @@ export const testimonyVideo = defineType({
           },
         },
       ],
+    }),
+    defineField({
+      name: 'linkReview',
+      title: 'Link Ulasan Google',
+      type: 'url',
+      description: 'Masukkan tautan ke ulasan Google untuk bisnis Anda.',
+      validation: (rule) =>
+        rule
+          .required()
+          .uri({ allowRelative: false, scheme: ['http', 'https'] })
+          .error('Masukkan URL yang valid untuk ulasan Google.'),
+    }),
+    defineField({
+      name: 'linkFeedback',
+      title: 'Link Formulir Feedback',
+      type: 'url',
+      description: 'Masukkan tautan ke formulir untuk pelanggan memberikan feedback.',
+      validation: (rule) =>
+        rule
+          .required()
+          .uri({ allowRelative: false, scheme: ['http', 'https'] })
+          .error('Masukkan URL yang valid untuk formulir feedback.'),
     }),
     defineField({
       name: 'slug',

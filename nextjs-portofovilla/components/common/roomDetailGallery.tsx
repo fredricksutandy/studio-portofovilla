@@ -6,7 +6,7 @@ import Image from "next/image";
 import imageUrlBuilder from "@sanity/image-url";
 import Splide from "@splidejs/splide";
 import "@splidejs/splide/dist/css/splide.min.css";
-import chevronLeft from '../../public/carbon_chevron-left.svg'
+import { ChevronLeft, ImageCopy } from '@carbon/icons-react';
 
 import {
   Dialog,
@@ -42,9 +42,11 @@ const RoomImage: React.FC<RoomImageProps> = ({ image, gallery }) => {
   // Initialize Splide only on mobile screens
   useEffect(() => {
     const splideInstance = new Splide(".splide", {
-      type: "fade",
+      type: "loop",
       heightRatio: 0.5,
       pagination: false,
+      speed: 800,
+      easing: 'ease-in-out',
       arrows: true,
       autoplay: true,
       interval: 3000,
@@ -57,8 +59,12 @@ const RoomImage: React.FC<RoomImageProps> = ({ image, gallery }) => {
     <section
       className="relative max-w-[1296px] mx-auto w-full h-fit cursor-pointer"
     >
-      {/* Gallery images (desktop) */}
-      <div className="flex flex-wrap gap-4 p-0 md:p-4 h-fit md:h-[460px] md:flex-row">
+      <div className="flex flex-wrap gap-2 p-0 md:p-4 h-fit md:h-[460px] md:flex-row relative">
+
+      <div className="px-5 py-2 bg-primary/80 text-white rounded-xl text-lg gap-2 font-montserrat font-semibold items-center hidden md:flex absolute bottom-6 right-6" onClick={openModal} >
+        <ImageCopy width={20} height={20}/> {gallery.length + 1}
+      </div>
+
         <div className="splide splide-gallery md:hidden" >
           <div className="splide__track">
             <ul className="splide__list" onClick={openModal}>
@@ -70,13 +76,14 @@ const RoomImage: React.FC<RoomImageProps> = ({ image, gallery }) => {
                     width={760}
                     height={450}
                     objectFit="cover"
-                    className="rounded-0 md:rounded-lg h-full object-cover"
+                    className="rounded-0 md:rounded-md h-full object-cover"
                   />
                 </li>
               ))}
             </ul>
           </div>
         </div>
+
         <Image
           src={urlFor(image).url()}
           alt="Room Main Image"
@@ -85,10 +92,10 @@ const RoomImage: React.FC<RoomImageProps> = ({ image, gallery }) => {
           objectFit="cover"
           placeholder="blur"
           blurDataURL={image.asset.metadata.lqip}
-          className="rounded-0 md:rounded-lg w-full flex-1 md:max-w-[760px] h-full object-cover hidden md:flex"
+          className="rounded-0 md:rounded-md w-full flex-1 md:max-w-[760px] h-full object-cover hidden md:flex"
           onClick={openModal}
         />
-        <div className="hidden md:flex max-w-[540px] flex-wrap gap-4 flex-1" onClick={openModal}>
+        <div className="hidden md:flex max-w-[540px] flex-wrap gap-2 flex-1 h-full items-stretch" onClick={openModal}>
           {gallery.slice(0, 4).map((img, index) => (
             <Image
               key={index}
@@ -97,7 +104,7 @@ const RoomImage: React.FC<RoomImageProps> = ({ image, gallery }) => {
               width={280}
               height={240}
               objectFit="cover"
-              className="rounded-lg w-[calc(50%-8px)] object-cover h-[206px]"
+              className="rounded-md w-[calc(50%-4px)] object-cover items-stretch h-[calc(50%-4px)]"
             />
           ))}
         </div>
@@ -111,14 +118,14 @@ const RoomImage: React.FC<RoomImageProps> = ({ image, gallery }) => {
       >
         <DialogBackdrop className="fixed inset-0 bg-black bg-opacity-50" />
         <DialogPanel className="relative bg-white px-8 pb-8 w-full max-w-[1296px] mx-auto rounded-lg">
-          <div className="flex gap-3 items-center sticky top-0 py-6 z-50 bg-white">
+          <div className="flex gap-3 items-center sticky top-0 lg:-top-6 py-4 md:py-6 z-50 bg-white">
           <button
             onClick={closeModal}
             className="rounded p-2 h-fit hover:bg-neutral-200 bg-neutral-100 transition-all font-montserrat flex items-center gap-1"
           >
-            <Image src={chevronLeft} alt="back" width={20} height={20} className=""/>
+            <ChevronLeft  width={20} height={20} className=""/>
           </button>
-          <DialogTitle className="text-3xl font-semibold font-krona">Foto kamar</DialogTitle>
+          <DialogTitle className="text-xl md:text-3xl font-semibold font-krona">Foto kamar</DialogTitle>
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">

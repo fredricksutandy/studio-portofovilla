@@ -35,7 +35,7 @@ const FloatingButton = () => {
         href={contactData.whatsappURL} 
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-4 right-4 rounded-lg bg-[#06C755] flex items-center justify-center p-6 z-30 hover:scale-90 transition-all"
+        className="fixed bottom-4 right-4 rounded-lg bg-[#06C755] flex items-center justify-center p-4 md:p-6 z-30 hover:scale-90 transition-all"
     >
         <Image src={WaLogo} alt="logo" width={24} className="" />
     </Link>

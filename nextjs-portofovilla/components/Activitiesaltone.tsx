@@ -51,7 +51,7 @@ const ActivitiesSection = () => {
   }
 
   return (
-    <section className="max-w-full mx-auto bg-[#FFF] py-24 px-4 overflow-hidden relative" id="activities">
+    <section className="max-w-full mx-auto bg-white py-24 px-4 overflow-hidden relative" id="activities">
 <Image src={palmLeaf} alt="palm-leaf" className="absolute left-0 bottom-0 z-0 scale-x-[-1]" />
 
       <div className="max-w-[1296px] mx-auto">

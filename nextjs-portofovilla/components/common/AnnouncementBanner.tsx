@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import type { SanityDocument } from "next-sanity";
 import { client } from "@/sanity/client";
+import { Close } from '@carbon/icons-react';
 
 const ANNOUNCEMENT_QUERY = `*[_type == "announcementBanner"][0]`;
 
@@ -31,7 +32,7 @@ const AnnouncementBanner = () => {
 
   return (
     <div
-      className="w-full z-50 bg-[#7cc097] text-black flex items-center justify-center py-3 px-4 pe-8 bg-announcement-bg"
+      className="w-full z-50 bg-tertier text-black flex items-center justify-center py-3 px-4 pe-8 bg-announcement-bg"
     >
       <div className="flex items-center gap-4">
         <p className="text-sm text-white font-normal text-center">{announcementData.announcementTitle} available until  <span className="text-sm font-semibold"> {announcementData.date}</span></p>
@@ -41,7 +42,7 @@ const AnnouncementBanner = () => {
         onClick={() => setIsVisible(false)}
         className="absolute right-4 text-lg font-bold text-white hover:text-neutral-200 focus:outline-none"
       >
-        ×
+        <Close width={20} height={20}/>
       </button>
     </div>
   );

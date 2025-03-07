@@ -6,11 +6,9 @@ import Image from "next/image";
 import roomsIco from '../../public/rooms-ico.svg'
 import guestIco from '../../public/guest-ico.svg'
 import bedIco from '../../public/bed-ico.svg'
-import arrowRight from '../../public/carbon_arrow-right.svg'
 import Link from "next/link";
 import imageUrlBuilder from '@sanity/image-url';
-import { Krona_One } from 'next/font/google'; // Use the correct font import
-
+import { ArrowRight } from '@carbon/icons-react';
 
 // Initialize image builder
 const builder = imageUrlBuilder(client);
@@ -77,46 +75,46 @@ const RoomSection = () => {
   }
 
   return (
-    <section className="justify-between mx-auto bg-[#fff] px-5 py-10 lg:py-[144px] relative" id="room">
+    <section className="justify-between mx-auto bg-white px-5 py-16 lg:py-[144px] relative" id="room">
       <div className="max-w-[1296px] block m-auto">
-      <Image src={roomsIco} alt="Asterisk icon" width={80} height={80} className="mb-8 flex mr-auto lg:mx-auto"/>
+      <Image src={roomsIco} alt="Asterisk icon" width={64} height={64} className="mb-4 flex mr-auto lg:mx-auto"/>
 
-      <h2 className="font-krona text-center text-2xl lg:text-4xl text-[#1A520F] font-semibold mb-4">
+      <h2 className="font-krona text-start md:text-center text-2xl lg:text-3xl text-primary font-semibold mb-2">
       {sectionMetadata.title}
       </h2>
-      <h3 className="text-lg text-center  text-gray-600 font-medium mb-10 max-w-[460px] m-auto">
+      <h3 className="text-xl text-start md:text-center text-gray-600 font-medium mb-10 md:mb-14 max-w-[460px] me-auto md:m-auto">
       {sectionMetadata.subtitle}</h3>
 
       <div className="flex flex-wrap gap-8">
         {roomData?.slice(0, 3).map((room: any, index: number) => (
           <div
             key={room.slug.current}
-            className="w-full lg:w-[calc(33%-24px)] gap-4 lg:gap-6 flex flex-auto lg:flex-1 flex-col items-center group overflow-hidden"
+            className="w-full lg:w-[calc(33%-24px)] gap-4 flex flex-auto lg:flex-1 flex-col items-center group overflow-hidden"
           >
             {room.image && (
-              <div className="relative w-full h-[300px] lg:h-[380px] overflow-hidden mb-2 rounded-t-xl lg:rounded-t-full">
+              <div className="relative w-full h-[240px] lg:h-[360px] overflow-hidden mb-2 rounded-t-xl lg:rounded-t-full">
                 <Image
                   src={urlFor(room.image).url()}
                   alt={room.roomName}
                   layout="fill"
                   objectFit="cover"
-                  className="transition-all group-hover:scale-105 w-full rounded"
+                  className="transition-all duration-700 ease-in-out group-hover:scale-105 w-full rounded"
                 />
               </div>
             )}
 
-            <div className="w-full h-fit flex justify-start lg:justify-center flex-col gap-4 text-start lg:text-center">
-              <h2 className="font-krona text-xl lg:text-2xl font-semibold text-black">{room.roomName}</h2>
+            <div className="w-full h-fit flex justify-start lg:justify-center flex-col gap-3 text-start lg:text-center">
+              <h2 className="font-krona text-xl font-semibold text-black">{room.roomName}</h2>
               {/* <div className="flex gap-5 justify-start lg:justify-center">
                 <p className={` text-black flex gap-2 font-medium items-center text-base`}><Image src={bedIco} alt="bedroom icon" width={28} height={28} className=""/> {room.bedroomsNumber} Bedrooms</p>
                 <p className={` text-black flex gap-2 font-medium items-center text-base`}><Image src={guestIco} alt="guest icon" width={28} height={28} className=""/> {room.guestNumber} Guests</p>
               </div> */}
               <p className="font-montserrat text-neutral-600 font-semibold text-lg">IDR {room.price} / malam</p>
 
-            <ul className="flex flex-wrap gap-2 items-center justify-center">
+            <ul className="flex flex-wrap gap-2 items-center justify-start md:justify-center">
                       {room.specifications?.map((specification: any, index: number) => {
                           return (
-                            <li key={index} className="w-fit rounded flex items-start gap-2 p-2 border border-[#d9d9d9]">
+                            <li key={index} className="w-fit rounded flex items-start gap-2 p-2 border border-graymuted">
                               {specification.icon?.asset?.url && (
                                 <img 
                                 src={urlFor(specification.icon).url()} 
@@ -137,11 +135,11 @@ const RoomSection = () => {
                 
               <Link
               href={`pages/${room.slug.current}`} prefetch={true}
-                className="flex items-center mt-2 mx-auto transition-all hover:translate-x-1 gap-2 border border-[#1A520F] justify-center w-full lg:w-fit py-4 px-6">
-                <p className="block m-0 text-[#1A520F] hover:underline">
+                className="flex items-center mt-2 mx-auto transition-all duration-300 ease-in-out hover:translate-x-1 gap-2 border border-primary justify-center w-full lg:w-fit py-4 px-6">
+                <p className="block m-0 text-primary hover:underline">
                   View Details
                 </p>
-                <Image src={arrowRight} alt="guest icon" width={16} height={16} className="invert"/>
+                <ArrowRight width={16} height={16} className="text-primary mt-[1px]"/>
               </Link>
             </div>
           </div>

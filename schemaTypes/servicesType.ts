@@ -60,6 +60,14 @@ export const service = defineType({
               description: 'Penjelasan detail tentang layanan, termasuk manfaat dan harapan pelanggan.',
               validation: (rule) => rule.required().error('Deskripsi layanan wajib diisi.'),
             }),
+            defineField({
+              name: 'serviceLink',
+              title: 'Tautan Informasi Layanan',
+              type: 'url',
+              description: 'Tambahkan tautan ke informasi layanan ini, seperti menu online, brosur PDF, atau halaman detail layanan.',
+              validation: (rule) =>
+                rule.uri({ scheme: ['http', 'https'] }).error('Harap masukkan URL yang valid dengan "http" atau "https".'),
+            }),
           ],
           preview: {
             select: {

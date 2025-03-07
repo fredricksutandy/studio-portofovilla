@@ -145,7 +145,7 @@ export const multipleContact = defineType({
               title: 'Alamat E-mail',
               type: 'string',
               description: 'Masukkan alamat E-mail. Contoh: "Adelia@gmail.com"',
-              validation: (rule) => rule.required().error('alamat email wajib diisi.'),
+              validation: (rule) => rule.required().email().error('Harus berupa alamat email yang valid'),
             }),
           ],
           preview: {

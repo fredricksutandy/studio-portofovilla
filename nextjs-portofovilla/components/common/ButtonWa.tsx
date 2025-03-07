@@ -12,15 +12,24 @@ const ButtonWa: React.FC<ButtonProps> = ({
   displayMobile,
   displayDesktop
 }) => {
-  // Apply styles conditionally based on the `type` prop
-  const buttonStyles = React.useMemo(
-    () => (type === 'green' ? 'bg-[#047C36] text-white' : 'bg-white text-[#1D764A] border border-[#1D764A]'),
-    [type]
-  );
+  const buttonStyles = React.useMemo(() => {
+    switch (type) {
+      case 'green':
+        return 'bg-secondary text-white';
+      case 'white':
+        return 'bg-white text-secondary border border-secondary';
+      case 'transparent':
+        return 'bg-transparent text-secondary'; // ✅ No background, no border
+      case 'transparent-border':
+        return 'bg-transparent text-secondary border border-secondary'; // ✅ Transparent with border
+      default:
+        return '';
+    }
+  }, [type]);
 
   const buttonRadius = React.useMemo(() => (radius === 'full' ? 'rounded-full' : 'rounded-lg'), [radius]);
 
-  const buttonWidth = React.useMemo(() => (width === 'full' ? 'w-full' : 'w-fit'), [width]);
+  const buttonWidth = React.useMemo(() => (width === 'full' ? 'w-full' : 'w-full md:w-fit'), [width]);
 
   // Apply visibility classes based on mobile and desktop visibility
   const visibilityClass = clsx(
@@ -35,7 +44,7 @@ const ButtonWa: React.FC<ButtonProps> = ({
   );
 
   const buttonClass = clsx(
-    'justify-center items-center px-[48px] py-[24px] gap-2 text-[16px] font-bold cursor-pointer',
+    'justify-center items-center px-[48px] py-[24px] gap-2 text-[16px] font-semibold cursor-pointer transition-all hover:-translate-y-2',
     buttonWidth,
     buttonRadius,
     buttonStyles,
@@ -44,9 +53,13 @@ const ButtonWa: React.FC<ButtonProps> = ({
 
   return (
     <a href={link} className={buttonClass} aria-label={text}>
-      {iconType && <Image src={iconType} alt="Icon" width={24} height={24} className="inline" />}
-      {text}
-    </a>
+    {typeof iconType === 'string' ? (
+      <Image src={iconType} alt="Icon" width={24} height={24} className="inline" />
+    ) : (
+      iconType // ✅ Directly render JSX icon
+    )}
+    {text}
+  </a>
   );
 };
 

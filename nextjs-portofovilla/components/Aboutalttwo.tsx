@@ -7,13 +7,9 @@ import type { SanityDocument } from "next-sanity";
 import Image from "next/image";
 import aboutico from '../public/about-ico.svg'
 
-// Initialize image builder
 const builder = imageUrlBuilder(client);
-
-// Helper to generate optimized image URLs
 const urlFor = (source: any) => builder.image(source).auto('format').fit('max');
 
-// Sanity query to fetch the 'about' document
 const ABOUT_QUERY = `*[_type == "about"][0]`;
 
 const AboutSection = () => {
@@ -29,44 +25,39 @@ const AboutSection = () => {
   }, []);
 
   if (!aboutData) {
-    return <div className="min-h-screen flex justify-center items-center">Loading...</div>; // Loading state
+    return <div className="min-h-[100vh] flex justify-center items-center">Loading...</div>;
   }
 
-  // Generate image URLs if available
-  const leftImageUrl = aboutData.imageLeft
-    ? urlFor(aboutData.imageLeft).url()
-    : '';
-  const rightImageUrl = aboutData.imageRight
-    ? urlFor(aboutData.imageRight).url()
-    : '';
-
   return (
-    <section className="flex flex-col md:flex-row justify-between max-w-[1296px] mx-auto bg-[#Fff] px-5 py-10 md:py-[80px] md:pt-[144px] gap-4 md:gap-10" id="about">
-      <div className="flex flex-col gap-4 md:gap-6 justify-center mb-6 md:mb-0 flex-1">
-        <Image src={aboutico} alt="Asterisk icon" width={100} height={100}/>
-        {/* <h1 className="text-lg font-medium  px-6 py-4 bg-[#D6F6E3] text-[#047C36] w-fit rounded">{aboutData.tagTitle}</h1> */}
-        {/* <h2 className="text-xl md:text-2xl mt-4 text-black max-w-[380px] font-semibold">{aboutData.subtitleone}</h2> */}
-        <h2 className="text-xl md:text-2xl mt-4 text-black max-w-[420px] font-semibold">{aboutData.subtitletwo}</h2>
-        <p className="mt-6 max-w-2xl text-lg text-[#555555]">{aboutData.aboutDescription}</p>
-        {/* {leftImageUrl && (
-          <img
-            src={leftImageUrl}
-            alt="About Image Left"
-            className="w-full h-auto object-cover rounded-md"
-          />
-        )} */}
+    <section className="w-full bg-lightbg" id="about">
+      <div className="max-w-[1296px] pt-10 md:pt-[144px] mx-auto mb-10 md:mb-20 px-6">
+
+        <div className="flex flex-col flex-1 mb-4 md:mb-14">
+          <div className="flex flex-row items-end gap-2 mb-4 md:mb-8">
+            <Image src={aboutico} alt="Asterisk icon" width={48} height={48} className=""/>
+            <h2 className="font-krona text-base md:text-lg text-primary font-medium leading-[100%!important]">{aboutData.title}</h2>
+          </div>
+          <h3 className="font-montserrat text-3xl sm:text-4xl md:text-7xl font-semibold text-neutral-800 w-full md:w-7/12">{aboutData.subtitle}</h3>
+        </div>
+
+        <p className="text-base md:text-xl text-neutral-600 flex flex-1 w-full md:w-7/12 ms-auto">{aboutData.aboutDescription}</p>
       </div>
 
-      <div className="flex items-end flex-1">
+      {/* <div className="flex flex-col-reverse items-start md:flex-row justify-between px-5 py-16 md:pt-[144px] md:pb-[222px] md:gap-[96px]">
         
-        {rightImageUrl && (
-          <img
-            src={rightImageUrl}
-            alt="About Image Right"
-            className="w-full object-cover h-[240px] md:h-auto md:max-h-[480px] rounded"
-          />
-        )}
-      </div>
+
+      </div> */}
+        <Image 
+          src={urlFor(aboutData.aboutImage).url()}
+          alt="about villa image" 
+          width={1920} 
+          height={620} 
+          className="w-full object-cover items-stretch flex h-[400px] md:h-[600px]"
+        />
+        
+        
+
+       
     </section>
   );
 };

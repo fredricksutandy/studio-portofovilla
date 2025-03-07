@@ -32,7 +32,7 @@ const FooterSection = () => {
     return <div>Loading...</div>; // Loading state
   }
   return (
-    <footer className="bg-[#06270B] px-[24px] py-[64px] text-white relative z-20">
+    <footer className="bg-darkbg px-[24px] py-[64px] text-white relative z-20">
       <div className="max-w-[1296px] mx-auto w-full flex flex-col justify-center items-center gap-[80px]">
         <div className="flex w-full flex-col md:flex-row md:justify-between">
           {/* Left Section */}
@@ -90,7 +90,7 @@ const FooterSection = () => {
 
 
           {/* Center Section */}
-          <div className="flex flex-col items-center text-center px-4 py-[72px] bg-[#093510] rounded-xl w-full gap-6">
+          <div className="flex flex-col items-center text-center px-4 py-[72px] bg-white/5 rounded-xl w-full gap-6">
 <div className="flex gap-6 ">
             {contactData.socialMedia.map((social: { link: string | undefined; icon: any; platform: any; }, index: Key | null | undefined) => (
               <a key={index} href={social.link} className="bg-transparent flex items-center grayscale invert">

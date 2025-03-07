@@ -52,12 +52,12 @@ const SplideComponent: React.FC<SplideComponentProps> = ({ data, autoScrollSpeed
   }, [autoScrollSpeed, reverse]);
 
   return (
-    <div ref={splideRef} className="splide mb-4 md:mb-10 overflow-initial">
+    <div ref={splideRef} className="splide mb-4 md:mb-6 overflow-initial">
       <div className="splide__track overflow-initial">
         <ul className="splide__list overflow-initial">
           {data?.map((item, index) => (
             <li key={index} className="splide__slide">
-              <div className="flex flex-col h-[180px] md:h-[320px] rounded bg-white border border-[#d9d9d9] p-6 justify-between gap-2 hover:translate-y-[-6px] transition-all">
+              <div className="flex flex-col h-[180px] md:h-[270px] rounded bg-white border border-graymuted p-6 justify-between gap-2 hover:translate-y-[-6px] transition-all">
                 {/* Display the image */}
                 {item?.image ? (
                   <Image

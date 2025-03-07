@@ -1,0 +1,14 @@
+@keyframes rtw {
+    0% { left: 0; opacity: 1; }
+    40% { left: 20px; opacity: 0; }
+    45% { left: 20px; opacity: 0; }
+    50% { left: -20px; opacity: 0;}
+    55% { left: -20px; opacity: 1;}
+    100% { left: 0px; }
+  }
+  
+  .hover-rtw:hover .hover-rtw-anim{
+    animation: rtw 850ms ease;
+  }
+
+  

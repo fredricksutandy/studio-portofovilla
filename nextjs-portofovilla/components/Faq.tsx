@@ -4,18 +4,19 @@ import { useEffect, useState } from "react";
 import { client } from "@/sanity/client";
 import type { SanityDocument } from "next-sanity";
 import AccordionRow from "./common/Accordion";
+import { Help } from "@carbon/icons-react";
 
-// Sanity query to fetch the 'about' document
+// Sanity query to fetch the 'faq' document
 const FAQ_QUERY = `*[_type == "faq"][0]`;
 
 const FaqSection = () => {
-  const [faqData, setFaqData] = useState<any>(null);
+  const [faqData, setFaqData] = useState<SanityDocument | null>(null);
 
   useEffect(() => {
     const fetchFaqData = async () => {
       const data = await client.fetch<SanityDocument>(FAQ_QUERY);
       setFaqData(data);
-      console.log(data)
+      console.log(data);
     };
 
     fetchFaqData();
@@ -26,17 +27,22 @@ const FaqSection = () => {
   }
 
   return (
-    <section className="flex justify-between max-w-[1296px] mx-auto bg-[#Fff] px-4 py-24" id="faq">
-      <div className="flex flex-col gap-8 w-full h-auto">
-        <div className="text-lg font-semibold  px-6 py-4 bg-[#D6F6E3] text-[#047C36] w-fit rounded">?</div>
-        <div className="flex flex-wrap justify-between w-full gap-4">
-            <h2 className="font-krona text-3xl lg:text-4xl text-[#1A520F] max-w-[470px] font-semibold">{faqData.title}</h2>
-            <div className="max-w-full lg:max-w-full xl:max-w-[640px]">
-            <AccordionRow question={faqData.faqs[0].question} answer={faqData.faqs[0].answer}/>
-            <AccordionRow question={faqData.faqs[1].question} answer={faqData.faqs[1].answer}/>
-            <AccordionRow question={faqData.faqs[0].question} answer={faqData.faqs[0].answer}/>
-            <AccordionRow question={faqData.faqs[1].question} answer={faqData.faqs[1].answer}/>
-            </div>
+    <section className="flex justify-between max-w-[1296px] mx-auto bg-white px-4 md:px-6 py-20 md:py-[200px]" id="faq">
+      <div className="flex flex-col w-full h-auto">
+        <Help size={36} className="text-primary" />
+        <div className="flex flex-wrap justify-between w-full gap-10">
+          <h2 className="font-krona text-2xl lg:text-3xl text-primary w-full md:w-[calc(50%-20px)] font-semibold mt-4">
+            {faqData.title}
+          </h2>
+          <div className="w-full md:w-[calc(50%-20px)]">
+            {faqData.faqs && faqData.faqs.length > 0 ? (
+              faqData.faqs.map((faq: { question: string; answer: string }, index: number) => (
+                <AccordionRow key={index} question={faq.question} answer={faq.answer} />
+              ))
+            ) : (
+              <p>Tidak ada pertanyaan yang tersedia saat ini.</p>
+            )}
+          </div>
         </div>
       </div>
     </section>

@@ -11,13 +11,6 @@ import Image from "next/image";
 
 const builder = imageUrlBuilder(client);
 
-// Initialize the Krona One font
-const kronaOne = Krona_One({
-  weight: '400', // Specify the weights you need
-  subsets: ['latin'], // Ensure the font supports the required subset
-  display: 'swap',
-});
-
 const urlFor = (source: any) => {
   return builder.image(source);
 };
@@ -57,14 +50,14 @@ const Hero = () => {
             <Image src={socialproof} alt="Logo" className="w-[104px] h-[26px]"/>
             <p className="text-base text-center mb-6 w-fit">Bergabung bersama <b>1,700+</b> pengunjung lain</p>
           </div>
-          <h1 className={`${kronaOne.className} text-5xl md:text-7xl font-bold mb-8 text-center`}>
+          <h1 className={`text-5xl md:text-7xl font-bold mb-8 text-center`}>
             {heroData.title}
           </h1>
           <h2 className="text-xl md:text-3xl text-center font-semibold">{heroData.subtitle}</h2>
         </div>
         <a
           href={heroData.buttonLink}
-          className="font-bold m-auto transition-all bg-[#DBEEFE] text-[#1D764A] hover:bg-[#1D764A] hover:text-white rounded-md px-12 py-6 text-base flex w-fit"
+          className="font-bold m-auto transition-all bg-subtle text-secondary hover:bg-secondary hover:text-white rounded-md px-12 py-6 text-base flex w-fit"
         >
           {heroData.buttonName}
         </a>

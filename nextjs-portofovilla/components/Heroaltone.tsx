@@ -4,12 +4,6 @@ import { useEffect, useState } from "react";
 import { client } from "@/sanity/client"; // Adjust the import as per your file structure
 import { Krona_One } from 'next/font/google'; // Use the correct font import
 
-// Initialize the Krona One font
-const kronaOne = Krona_One({
-  weight: '400', // Specify the weights you need
-  subsets: ['latin'], // Ensure the font supports the required subset
-  display: 'swap',
-});
 
 // Sanity query to resolve the video reference and fetch URL
 const HERO_QUERY = `*[_type == "hero"][0]{title, subtitle, video { asset-> {url} }}`;
@@ -56,7 +50,7 @@ const Hero = () => {
       {/* Text Container */}
       <div className="absolute top-3/4 left-1/4 transform text-white text-start">
       {/* Center text */}
-        <h1 className={`${kronaOne.className} text-2xl md:text-5xl font-bold mb-2 text-gray-100`}>
+        <h1 className={`text-2xl md:text-5xl font-bold mb-2 text-gray-100 font-krona`}>
           {heroData.title}
         </h1>
         <h2 className="text-lg md:text-xl">{heroData.subtitle}</h2>

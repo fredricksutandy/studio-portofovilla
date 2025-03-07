@@ -8,6 +8,8 @@ import imageUrlBuilder from "@sanity/image-url";
 import type { SanityDocument } from "next-sanity";
 import ButtonWa from './common/ButtonWa';
 import WaLogo from '../public/logos_whatsapp-icon.svg'
+import Link from "next/link";
+import { ArrowRight } from "@carbon/icons-react";
  
 
 // Initialize image builder for fetching image URLs
@@ -17,11 +19,13 @@ const urlFor = (source) => builder.image(source).url();
 // Query to fetch service data from Sanity
 const SERVICE_QUERY = `*[_type == "service"][0]{
   title,
+  subtitle,
   services[]{
     serviceTitle,
     serviceTagline,
     serviceDescription,
-    serviceImage
+    serviceImage,
+    serviceLink,
   }
 }`;
 
@@ -51,55 +55,56 @@ const ServicesSection = () => {
     return <div>Service data is incomplete.</div>;
   }
   return (
-    <main className="bg-[#fff] font-montserrat" id="services">
-      <section className="max-w-[1296px] mx-auto bg-[#Fff] px-4 py-24 relative gap-8">
-        <Image src={serviceIco} alt="Asterisk icon" width={100} height={64} className="mb-8 flex" />
-
-        {/* Title of the section */}
-        <h2 className="text-2xl lg:text-3xl text-start text-black font-semibold max-w-[380px] mb-8">
-          {serviceData.title}
-        </h2>
-        <div className="flex flex-col gap-8 lg:gap-[80px]">
-          {serviceData.services.map((service, index) => (
-          <div key={index} className="w-full px-0">
+    <main className="bg-white font-montserrat" id="services">
+      <section className="max-w-[1296px] mx-auto bg-white px-4 md:px-6 py-10 md:py-[120px] relative gap-8">
+      <div className="flex flex-row items-end gap-2 mb-6">
+          <Image src={serviceIco} alt="Asterisk icon" width={44} height={44} className=""/>
+          <h2 className="font-krona text-base md:text-lg text-primary font-medium leading-[100%!important]">{serviceData.title}</h2>
+        </div>          
+        <h3 className="font-montserrat text-2xl md:text-4xl font-bold text-black mb-10 max-w-[990px]">{serviceData.subtitle}</h3>
+        
+        <div className="flex flex-col relative">
+        {serviceData.services.map((service, index) => (
+          <div
+            key={index}
+            className={`w-full px-0 bg-white sticky top-0 z-[${index}] ${
+              index === serviceData.services.length - 1 ? "pb-10" : "pb-[184px]"
+            }`}
+          >
             <Image
               src={urlFor(service.serviceImage)}
               alt={service.serviceTitle}
               width={1320}
-              height={640}
-              className="w-full h-[540px] object-cover"
+              height={620}
+              className="w-full h-[540px] object-cover rounded"
             />
 
-            <div className="flex justify-end gap-4 mt-4">
+            <div className="flex justify-between gap-4 mt-4 md:mt-6">
               <div>
                 <h3 className="tracking-[2px] text-2xl lg:text-5xl font-krona font-semibold mb-4">
                   {service.serviceTitle}
                 </h3>
-                {/* <p className="font-krona text-xl lg:text-3xl">{service.serviceTagline}</p> */}
               </div>
+              <div className="flex items-end flex-col">
               <p className="text-end ms-auto text-base max-w-[560px]">{service.serviceDescription}</p>
+              {service.serviceLink && service.serviceLink.trim() !== "" && (
+                <Link
+                  href={service.serviceLink}
+                  passHref
+                  className="flex items-center justify-center transition-all duration-700 ease-in-out hover:-translate-x-2 gap-2 w-full md:w-fit mt-2 rounded border border-primary md:border-0 p-3 md:p-0 underline group"
+                >
+                  <p className="block m-0 text-base font-medium">View Details</p>
+                  <div className="w-0 group-hover:w-4 overflow-hidden transition-all duration-700">
+                  <ArrowRight width={16} height={16} className="mt-[2px] transition-all duration-700 -translate-x-4 opacity-0 group-hover:opacity-100 group-hover:-translate-x-0"/>
+                  
+                  </div>
+                </Link>
+              )}
+              </div>
             </div>
           </div>
           ))}
         </div>
-        {/* <div className="w-full px-0 mt-10 lg:mt-[64px]">
-          <Image
-            src={urlFor(serviceData.services[1].serviceImage)}
-            alt={serviceData.services[1].serviceTitle}
-            width={1320}
-            height={640}
-            className="w-full h-[540px] object-cover"
-          />
-
-          <div className="flex justify-end gap-4 mt-4">
-            <div>
-              <h3 className="tracking-[2px] text-2xl lg:text-5xl font-krona font-semibold mb-4">
-                {serviceData.services[1].serviceTitle}
-              </h3>
-            </div>
-            <p className="text-end ms-auto text-base max-w-[560px]">{serviceData.services[1].serviceDescription}</p>
-          </div>
-        </div> */}
         <div className="mt-10">
         <ButtonWa 
               link={serviceData.serviceContact}

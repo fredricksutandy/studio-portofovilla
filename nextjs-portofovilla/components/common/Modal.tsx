@@ -3,17 +3,13 @@
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import { Montserrat } from 'next/font/google';
 import Link from 'next/link';
 import { client } from '@/sanity/client';
+import imageUrlBuilder from "@sanity/image-url";
+import { Close } from '@carbon/icons-react';
 
-const montserrat = Montserrat({
-  weight: ['400', '500', '600', '700'],
-  subsets: ['latin'],
-  display: 'swap',
-});
-
-
+const builder = imageUrlBuilder(client);
+const urlFor = (source) => builder.image(source).url();
 
 const MODAL_QUERY = `
   *[_type == "modalPromo"]{
@@ -30,6 +26,7 @@ const MODAL_QUERY = `
       detailTitle,
       detailDescription
     },
+    linkModal,
     slug
   }
 `;
@@ -62,53 +59,55 @@ const Modal = () => {
   }
 
   return (
-    <Dialog open={open} onClose={() => setOpen(false)} className={`${montserrat.className} relative z-10`}>
+    <Dialog open={open} onClose={() => setOpen(false)} className="relative z-[999]">
       <DialogBackdrop className="fixed inset-0 bg-black/75 transition-opacity" />
       <div className="fixed inset-0 z-10 overflow-y-auto">
-        <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-          <DialogPanel className="relative transform overflow-hidden max-w-4xl rounded bg-white text-left shadow-xl transition-all flex flex-col md:flex-row">
+        <div className="flex min-h-full items-end justify-center p-2 text-center sm:items-center sm:p-0">
+          <DialogPanel className="font-montserrat relative max-w-4xl rounded bg-white text-left shadow-xl transition-all flex flex-col md:flex-row">
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="text-3xl absolute top-3 right-3 text-gray-400"
+              className="absolute -top-8 md:top-3 right-0 md:right-3 text-white/50 md:text-gray-400"
             >
-              &times;
+              <Close width={24} height={24}/>
             </button>
 
-            {/* Modal Image */}
-            <div className="bg-gray-50 w-full md:w-5/12">
+              <div className='w-full md:w-5/12 flex items-stretch relative h-[152px] md:h-auto'>
               <Image
-                src={modalData.imageModal.asset.url}
+                src={urlFor(modalData.imageModal)} 
                 alt={modalData.title || 'Modal image'}
-                width={800}
-                height={1600}
-                className="w-full h-[144px] md:h-full object-cover"
+                fill
+                className="w-full h-full object-cover"
               />
-            </div>
+              </div>
 
             {/* Modal Content */}
-            <div className="bg-white px-4 py-4 md:py-6 md:px-6 flex flex-col justify-between flex-1">
+            <div className="bg-white px-4 py-4 md:py-6 md:px-6 flex-col justify-between flex w-full md:w-7/12">
               <div>
-              <DialogTitle as="h3" className="text-xl md:text-3xl font-bold text-[#047C36]">
+              <DialogTitle as="h3" className="font-krona text-xl md:text-3xl font-bold text-primary">
                 {modalData.title}
               </DialogTitle>
               <p className="text-base md:text-xl text-black font-medium mt-2">
                 {modalData.subtitle}
               </p>
-              </div>
-              <ul className="list-disc pl-6 mt-6 space-y-2 text-sm md:text-base text-gray-800">
+              <ul className="list-disc pl-6 mt-8 space-y-2 text-sm md:text-base text-gray-800">
                 {modalData.details.map((detail, index) => (
                   <li key={index}>
                     <strong>{detail.detailTitle}</strong>: {detail.detailDescription}
                   </li>
                 ))}
               </ul>
+              </div>
+              
+              {modalData.linkModal && (
               <Link
-                href="#"
-                className="bg-[#1A520F] px-10 py-4 mt-6 text-white flex w-fit ms-auto hover:-translate-y-2 hover:bg-[#3e6e34] transition-all"
+                target="_blank"
+                href={modalData.linkModal}
+                className="bg-secondary px-10 py-4 mt-14 text-white flex w-fit ms-auto hover:-translate-y-2 hover:bg-secondary/70 transition-all"
               >
                 Book Now
               </Link>
+            )}
             </div>
           </DialogPanel>
         </div>

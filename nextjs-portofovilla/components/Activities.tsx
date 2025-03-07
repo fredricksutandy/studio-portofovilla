@@ -37,7 +37,7 @@ const ActivitiesSection = () => {
   }
 
   return (
-    <section className="max-w-[1296px] mx-auto bg-[#FFF] px-4 py-24" id="activities">
+    <section className="max-w-[1296px] mx-auto bg-white px-4 py-24" id="activities">
       <Image src={activitiesIcon} alt="Activities icon" width={100} height={100} className="mb-8" />
       <h2 className="text-3xl lg:text-4xl text-black font-medium mb-0">
         {activitiesData.title}
@@ -52,7 +52,7 @@ const ActivitiesSection = () => {
             key={index}
             className="flex flex-col h-[380px] rounded min-w-[300px] w-1/3 flex-auto items-start justify-end p-4 hover:translate-y-[-6px] transition-all"
             style={{
-              backgroundImage: `url(${urlFor(activities.galleryImage) || ''})`,
+              backgroundImage: `url(${urlFor(activities.activitiesImage) || ''})`,
               backgroundSize: 'cover', // Cover the entire div
               backgroundPosition: 'center', // Center the background image
               backgroundRepeat: 'no-repeat' // Prevent background from repeating

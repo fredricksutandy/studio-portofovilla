@@ -15,8 +15,8 @@ interface ButtonProps {
 
 // Define button styles for each type, including brand-specific colors
 const buttonStyleConfig: Record<string, string> = {
-  green: 'bg-[#047C36] text-white', // WhatsApp
-  white: 'bg-white text-[#1D764A] border border-[#1D764A]', // Default white style
+  green: 'bg-secondary text-white', // WhatsApp
+  white: 'bg-white text-secondary border border-secondary', // Default white style
   'booking.com': 'bg-[#003580] text-white', // Booking.com blue
   'tiket.com': 'bg-[#FFD100] text-black', // Tiket.com yellow
   airbnb: 'bg-[#FF5A5F] text-white', // Airbnb reddish-pink

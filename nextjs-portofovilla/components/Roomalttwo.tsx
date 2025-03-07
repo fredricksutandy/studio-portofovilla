@@ -4,27 +4,13 @@ import React, { useState, useEffect } from "react";
 import { client } from "@/sanity/client";
 import Image from "next/image";
 import roomsIco from '../public/rooms-ico.svg'
-import guestIco from '../public/guest-ico.svg'
-import bedIco from '../public/bed-ico.svg'
-import arrowRight from '../public/carbon_arrow-right.svg'
+import { ArrowRight } from '@carbon/icons-react';
 import Link from "next/link";
 import imageUrlBuilder from '@sanity/image-url';
-import { Krona_One } from 'next/font/google'; // Use the correct font import
 
-
-// Initialize image builder
 const builder = imageUrlBuilder(client);
-
-// Helper to generate optimized image URLs
 const urlFor = (source: any) => builder.image(source).auto('format').fit('max');
 
-const kronaOne = Krona_One({
-  weight: '400', // Specify the weights you need
-  subsets: ['latin'], // Ensure the font supports the required subset
-  display: 'swap',
-});
-
-// Define queries for room data and section metadata
 const ROOM_QUERY = `
   *[_type == "room"] {
     roomName,
@@ -83,14 +69,24 @@ const RoomSection = () => {
   }
 
   return (
-    <section className="justify-between mx-auto px-5 py-10 md:py-[80px] relative" id="room">
+    <section className="justify-between mx-auto px-5 py-16 md:py-[120px] relative" id="room">
       <div className="max-w-[1296px] block m-auto">
-      <Image src={roomsIco} alt="Asterisk icon" width={80} height={80} className="mb-8 flex"/>
+      {/* <Image src={roomsIco} alt="Asterisk icon" width={80} height={80} className="mb-8 flex"/> */}
 
-      <h2 className="text-3xl lg:text-4xl text-[#1D764A] font-semibold mb-0">
+      {/* <h2 className="text-3xl lg:text-4xl text-secondary font-semibold mb-0">
       {sectionMetadata.title}
       </h2>
-      <h3 className="text-3xl lg:text-4xl text-[#1D764A] font-semibold mb-10 md:mb-20">
+      <h3 className="text-3xl lg:text-4xl text-secondary font-semibold mb-10 md:mb-20">
+      {sectionMetadata.subtitle}</h3> */}
+
+      <div className="flex flex-row items-end gap-2 mb-6">
+                <Image src={roomsIco} alt="Asterisk icon" width={40} height={40} className="flex items-center" />
+                <h2 className="font-krona text-base md:text-lg text-primary font-medium leading-[100%!important]">
+                {sectionMetadata.title}
+                </h2>
+                
+              </div>
+              <h3 className="font-montserrat text-2xl md:text-4xl font-bold text-black mb-10 max-w-[768px]">
       {sectionMetadata.subtitle}</h3>
 
       <div className="flex flex-wrap gap-16 md:gap-20">
@@ -99,7 +95,7 @@ const RoomSection = () => {
   <div
     key={room.slug.current}
     className={`w-full gap-4 md:gap-10 flex flex-col md:flex-row ${
-      index % 2 === 0 ? 'md:flex-row-reverse' : ''
+      index % 2 !== 0 ? 'md:flex-row-reverse' : ''
     } items-center group overflow-hidden`}
   >
     {room.image && (
@@ -109,23 +105,23 @@ const RoomSection = () => {
           alt={room.roomName}
           layout="fill"
           objectFit="cover"
-          className="transition-all group-hover:scale-105 w-full rounded"
+          className="transition-all duration-700 ease-in-out group-hover:scale-105 w-full rounded-lg"
         />
       </div>
     )}
 
-    <div className="w-full md:w-[calc(50%-20px)] h-fit flex justify-center flex-col gap-5">
-      <h2 className={`${kronaOne.className} text-xl md:text-2xl font-semibold text-black`}>{room.roomName}</h2>
-              <p className={`${kronaOne.className} text-neutral-500 text-lg m-0`}>IDR {room.price} / malam</p>
+    <div className="w-full md:w-[calc(50%-20px)] h-fit flex justify-center flex-col">
+      <h4 className={`font-krona text-xl md:text-2xl font-semibold text-black mb-2`}>{room.roomName}</h4>
+              <p className={`text-neutral-500 text-lg font-semibold m-0`}>IDR {room.price} / malam</p>
 
       {/* <div className="flex gap-5">
-        <p className={`${kronaOne.className} text-black flex gap-2 font-medium items-center text-base`}><Image src={bedIco} alt="bedroom icon" width={28} height={28} className=""/> {room.bedroomsNumber} Bedrooms</p>
-        <p className={`${kronaOne.className} text-black flex gap-2 font-medium items-center text-base`}><Image src={guestIco} alt="guest icon" width={28} height={28} className=""/> {room.guestNumber} Guests</p>
+        <p className={`text-black flex gap-2 font-medium items-center text-base`}><Image src={bedIco} alt="bedroom icon" width={28} height={28} className=""/> {room.bedroomsNumber} Bedrooms</p>
+        <p className={`text-black flex gap-2 font-medium items-center text-base`}><Image src={guestIco} alt="guest icon" width={28} height={28} className=""/> {room.guestNumber} Guests</p>
       </div> */}
 <ul className="flex flex-wrap gap-2 items-center justify-start my-4 max-w-[90%]">
                 {room.specifications?.slice(0, 4).map((specification: any, index: number) => {
                     return (
-                      <li key={index} className="w-fit rounded flex items-start gap-2 p-2 border border-[#d9d9d9]">
+                      <li key={index} className="w-fit rounded flex items-start gap-2 p-2 border border-graymuted">
                         {specification.icon?.asset?.url && (
                           <img 
                           src={urlFor(specification.icon).url()} 
@@ -141,7 +137,7 @@ const RoomSection = () => {
                   })}
                 </ul>
       <div>
-      <p className="text-gray-700 text-base max-w-[420px]">{room.description}</p>
+      <p className="text-gray-700 text-base max-w-[560px] mb-6">{room.description}</p>
       {/* <ul className="mt-2 text-gray-500 text-sm flex flex-wrap gap-2 max-w-[420px]">
                 {room.facilities?.map((facility: string, index: number) => (
                   <li key={index}>• {facility}</li>
@@ -151,11 +147,11 @@ const RoomSection = () => {
         
       <Link
       href={`/room/${room.slug.current}`}
-        passHref className="flex items-center transition-all hover:translate-x-1 gap-2 border border-[#1A520F] w-fit py-4 px-6">
-        <p className="block m-0 text-[#1A520F] hover:underline">
+        passHref className="flex items-center transition-all hover:translate-x-1 gap-2 border border-primary w-fit py-4 px-6">
+        <p className="block m-0 text-primary hover:underline">
           View Details
         </p>
-        <Image src={arrowRight} alt="guest icon" width={16} height={16} className="invert"/>
+        <ArrowRight width={16} height={16} className="mt-[2px] text-primary"/>
       </Link>
     </div>
   </div>

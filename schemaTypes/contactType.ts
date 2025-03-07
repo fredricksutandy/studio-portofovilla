@@ -2,67 +2,92 @@ import { defineType, defineField } from 'sanity';
 
 export const contact = defineType({
   name: 'contact',
-  title: 'Contact Us Section',
+  title: 'Bagian Hubungi Kami',
+  description: 'Bagian ini berisi informasi kontak yang dapat dihubungi oleh pengunjung.',
   type: 'document',
   fields: [
     defineField({
       name: 'title',
-      title: 'Title',
+      title: 'Judul',
+      description: 'Judul utama bagian Hubungi Kami, misalnya "Hubungi Kami".',
       type: 'string',
+      validation: (rule) => rule.required().error('Judul wajib diisi'),
     }),
     defineField({
       name: 'subTitle',
-      title: 'Sub Title',
+      title: 'Sub-Judul',
+      description: 'Sub-judul yang menjelaskan lebih lanjut bagian kontak ini.',
       type: 'string',
+      validation: (rule) => rule.required().error('Sub-judul wajib diisi'),
     }),
     defineField({
       name: 'slug',
       title: 'Slug',
+      description: 'Slug untuk halaman ini, dibuat otomatis dari judul.',
       type: 'slug',
       options: {
-        source: 'title',  // Automatically generate from the title
-        maxLength: 96,       // Optional: Limit the length of the slug
+        source: 'title',
+        maxLength: 96,
       },
+      validation: (rule) => rule.required().error('Slug wajib diisi'),
     }),
     defineField({
       name: 'mapEmbedLink',
-      title: 'Google Maps Embed Link',
+      title: 'Tautan Google Maps (Sematan)',
+      description: 'Salin dan tempel tautan sematan (embed) Google Maps di sini.',
       type: 'url',
-      description: 'Paste the Google Maps embed link here',
+      validation: (rule) => 
+        rule.uri({ allowRelative: false }).error('Harus berupa URL sematan Google Maps yang valid'),
     }),
     defineField({
       name: 'address',
-      title: 'Address',
+      title: 'Alamat',
+      description: 'Alamat lengkap yang akan ditampilkan pada bagian kontak.',
       type: 'text',
+      validation: (rule) => rule.required().error('Alamat wajib diisi'),
     }),
     defineField({
       name: 'googleMapURL',
-      title: 'Google map URL',
+      title: 'Tautan Google Maps',
+      description: 'Tautan langsung ke lokasi di Google Maps.',
       type: 'url',
+      validation: (rule) =>
+        rule.uri({ allowRelative: false }).error('Link harus berupa URL valid.'),
     }),
     defineField({
       name: 'email',
-      title: 'Email',
+      title: 'Alamat Email',
+      description: 'Alamat email resmi untuk dihubungi.',
       type: 'string',
+      validation: (rule) => rule.required().email().error('Harus berupa alamat email yang valid'),
     }),
     defineField({
       name: 'emailURL',
-      title: 'Email URL',
+      title: 'Tautan Email',
+      description: 'Tautan untuk membuka email, misalnya "mailto:example@email.com".',
       type: 'url',
+      validation: (rule) =>
+        rule.uri({ allowRelative: false }).error('Harus berupa URL email yang valid'),
     }),
     defineField({
       name: 'whatsappNumber',
-      title: 'Whatsapp Number',
+      title: 'Nomor WhatsApp',
+      description: 'Nomor WhatsApp yang dapat dihubungi, dalam format internasional (misalnya +6281234567890).',
       type: 'string',
+      validation: (rule) => rule.required().regex(/^\+?[0-9]{10,15}$/, 'Harus berupa nomor telepon yang valid'),    
     }),
     defineField({
       name: 'whatsappURL',
-      title: 'Whatsapp URL',
+      title: 'Tautan WhatsApp',
+      description: 'Tautan langsung ke chat WhatsApp, misalnya "https://wa.me/6281234567890".',
       type: 'url',
+      validation: (rule) =>
+        rule.uri({ allowRelative: false }).error('Harus berupa URL WhatsApp yang valid'),
     }),
     defineField({
       name: 'socialMedia',
-      title: 'Social Media Links',
+      title: 'Tautan Media Sosial',
+      description: 'Tambahkan tautan ke akun media sosial resmi, beserta ikon dan platformnya.',
       type: 'array',
       of: [
         {
@@ -70,21 +95,28 @@ export const contact = defineType({
           fields: [
             defineField({
               name: 'platform',
-              title: 'Social Media Platform',
+              title: 'Platform Media Sosial',
+              description: 'Nama platform media sosial, misalnya Instagram, Facebook, atau Twitter.',
               type: 'string',
+              validation: (rule) => rule.required().error('Platform wajib diisi'),
             }),
             defineField({
               name: 'icon',
-              title: 'Social Media Icon',
+              title: 'Ikon Media Sosial',
+              description: 'Unggah ikon resmi dari platform media sosial.',
               type: 'image',
               options: {
-                hotspot: true, // Allows for easy cropping/focal point selection
+                hotspot: true,
               },
+              validation: (rule) => rule.required().error('Ikon wajib diunggah'),
             }),
             defineField({
               name: 'link',
-              title: 'Social Media Link',
+              title: 'Tautan Media Sosial',
+              description: 'Tautan langsung ke halaman media sosial resmi.',
               type: 'url',
+              validation: (rule) =>
+                rule.uri({ allowRelative: false }).error('Link harus berupa URL valid.'),
             }),
           ],
           preview: {
@@ -96,10 +128,8 @@ export const contact = defineType({
           },
         },
       ],
-      description: 'Add social media platforms with their icon and link',
     }),
   ],
 });
 
 export default contact;
-

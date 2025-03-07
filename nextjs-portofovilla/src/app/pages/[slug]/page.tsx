@@ -5,7 +5,7 @@ import Image from "next/image";
 import ButtonWa from "../../../../components/common/ButtonWa";
 import WaLogo from '../../../../public/logos_whatsapp-icon.svg'
 import SectionNav from "../../../../components/common/SectionNavigation";
-import FooterSection from "../../../../components/layout/Footer";
+import FooterSectionalttwo from "../../../../components/layout/Footeralttwo";
 import NavbarDetailSection from "../../../../components/layout/NavbarDetail";
 
 import RoomImage from "../../../../components/common/roomDetailGallery";
@@ -168,10 +168,12 @@ export default async function RoomDetails({ params }: { params: { slug: string }
     <>
     <NavbarDetailSection />
 
-    {room.image && <RoomImage image={room.image} gallery={room.gallery || []} />}    <SectionNav />
-    <section className="bg-white flex gap-8 relative max-w-[1296px] mx-auto font-montserrat p-4">
+    {room.image && <RoomImage image={room.image} gallery={room.gallery || []} />}    
+    <section className="bg-white relative max-w-[1296px] mx-auto font-montserrat px-4 pb-4">
+    <SectionNav />
 
-      <section className="w-full md:w-[calc(68%-16px)]">
+<div className="flex gap-8">
+<section className="w-full md:w-[calc(68%-16px)]">
         <section id="kamar" className="flex flex-col gap-6 pt-8">
           <div>
           <p className="text-base font-semibold text-neutral-500 mb-2">{room.guestsBooked} tamu telah menginap disini</p>
@@ -202,12 +204,12 @@ export default async function RoomDetails({ params }: { params: { slug: string }
 
         </section>
 
-        <section id="fasilitas" className="pt-14 pb-14 border-b border-[#d9d9d9]">
+        <section id="fasilitas" className="pt-14 pb-14 border-b border-graymuted">
         <h2 className="text-lg md:text-2xl font-semibold mb-4">Fasilitas</h2>
           <ul className="flex flex-wrap gap-4">
           {room.facilities?.map((facility: any, index: number) => {
               return (
-                <li key={index} className="p-4 border border-[#d9d9d9] w-fit rounded flex items-center gap-2">
+                <li key={index} className="p-4 border border-graymuted w-fit rounded flex items-center gap-2">
                   <h3 className="text-sm md:text-base">{facility.name}</h3>
                   {facility.icon?.asset?.url && (
                     <img 
@@ -224,19 +226,19 @@ export default async function RoomDetails({ params }: { params: { slug: string }
           </ul>
         </section>
 
-        <section id="lokasi" className="space-y-2 text-gray-700 pt-14 pb-14 border-b border-[#d9d9d9]">
+        <section id="lokasi" className="space-y-2 text-gray-700 pt-14 pb-14 border-b border-graymuted">
           <h2 className="text-lg md:text-2xl font-semibold mb-4">Lokasi</h2>
           <p className="text-sm md:text-base">{room.address}</p>
           <iframe src={room.gmapUrl} className="w-full border-0 h-[300px] md:h-[440px] lg:h-fill outline-hidden rounded" loading="lazy"></iframe>
         </section>
 
         {/* Rules and Disclaimer Sections */}
-        <section id="aturan" className="text-gray-700 pt-14 pb-14 border-b border-[#d9d9d9]">
+        <section id="aturan" className="text-gray-700 pt-14 pb-14 border-b border-graymuted">
           <h2 className="text-lg md:text-2xl font-semibold mb-4">Aturan & info penting</h2>
             <div className="flex gap-6 flex-wrap mb-6 text-sm md:text-base">
-              <p>Check-In: {room.checkIn} WIB</p>
+              <p>Check-In : <span className="font-semibold">{room.checkIn} WIB</span> </p>
               -
-              <p>Check-Out: {room.checkOut} WIB</p>
+              <p>Check-Out : <span className="font-semibold">{room.checkOut} WIB</span> </p>
             </div>
           
           <ul className="list-decimal ps-10 mb-6">
@@ -286,10 +288,12 @@ export default async function RoomDetails({ params }: { params: { slug: string }
         whatsappURL={"contactData.whatsappURL"}
         bookingMethods={room.bookingMethod}
       />
+</div>
+      
 
-      {/* <section className="bg-white rounded-0 mb-0 w-full left-0 fixed bottom-0 top-auto md:bottom-auto md:w-[calc(32%-16px)] md:sticky md:top-[80px] h-fit mt-8 p-4 md:p-6 border border-[#d9d9d9] md:rounded-xl md:mb-4">
+      {/* <section className="bg-white rounded-0 mb-0 w-full left-0 fixed bottom-0 top-auto md:bottom-auto md:w-[calc(32%-16px)] md:sticky md:top-[80px] h-fit mt-8 p-4 md:p-6 border border-graymuted md:rounded-xl md:mb-4">
         <div className="">
-          <p className="text-lg md:text-xl text-center md:text-start font-bold pb-4 border-0 md:border-b border-[#d9d9d9] mb-0 md:mb-4 font-krona">Rp.{room.price} <span className="text-sm font-normal"> per malam</span></p>
+          <p className="text-lg md:text-xl text-center md:text-start font-bold pb-4 border-0 md:border-b border-graymuted mb-0 md:mb-4 font-krona">Rp.{room.price} <span className="text-sm font-normal"> per malam</span></p>
           
           <div className="mb-4 hidden md:block">
             <p className="text-green-700 text-semibold">Free cancellation</p>
@@ -299,7 +303,7 @@ export default async function RoomDetails({ params }: { params: { slug: string }
           <div className="hidden md:flex gap-4 mb-6">
           <div className="flex flex-col flex-1">
             <p className="mb-2 font-semibold">Tamu</p>
-            <select name="" id="" className="w-full p-3 text-sm bg-white rounded-md border border-[#000]">
+            <select name="" id="" className="w-full p-3 text-sm bg-white rounded-md border border-black">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -310,7 +314,7 @@ export default async function RoomDetails({ params }: { params: { slug: string }
 
           <div className="hidden md:flex flex-col flex-1">
             <p className="mb-2 font-semibold">Malam</p>
-            <select name="" id="" className="w-full p-3 text-sm bg-white rounded-md border border-[#000]">
+            <select name="" id="" className="w-full p-3 text-sm bg-white rounded-md border border-black">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -345,7 +349,7 @@ export default async function RoomDetails({ params }: { params: { slug: string }
         </div>
       </section> */}
   </section>
-  <FooterSection />
+  <FooterSectionalttwo />
 
     </>
   

@@ -53,6 +53,17 @@ export const modalPromoType = defineType({
       ],
     }),
     defineField({
+      name: "linkModal",
+      title: "Tautan Modal Promo",
+      type: "url",
+      description: "Masukkan tautan untuk booking promo villa.",
+      validation: (rule) =>
+        rule
+          .required()
+          .uri({ allowRelative: false, scheme: ["http", "https"] })
+          .error("Masukkan URL yang valid."),
+    }),
+    defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',

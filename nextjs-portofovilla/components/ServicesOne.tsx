@@ -16,6 +16,7 @@ const urlFor = (source) => builder.image(source).url();
 // Query to fetch service data from Sanity
 const SERVICE_QUERY = `*[_type == "service"][0]{
   title,
+  subtitle,
   services[]{
     serviceTitle,
     serviceTagline,
@@ -51,14 +52,13 @@ const ServicesSection = () => {
     return <div>Service data is incomplete.</div>;
   }
   return (
-    <main className="bg-[#fff] font-montserrat" id="services">
-      <section className="max-w-[1296px] mx-auto bg-[#Fff] px-4 py-24 relative gap-8">
-        <Image src={serviceIco} alt="Asterisk icon" width={100} height={64} className="mb-8 flex" />
-
-        {/* Title of the section */}
-        <h2 className="text-2xl lg:text-3xl text-start text-black font-semibold max-w-[380px]">
-          {serviceData.title}
-        </h2>
+    <main className="bg-white font-montserrat" id="services">
+      <section className="max-w-[1296px] mx-auto bg-white px-4 md:px-6 py-10 md:py-[120px] relative gap-8">
+      <div className="flex flex-row items-end gap-2 mb-6">
+          <Image src={serviceIco} alt="Asterisk icon" width={44} height={44} className=""/>
+          <h2 className="font-krona text-base md:text-lg text-primary font-medium leading-[100%!important]">{serviceData.title}</h2>
+        </div>          
+        <h3 className="font-montserrat text-2xl md:text-4xl font-bold text-black mb-10 max-w-[990px]">{serviceData.subtitle}</h3>
 
         {/* First Service */}
         <div className="w-full px-0 mt-8">

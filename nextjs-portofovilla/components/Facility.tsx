@@ -34,7 +34,7 @@ const FacilitySection = () => {
   }
 
   return (
-    <section className="max-w-[1296px] mx-auto bg-[#Fff] px-4 py-24 relative" id="facilities">
+    <section className="max-w-[1296px] mx-auto bg-white px-4 py-24 relative" id="facilities">
         <Image src={facilityIco} alt="Asterisk icon" width={100} height={64} className="mb-8 flex"/>
         {/* <Image src={palmLeaf} alt="palm-leaf" className="absolute left-[-10%] top-1/2 -translate-y-1/2 z-0 scale-[-1]" /> */}
 
@@ -50,7 +50,7 @@ const FacilitySection = () => {
 
       <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8">
         {facilityData.facilities.map((facility, index) => (
-          <div key={index} className="flex flex-col md:flex-row items-start md:items-center py-2 px-0 md:p-5 gap-2 md:gap-4 border-b border-b-[#1D764A]">
+          <div key={index} className="flex flex-col md:flex-row items-start md:items-center py-2 px-0 md:p-5 gap-2 md:gap-4 border-b border-b-secondary">
             {facility.facilityImage && (
               <Image
                 src={urlFor(facility.facilityImage)}
