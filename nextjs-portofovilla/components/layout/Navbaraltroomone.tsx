@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from 'next/link';
 import Image from 'next/image';
 import portofovillalogomono from '../../public/portofovilla logo mono.svg'
@@ -8,10 +8,11 @@ import leafroom from '../../public/leaf-room-placeholder.png'
 import WaLogo from '../../public/logos_whatsapp-icon.svg'
 import { client } from "@/sanity/client"; 
 import type { SanityDocument } from "next-sanity";
-import AnnouncementBanner from "../../components/common/AnnouncementBanner";
+import AnnouncementBanner from "../common/AnnouncementBanner";
 import { quickLinks } from "../../src/constant/link"; 
 import { Close, Menu, ChevronDown, ArrowRight } from '@carbon/icons-react';
 import imageUrlBuilder from '@sanity/image-url';
+import gsap from "gsap";
 
 const builder = imageUrlBuilder(client);
 const urlFor = (source: any) => builder.image(source).auto('format').fit('max');
@@ -24,47 +25,82 @@ const ROOM_QUERY = `*[_type == "room"] {
 
 const CONTACT_QUERY = `*[_type == "contact"][0]`;
 
+interface Room {
+  _id: string;
+  name: string;
+  image: string;
+  description: string;
+}
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isRoomsOpen, setIsRoomsOpen] = useState(false);
-  const [rooms, setRooms] = useState([]);
-  const [hoveredImage, setHoveredImage] = useState(null);
+  const [contactData, setContactData] = useState(false);
+  const [rooms, setRooms] = useState<Room[]>([]);
+  const [hoveredImage, setHoveredImage] = useState(leafroom);
+  const [currentImage, setCurrentImage] = useState(leafroom);
+
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  const navRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        setIsRoomsOpen(false); // Close the dropdown
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+ useEffect(() => {
+  if (!hoveredImage || hoveredImage === currentImage || !imgRef.current) return;
+
+  gsap.to(imgRef.current, {
+    opacity: 0,
+    duration: 0.5,
+    onComplete: () => {
+      setCurrentImage(hoveredImage); // Update image
+      gsap.to(imgRef.current, { opacity: 1, duration: 0.4 });
+    },
+  });
+}, [hoveredImage, currentImage]); // Added `currentImage` as dependency
+
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
+      requestAnimationFrame(() => {
+        setIsScrolled(window.scrollY > 0);
+      });
     };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+  
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  
 
   // Sanity query to fetch the 'contact' document
   
-    const [contactData, setContactData] = useState<any>(null);
+  const fetchData = useCallback(async () => {
+    try {
+      const [contactData, roomsData] = await Promise.all([
+        client.fetch<SanityDocument>(CONTACT_QUERY),
+        client.fetch(ROOM_QUERY),
+      ]);
   
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const [contactData, roomsData] = await Promise.all([
-            client.fetch<SanityDocument>(CONTACT_QUERY),
-            client.fetch(ROOM_QUERY)
-          ]);
-          
-          setContactData(contactData);
-          setRooms(roomsData);
-        } catch (error) {
-          console.error("Error fetching data:", error);
-        }
-      };
-    
-      fetchData();
-    }, []);
+      setContactData(contactData);
+      setRooms(roomsData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }, []);
+  
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
   
     if (!contactData) {
       return <div>Loading...</div>; // Loading state
@@ -72,10 +108,11 @@ const Navbar = () => {
 
   return (
     <nav
-    className={`fixed top-0 left-0 w-full z-50 ${
-      isMenuOpen || isRoomsOpen || isScrolled ? 'bg-white text-black border-b border-graymuted' : 'bg-transparent text-white'
-    }`}
-  >
+      ref={navRef}
+      className={`fixed top-0 left-0 w-full z-50 ${
+        isMenuOpen || isRoomsOpen || isScrolled ? 'bg-white text-black border-b border-graymuted' : 'bg-transparent text-white'
+      }`}
+    >
     <AnnouncementBanner />
     <div className="max-w-[1296px] mx-auto flex items-center justify-between p-4">
       {/* Logo */}
@@ -87,9 +124,9 @@ const Navbar = () => {
       <button
         className="lg:hidden focus:outline-none rounded transition-colors"
         onClick={() => setIsMenuOpen((prev) => !prev)}
-        aria-label='Open Menu'
+        aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
       >
-        <Menu className="w-6 h-6" />
+        {isMenuOpen ? <Close className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
       </button>
 
       {/* Desktop Menu */}
@@ -165,43 +202,45 @@ const Navbar = () => {
 
     {/* dropdown */}
     <div
-      className={`w-full hidden max-w-fit rounded-md bg-white mx-auto justify-center gap-6 transition-all duration-300 p-6 overflow-hidden
+      className={`w-full hidden max-w-[1272px] bg-white mx-auto justify-center gap-10 transition-all duration-300 p-4 overflow-hidden
         ${isRoomsOpen ? "lg:flex" : "hidden"}`}
     >
 
         {/* Left Side - Room Links */}
-      <div className="flex w-66 flex-col gap-4 overflow-hidden">
-      <a href="#room" className="text-2xl font-semibold font-krona text-primary underline">Kamar kami</a>
-
+      <div className="flex w-[calc(50%-20px)] flex-col gap-6 overflow-hidden">
+      <a href="#room" className="text-xl font-semibold font-krona text-primary underline">Kamar kami</a>
+        <div className='flex flex-wrap gap-x-6 gap-y-4'>
+          <div className='w-[calc(50%-12px)] border-t border-graymuted'></div>
+          <div className='w-[calc(50%-12px)] border-t border-graymuted'></div>
         {rooms.map((room) => (
-          <div key={room.slug?.current || room._id}>
             <Link
+              key={room.slug?.current || room._id}
               href={`/pages/${room.slug?.current}`}
-              className="text-black flex group items-center rounded gap-2 -translate-x-6 transition-all duration-500 hover:translate-x-0"
+              className="text-black flex group items-center rounded gap-2 transition-all duration-500 hover:translate-x-2 w-[calc(50%-12px)] group"
               onMouseEnter={() =>
                 setHoveredImage(room.image ? urlFor(room.image).width(500).height(300).url() : "")
               }
             >
 
-          <ArrowRight width={16} height={16} className="transition-all mt-[1px]"/>
               {room.roomName}
+              <ArrowRight width={16} height={16} className="transition-all duration-500 -translate-x-3 mt-[1px] opacity-0 group-hover:opacity-100 group-hover:translate-x-0"/>
               
 
             </Link>
-          </div>
         ))}
-
+  </div>
       {/* Right Side - Room Image */}
       
       </div>
-      <div className="flex flex-1 max-w-lg">
-      <Image
-        src={hoveredImage || leafroom} // ✅ Show hovered image, fallback to default
-        alt="Room Image"
-        width={500}
-        height={360}
-        className="rounded-lg w-full max-w-[500px] h-50 transition-all object-cover"
-      />
+        <div className="relative w-[calc(50%-20px)] h-[300px] overflow-hidden bg-primary/70 rounded-lg">
+          <Image
+            ref={imgRef}
+            src={currentImage ?? leafroom}
+            alt="Room Image"
+            width={700}
+            height={460}
+            className="rounded-lg w-full h-full object-cover"
+          />
       </div>
     </div>
   </nav>

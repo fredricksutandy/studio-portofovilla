@@ -128,7 +128,7 @@
     }
 } */
 
-.splide__slide{
+.splidetestimonial.overflow-initial .splide__slide{
   opacity: 0.3;
   transition: all 200ms ease-in-out;
 }

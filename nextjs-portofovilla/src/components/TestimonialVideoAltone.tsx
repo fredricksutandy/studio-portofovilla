@@ -19,7 +19,7 @@ import tiketComLogo from '../../public/colored-ico/Tiket.com_logo.svg';
 import bookingComLogo from '../../public/colored-ico/Booking.com-Logo.wine.svg';
 import agodaLogo from '../../public/colored-ico/Agoda_transparent_logo.svg';
 import tripComLogo from '../../public/colored-ico/Trip.com_logo.svg.svg';
-import travelokaLogo from '../../public/colored-ico/traveloka-logo-brandlogo.net.svg';
+import travelokaLogo from '../../public/colored-ico/Traveloka-logo-icon.svg';
 import googleLogo from '../../public/colored-ico/devicon_google.svg';
 
 import imageUrlBuilder from "@sanity/image-url";
@@ -166,12 +166,12 @@ const TestimonySplide = () => {
                   <div
                     className="absolute top-0 left-0 h-full bg-green-700 z-20"
                     style={{
-                      width: `${(parseFloat(platform.rating) / 5) * 100}%`,
+                      width: `${(parseFloat(platform.rating) / 5) * 100 - 1}%`,
                     }}
                   ></div>
                 </div>
 
-                <div className="flex gap-1 items-center">
+                <div className="flex flex-col md:flex-row gap-1 items-center">
                 <p className="text-base font-normal text-neutral-600">
   Rated <span className="font-semibold">{platform.rating}</span> in
 </p>
@@ -204,7 +204,7 @@ const TestimonySplide = () => {
           <ul className="splide__list">
             {testimonyData.testimonies?.map((testimony: any, index: number) => (
               <li className="splide__slide" key={index}>
-                <div className="flex flex-col h-[280px] rounded bg-white p-6 justify-between gap-2 transition-all">
+                <div className="flex flex-col min-h-[280px] h-full rounded bg-white p-6 justify-between gap-2 transition-all">
                   
                   {/* <div className="flex gap-1">
                     {Array(testimony.testimonyRating || 0)
@@ -216,48 +216,54 @@ const TestimonySplide = () => {
 
               <div  className="flex flex-col items-start text-center gap-2 w-full"
               >
-                <div className="relative h-[16px] w-fit">
-                <Image
-                  src={starTemplateWhite}
-                  alt="{platform.platformName}"
-                  width={300}
-                  height={300}
-                  className="w-[80px] h-[16px] relative z-30 bg-contain bg-no-repeat top-0"
-                />
-                <Image
-                  src={starBackhold}
-                  alt="{platform.platformName}"
-                  width={300}
-                  height={300}
-                  className="w-[80px] h-[16px] absolute z-10 bg-contain bg-no-repeat top-0 left-0"
-                />
-                  <div
-                    className="absolute top-0 left-0 h-full bg-green-700 z-20"
-                    style={{
-                      width: `${(parseFloat(testimony.testimonyRating) / 5) * 100}%`,
-                    }}
-                  ></div>
+                <div className="flex gap-2 items-center">
+                  <p className="text-primary text-lg font-semibold">{testimony.testimonyRating}</p>
+                  <div className="relative h-[16px] w-fit">
+                    <Image
+                      src={starTemplateWhite}
+                      alt="{platform.platformName}"
+                      width={300}
+                      height={300}
+                      className="w-[80px] h-[16px] relative z-30 bg-contain bg-no-repeat top-0"
+                    />
+                    <Image
+                      src={starBackhold}
+                      alt="{platform.platformName}"
+                      width={300}
+                      height={300}
+                      className="w-[80px] h-[16px] absolute z-10 bg-contain bg-no-repeat top-0 left-0"
+                    />
+                      <div
+                        className="absolute top-0 left-0 h-full bg-green-700 z-20"
+                        style={{
+                          width: `${(parseFloat(testimony.testimonyRating) / 5) * (100)}%`,
+                        }}
+                      ></div>
+                    </div>
                 </div>
-                <p className="text-primary text-xl md:text-2xl font-semibold">
-                    {testimony.testimonyHighlight}
-                  </p>
-                  <p className="text-black text-base text-start">{testimony.testimony}</p>
-                
+                  <p className="text-primary text-xl md:text-2xl font-semibold">
+                      {testimony.testimonyHighlight}
+                    </p>
+                    <p className="text-neutral-700 text-base text-start">{testimony.testimony}</p>
+                  
                 </div>
-                  <div className="flex items-center gap-2">
-                  <Image
-                    src={urlFor(testimony.testimonyImage)}  // Correctly accessing the image
-                    alt={testimony.testimonyName}
-                    width={300}
-                    height={300}
-                    className="w-7 h-7 rounded-full object-cover"
-                  />
-
-                  <p className="text-black text-sm font-medium">
-                    {testimony.testimonyName}{' '}
-                    {testimony.testimonyFrom && <span className="text-gray-500">(dari {testimony.testimonyFrom})</span>}
-                  </p>
-                  </div>
+                  <div className="flex items-center gap-4">
+                                    
+                                    <Image
+                                      src={urlFor(testimony.testimonyImage)}  // Correctly accessing the image
+                                      alt={testimony.testimonyName}
+                                      width={200}
+                                      height={200}
+                                      className="w-14 h-14 rounded-full object-cover"
+                                    />
+                                    <div>
+                                    <p className="text-black text-base font-[500]">
+                                      {testimony.testimonyName}{' '}
+                                      
+                                    </p>
+                                    {testimony.testimonyFrom && <p className="text-gray-500">(dari {testimony.testimonyFrom})</p>}
+                                    </div>
+                                    </div>
                 </div>
               </li>
             ))}
@@ -285,7 +291,7 @@ const TestimonySplide = () => {
 
         
 
-      <div className="max-w-[1296px] mx-auto flex flex-wrap justify-center mt-8 gap-4">
+      <div className="max-w-[1296px] mx-auto flex flex-wrap justify-center mt-8 gap-4 relative z-10">
 
       <ButtonWa 
         link={testimonyData.linkFeedback}

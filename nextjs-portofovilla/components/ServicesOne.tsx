@@ -22,7 +22,8 @@ const SERVICE_QUERY = `*[_type == "service"][0]{
     serviceTagline,
     serviceDescription,
     serviceContact,
-    serviceImage
+    serviceImage,
+    servicePrice,
   }
 }`;
 
@@ -60,30 +61,28 @@ const ServicesSection = () => {
         </div>          
         <h3 className="font-montserrat text-2xl md:text-4xl font-bold text-black mb-10 max-w-[990px]">{serviceData.subtitle}</h3>
 
-        {/* First Service */}
         <div className="w-full px-0 mt-8">
-          {/* <div>
-              <h3 className="tracking-[2px] text-lg lg:text-2xl font-semibold mb-4">
-                {serviceData.services[0].serviceTitle}
-              </h3>
-              <p className="font-krona text-xl lg:text-3xl">{serviceData.services[0].serviceTagline}</p>
-            </div> */}
+          <div className="relative">
           <Image
             src={urlFor(serviceData.services[0].serviceImage)}
             alt={serviceData.services[0].serviceTitle}
             width={1320}
             height={640}
-            className="w-full h-[540px] object-cover"
+            className="w-full h-[400px] md:h-[540px] object-cover"
           />
+          <p className={`px-3 py-2 rounded-lg text-lg font-semibold w-fit absolute bottom-4 left-4
+              ${!serviceData.services[0].servicePrice?.trim() ? "bg-green-200 text-green-800" : "bg-gray-200 text-gray-800"}
+            `}>
+              {serviceData.services[0].servicePrice?.trim() || "Gratis!"}
+            </p>
+          </div>
 
-          <div className="flex justify-between gap-4 mt-4">
-              <h3 className="tracking-[2px] text-2xl lg:text-5xl font-krona font-semibold mb-4">
-                {serviceData.services[0].serviceTitle}
-              </h3>
-            <div className="flex flex-col gap-4 items-end">
-            <p className="text-end ms-auto text-base max-w-[560px]">{serviceData.services[0].serviceDescription}</p>
+          <div className="flex flex-col md:flex-row justify-between mt-4">
+            <h3 className="tracking-[2px] text-2xl lg:text-5xl font-krona font-semibold mb-2">
+              {serviceData.services[0].serviceTitle}
+            </h3>
+            <p className="text-start md:text-end ms-0 md:ms-auto text-base max-w-[560px]">{serviceData.services[0].serviceDescription}</p>
             
-            </div>
           </div>
         </div>
         <div className="mt-10">
@@ -102,27 +101,5 @@ const ServicesSection = () => {
     </main>
   );
 };
-
-// export async function getStaticProps() {
-//   try {
-//     const serviceData = await client.fetch(SERVICE_QUERY);
-//     console.log("Service Data:", serviceData); // This should log the fetched data
-//     return {
-//       props: {
-//         serviceData: serviceData || null, // Pass `null` if no data
-//       },
-//       revalidate: 10, // Enable ISR
-//     };
-//   } catch (error) {
-//     console.error("Error fetching service data:", error);
-//     return {
-//       props: {
-//         serviceData: null, // Return `null` if fetching fails
-//       },
-//       revalidate: 10, // Enable ISR
-//     };
-//   }
-// }
-
 
 export default ServicesSection;

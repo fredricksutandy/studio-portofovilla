@@ -37,7 +37,7 @@ const AboutSection = () => {
             <Image src={aboutico} alt="Asterisk icon" width={48} height={48} className=""/>
             <h2 className="font-krona text-base md:text-lg text-primary font-medium leading-[100%!important]">{aboutData.title}</h2>
           </div>
-          <h3 className="font-montserrat text-3xl sm:text-4xl md:text-7xl font-semibold text-neutral-800 w-full md:w-7/12">{aboutData.subtitle}</h3>
+          <h3 className="font-montserrat text-3xl sm:text-4xl md:text-7xl font-bold text-neutral-800 w-full md:w-7/12">{aboutData.subtitle}</h3>
         </div>
 
         <p className="text-base md:text-xl text-neutral-600 flex flex-1 w-full md:w-7/12 ms-auto">{aboutData.aboutDescription}</p>

@@ -6,7 +6,7 @@ import Image from "next/image";
 import imageUrlBuilder from "@sanity/image-url";
 import Splide from "@splidejs/splide";
 import "@splidejs/splide/dist/css/splide.min.css";
-import { ChevronLeft, ImageCopy } from '@carbon/icons-react';
+import { ChevronLeft, ImageCopy, Close } from '@carbon/icons-react';
 
 import {
   Dialog,
@@ -43,7 +43,7 @@ const RoomImage: React.FC<RoomImageProps> = ({ image, gallery }) => {
   useEffect(() => {
     const splideInstance = new Splide(".splide", {
       type: "loop",
-      heightRatio: 0.5,
+      heightRatio: 0.7,
       pagination: false,
       speed: 800,
       easing: 'ease-in-out',
@@ -116,7 +116,7 @@ const RoomImage: React.FC<RoomImageProps> = ({ image, gallery }) => {
         onClose={closeModal}
         className="fixed inset-0 z-[999] flex items-start justify-center overflow-auto pt-0 lg:pt-6"
       >
-        <DialogBackdrop className="fixed inset-0 bg-black bg-opacity-50" />
+        <DialogBackdrop className="fixed inset-0 bg-black/50" />
         <DialogPanel className="relative bg-white px-8 pb-8 w-full max-w-[1296px] mx-auto rounded-lg">
           <div className="flex gap-3 items-center sticky top-0 lg:-top-6 py-4 md:py-6 z-50 bg-white">
           <button
@@ -156,12 +156,12 @@ const RoomImage: React.FC<RoomImageProps> = ({ image, gallery }) => {
         className="fixed inset-0 z-[1000] flex items-start justify-center"
       >
         <DialogBackdrop className="fixed inset-0 bg-black bg-opacity-70" />
-        <DialogPanel className="relative bg-neutral-600 p-6 w-full h-full mx-auto rounded-lg flex justify-center items-center flex-col">
+        <DialogPanel className="relative bg-neutral-600/80 p-6 w-full h-full mx-auto flex justify-center items-center flex-col" onClick={closeFullScreenModal}>
           <button
             onClick={closeFullScreenModal}
-            className="text-white rounded-full text-xl absolute left-6 top-6 px-6 pt-2 pb-3 hover:bg-neutral-700 transition-all flex justify-center items-center"
+            className="text-white rounded-full text-base absolute left-1/2 -translate-x-1/2 top-auto bottom-6 md:bottom-auto md:top-6 p-2 bg-red-800 transition-all flex gap-1 items-center font-montserrat"
           >
-            &times; Tutup
+            <Close width={20} height={20}/> 
           </button>
           {selectedImage && (
             <div className="relative">

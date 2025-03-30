@@ -10,6 +10,7 @@ import type { SanityDocument } from 'next-sanity';
 import palmLeaf from '../../public/palm-leaf-shadow.png';
 import activitiesIcon from '../../public/activities-ico.svg';
 import { ArrowRight, PanHorizontal, Time } from '@carbon/icons-react';
+import OtherActivitiesSection from "../../src/components/OtherActivities";
 
 
 import '../styles/custom-swiper.css';
@@ -181,6 +182,9 @@ const ActivitiesSplide = () => {
         <button ref={prevAttArrowRef} className="custom-arrow  less-top custom-arrow--prev opacity-50" />
         <button ref={nextAttArrowRef} className="custom-arrow  less-top custom-arrow--next" />
       </div>
+
+      <OtherActivitiesSection />
+
     </section>
   );
 };

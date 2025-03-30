@@ -29,9 +29,9 @@ const FaqSection = () => {
   return (
     <section className="flex justify-between max-w-[1296px] mx-auto bg-white px-4 md:px-6 py-20 md:py-[200px]" id="faq">
       <div className="flex flex-col w-full h-auto">
-        <Help size={36} className="text-primary" />
+        <Help size={36} className="text-primary relative" />
         <div className="flex flex-wrap justify-between w-full gap-10">
-          <h2 className="font-krona text-2xl lg:text-3xl text-primary w-full md:w-[calc(50%-20px)] font-semibold mt-4">
+          <h2 className="font-krona text-2xl lg:text-3xl text-primary w-full md:w-[calc(50%-20px)] font-semibold mt-4 md:sticky top-40 h-fit">
             {faqData.title}
           </h2>
           <div className="w-full md:w-[calc(50%-20px)]">

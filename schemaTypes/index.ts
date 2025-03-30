@@ -15,6 +15,7 @@ import { CTA } from "./ctaType";
 import { faq } from "./faqType";
 import { gallery } from "./gallery";
 import { activities } from "./activitiesType";
+import { otherActivities } from "./otherActivitiesType";
 import { sectionMetadata } from "./sectionMetadataType";
 import { modalPromoType } from "./modalPromoType";
 import { siteSettings } from "./siteSettingsType";
@@ -36,7 +37,8 @@ export const schemaTypes = [
     faq, 
     gallery, 
     CTA, 
-    activities, 
+    activities,
+    otherActivities, 
     modalPromoType,
     siteSettings,
 ]

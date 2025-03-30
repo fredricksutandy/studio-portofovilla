@@ -59,7 +59,7 @@ const CertificateAwardSection = () => {
               alt={cert.certificateName}
               width={600}
               height={600}
-              className="d-flex flex-1 minw-w-[100px] md:min-w-[150px]"
+              className="d-flex flex-1 min-w-[100px] md:min-w-[150px]"
             />
           ))}
         </div>

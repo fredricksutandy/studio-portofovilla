@@ -7,6 +7,9 @@ import type { SanityDocument } from "next-sanity";
 import Image from "next/image";
 import activitiesIcon from '../public/activities-ico.svg';
 import { ArrowRight, PanHorizontal, Time } from '@carbon/icons-react';
+import OtherActivitiesSection from "../src/components/OtherActivities";
+
+
 
 const builder = imageUrlBuilder(client);
 const urlFor = (source: any) => {
@@ -94,6 +97,9 @@ const ActivitiesSection = () => {
             </div>
         ))}
       </div>
+
+      <OtherActivitiesSection />
+
     </section>
   );
 };

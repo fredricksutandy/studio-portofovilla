@@ -37,7 +37,7 @@ export const trivia = defineType({
               name: 'number',
               title: 'Angka',
               type: 'string',
-              description: 'Angka yang merepresentasikan fakta (contoh: 100+)',
+              description: 'Angka yang merepresentasikan fakta (contoh: 4.5/5.0)',
               validation: (Rule) => Rule.required().error('Angka harus diisi'),
             }),
             defineField({

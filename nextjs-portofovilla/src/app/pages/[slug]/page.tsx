@@ -7,9 +7,14 @@ import WaLogo from '../../../../public/logos_whatsapp-icon.svg'
 import SectionNav from "../../../../components/common/SectionNavigation";
 import FooterSectionalttwo from "../../../../components/layout/Footeralttwo";
 import NavbarDetailSection from "../../../../components/layout/NavbarDetail";
+import ExpandableSection from "../../../../components/common/Expandable";
+import NavbarDetailSectionaltone from "../../../../components/layout/NavbarDetailaltone";
+import { PortableText } from "@portabletext/react";
+import CollapsibleCard from '../../../../components/common/CollapsibleCard';
 
 import RoomImage from "../../../../components/common/roomDetailGallery";
 import BookingSection from "../../../../components/common/BookingSection";
+import { Information } from "@carbon/icons-react";
 
 // Initialize the image builder
 const builder = imageUrlBuilder(client);
@@ -22,7 +27,10 @@ interface RoomData {
   roomName: string;
   guestsBooked?: number;
   description: string;
-  price?: number;
+  price: string;
+  priceRange: string;
+  promotionDetails: string;
+  priceDisclaimer: string;
   specifications?: { name: string; icon?: { url: string; lqip: string } }[];
   facilities?: { name: string; icon?: { url: string; lqip: string } }[];
   address?: string;
@@ -30,7 +38,7 @@ interface RoomData {
   checkIn?: string;
   checkOut?: string;
   rulesList?: string[];
-  disclaimer?: string;
+  policies?: string;
   extraAmenities?: string[];
   bookingMethod?: string[];
   image?: {
@@ -54,6 +62,9 @@ async function getRoomData(slug: string): Promise<RoomData | null> {
     guestsBooked,
     description,
     price,
+    priceRange,
+    promotionDetails,
+    priceDisclaimer,
     specifications[]{
       name,
       icon {
@@ -81,7 +92,10 @@ async function getRoomData(slug: string): Promise<RoomData | null> {
     checkIn,
     checkOut,
     rulesList,
-    disclaimer,
+    policies[] {
+        title,
+        description
+      },
     extraAmenities[]{
       name,
       price
@@ -166,7 +180,8 @@ export default async function RoomDetails({ params }: { params: { slug: string }
 
   return (
     <>
-    <NavbarDetailSection />
+    {/* <NavbarDetailSection /> */}
+    <NavbarDetailSectionaltone />
 
     {room.image && <RoomImage image={room.image} gallery={room.gallery || []} />}    
     <section className="bg-white relative max-w-[1296px] mx-auto font-montserrat px-4 pb-4">
@@ -178,9 +193,19 @@ export default async function RoomDetails({ params }: { params: { slug: string }
           <div>
           <p className="text-base font-semibold text-neutral-500 mb-2">{room.guestsBooked} tamu telah menginap disini</p>
 
-          <h1 className="font-krona text-2xl md:text-4xl font-bold mb-2">{room.roomName}</h1>
+          <h1 className="font-krona text-2xl md:text-4xl font-bold">{room.roomName}</h1>
 
           </div>
+          <CollapsibleCard
+  title="Promo Terbatas!"
+  content={room.promotionDetails}
+  bgColor="text-primary "
+  textSize="text-base"
+  fontWeight="font-semibold"
+  defaultState={true}
+  hideOnDesktop={true}
+/>
+
 
           <ul className="flex flex-wrap gap-6">
           {room.specifications?.map((specification: any, index: number) => {
@@ -200,7 +225,10 @@ export default async function RoomDetails({ params }: { params: { slug: string }
               );
             })}
           </ul>
-          <p className="text-sm md:text-base leading-relaxed text-neutral-500">{room.description}</p>
+          <ExpandableSection maxHeight="200px">
+            <p className="text-sm md:text-base leading-relaxed text-neutral-500 whitespace-pre-line">{room.description}</p>
+            
+          </ExpandableSection>
 
         </section>
 
@@ -215,8 +243,8 @@ export default async function RoomDetails({ params }: { params: { slug: string }
                     <img 
                     src={urlFor(facility.icon).url()} 
                     alt={facility.name} 
-                    width={26} 
-                    height={26} 
+                    width={24} 
+                    height={24} 
                     className="object-cover"
                   />
                   )}
@@ -226,33 +254,14 @@ export default async function RoomDetails({ params }: { params: { slug: string }
           </ul>
         </section>
 
-        <section id="lokasi" className="space-y-2 text-gray-700 pt-14 pb-14 border-b border-graymuted">
+        <section id="lokasi" className="space-y-2 pt-14 pb-14 border-b border-graymuted">
           <h2 className="text-lg md:text-2xl font-semibold mb-4">Lokasi</h2>
           <p className="text-sm md:text-base">{room.address}</p>
           <iframe src={room.gmapUrl} className="w-full border-0 h-[300px] md:h-[440px] lg:h-fill outline-hidden rounded" loading="lazy"></iframe>
         </section>
 
-        {/* Rules and Disclaimer Sections */}
-        <section id="aturan" className="text-gray-700 pt-14 pb-14 border-b border-graymuted">
-          <h2 className="text-lg md:text-2xl font-semibold mb-4">Aturan & info penting</h2>
-            <div className="flex gap-6 flex-wrap mb-6 text-sm md:text-base">
-              <p>Check-In : <span className="font-semibold">{room.checkIn} WIB</span> </p>
-              -
-              <p>Check-Out : <span className="font-semibold">{room.checkOut} WIB</span> </p>
-            </div>
-          
-          <ul className="list-decimal ps-10 mb-6">
-            {room.rulesList?.map((rule: string, index: number) => (
-              <li className="font-semibold text-sm md:text-lg text-black" key={index}>{rule}</li>
-            ))}
-          </ul>
-
-          <p className="text-red-700 text-sm md:text-base">{room.disclaimer}</p>
-        </section>
-
-
         {/* Extra Amenities Section */}
-        <section id="tambahan" className="pt-14 pb-14">
+        <section id="tambahan" className="pt-14 pb-14 border-b border-graymuted">
           <h2 className="text-lg md:text-2xl font-semibold mb-4">Tambahan</h2>
           <ul>
             {room.extraAmenities?.map((amenity: any, index: number) => (
@@ -273,18 +282,33 @@ export default async function RoomDetails({ params }: { params: { slug: string }
             ))}
           </ul>
         </section>
+
+        {/* Rules and Disclaimer Sections */}
+        <section id="aturan" className="pt-14 pb-0">
+          <h2 className="text-lg md:text-2xl font-semibold mb-4">Aturan & info penting</h2>
+            <div className="flex gap-6 flex-wrap mb-6 text-sm md:text-base">
+              <p>Check-In : <span className="font-semibold">{room.checkIn} WIB</span> </p>
+              -
+              <p>Check-Out : <span className="font-semibold">{room.checkOut} WIB</span> </p>
+            </div>
+          
+          <ul className="list-decimal ps-10 mb-6">
+            {room.rulesList?.map((rule: string, index: number) => (
+              <li className="font-semibold text-sm md:text-lg text-black" key={index}>{rule}</li>
+            ))}
+          </ul>
+
+        </section>
+
+
+        
       </section>
 
       <BookingSection 
         price={room.price}
-        cancellationPolicy={{
-          freeCancellationText: 'Free cancellation',
-          cancellationDeadline: 'H - 7 tanggal menginap',
-        }}
-        guestsOptions={[1, 2, 3, 4, 5]}
-        nightsOptions={[1, 2, 3, 4, 5]}
-        totalPrice="3.400.000"
-        limitedOfferText="Penawaran terbatas : potongan 10% untuk reservasi 3 malam"
+        priceRange={room.priceRange}
+        priceDisclaimer={room.priceDisclaimer}
+        limitedOfferText={room.promotionDetails}
         whatsappURL={"contactData.whatsappURL"}
         bookingMethods={room.bookingMethod}
       />
@@ -349,6 +373,31 @@ export default async function RoomDetails({ params }: { params: { slug: string }
         </div>
       </section> */}
   </section>
+  
+  <section className="pt-14 pb-20 max-w-[1296px] mx-auto px-4 font-montserrat" id="kebijakan">
+  <div className="flex items-center gap-2 mb-6">
+  <Information width={32} height={32} className="text-amber-500 mt-[1px]"/><h2 className="text-lg md:text-2xl font-semibold leading-[100%] text-amber-500">Penting untuk dibaca</h2>
+  </div>
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-8 gap-x-16  relative font-montserrat">
+  {room.policies?.map((policy, index) => (
+          <div key={index} className="">
+            <h3 className="text-lg font-semibold mb-2 text-neutral-800">{policy.title}</h3>
+            <PortableText className="whitespace-pre-line text-neutral-600 text-sm leading-relaxed" value={policy.description} />
+          </div>
+        ))}
+</div>
+  </section>
+
+  <CollapsibleCard
+  title="Disclaimer"
+  content={room.priceDisclaimer}
+  bgColor="bg-orange-50"
+  textSize="text-base"
+  fontWeight="font-semibold"
+  defaultState={true}
+  hideOnDesktop={true}
+/>
+  
   <FooterSectionalttwo />
 
     </>

@@ -33,8 +33,9 @@ const SectionNav = () => {
       <a href="#kamar" className={activeSection === "kamar" ? "text-secondary font-semibold w-fit whitespace-nowrap" : "font-semibold w-fit whitespace-nowrap text-neutral-600 transition-all hover:text-secondary"}>Tentang kamar</a>
       <a href="#fasilitas" className={activeSection === "fasilitas" ? "text-secondary font-semibold w-fit whitespace-nowrap" : "font-semibold w-fit whitespace-nowrap text-neutral-600 transition-all hover:text-secondary"}>Fasilitas</a>
       <a href="#lokasi" className={activeSection === "lokasi" ? "text-secondary font-semibold w-fit whitespace-nowrap" : "font-semibold w-fit whitespace-nowrap text-neutral-600 transition-all hover:text-secondary"}>Lokasi</a>
-      <a href="#aturan" className={activeSection === "aturan" ? "text-secondary font-semibold w-fit whitespace-nowrap" : "font-semibold w-fit whitespace-nowrap text-neutral-600 transition-all hover:text-secondary"}>Aturan</a>
       <a href="#tambahan" className={activeSection === "tambahan" ? "text-secondary font-semibold w-fit whitespace-nowrap" : "font-semibold w-fit whitespace-nowrap text-neutral-600 transition-all hover:text-secondary"}>Tambahan</a>
+      <a href="#aturan" className={activeSection === "aturan" ? "text-secondary font-semibold w-fit whitespace-nowrap" : "font-semibold w-fit whitespace-nowrap text-neutral-600 transition-all hover:text-secondary"}>Aturan</a>
+      <a href="#kebijakan" className={activeSection === "kebijakan" ? "text-secondary font-semibold w-fit whitespace-nowrap" : "font-semibold w-fit whitespace-nowrap text-neutral-600 transition-all hover:text-secondary"}>Kebijakan</a>
       </div>
     </section>
   );

@@ -7,6 +7,8 @@ import roomsIco from '../public/rooms-ico.svg'
 import { ArrowRight } from '@carbon/icons-react';
 import Link from "next/link";
 import imageUrlBuilder from '@sanity/image-url';
+import { summarizeText } from "../components/common/summarizeText";
+
 
 const builder = imageUrlBuilder(client);
 const urlFor = (source: any) => builder.image(source).auto('format').fit('max');
@@ -137,7 +139,12 @@ const RoomSection = () => {
                   })}
                 </ul>
       <div>
-      <p className="text-gray-700 text-base max-w-[560px] mb-6">{room.description}</p>
+      {/* <p className="text-gray-700 text-base max-w-[560px] mb-6">{room.description}</p> */}
+      <p className="text-gray-700 text-base max-w-[560px] mb-6">
+      {summarizeText(room.description)}
+    </p>
+
+      {/* {summarizeText(description, 200)} */}
       {/* <ul className="mt-2 text-gray-500 text-sm flex flex-wrap gap-2 max-w-[420px]">
                 {room.facilities?.map((facility: string, index: number) => (
                   <li key={index}>• {facility}</li>
@@ -146,7 +153,7 @@ const RoomSection = () => {
       </div>
         
       <Link
-      href={`/room/${room.slug.current}`}
+      href={`/pages/${room.slug.current}`}
         passHref className="flex items-center transition-all hover:translate-x-1 gap-2 border border-primary w-fit py-4 px-6">
         <p className="block m-0 text-primary hover:underline">
           View Details

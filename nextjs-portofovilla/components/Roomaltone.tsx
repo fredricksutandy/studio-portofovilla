@@ -7,6 +7,7 @@ import roomsIco from '../public/rooms-ico.svg';
 import { ArrowRight } from '@carbon/icons-react';
 import Link from "next/link";
 import imageUrlBuilder from '@sanity/image-url';
+import { summarizeText } from "../components/common/summarizeText";
 
 const builder = imageUrlBuilder(client);
 const urlFor = (source: any) => builder.image(source).auto('format').fit('max');
@@ -93,7 +94,10 @@ const RoomSection = () => {
                 </h2>
               </div>
               <h3 className={`font-montserrat text-2xl md:text-4xl font-bold text-black mb-2`}>{firstRoom.roomName}</h3>
-              <p className={`font-montserrat text-base text-black mb-6`}>{firstRoom.description}</p>
+              {/* <p className={`font-montserrat text-base text-black mb-6`}>{firstRoom.description}</p> */}
+              <p className="text-gray-700 text-base max-w-[560px] mb-6">
+                    {summarizeText(firstRoom.description)}
+                  </p>
               {/* <ul className="flex flex-wrap gap-2 items-center justify-start my-4">
                 {firstRoom.specifications?.slice(0, 4).map((specification: any, index: number) => (
                   <li key={index} className="w-fit rounded flex items-start gap-2 p-2 border border-graymuted">

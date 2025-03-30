@@ -14,6 +14,7 @@ import FaqSection from "../../components/Faq";
 
 import Contact from "../../components/Contact";
 import MultipleContact from "../../components/MultipleContact";
+import MultipleContactnoemail from "../../components/MultipleContactnoemail";
 
 import TriviaSectionaltone from "../../components/Triviaaltone";
 import TriviaSectionalttwo from "../../components/Triviaalttwo";
@@ -24,6 +25,8 @@ import FacilitySectionaltone from "../../components/Facilityaltone";
 import ActivitiesSection from "../../components/Activities";
 import ActivitiesSectionaltone from "../components/Activitiesaltone";
 import ActivitiesSectionalttwo from "../../components/Activitiesalttwo";
+
+import OtherActivitiesSection from "../components/OtherActivities";
 
 import TestimonyVideo from "../components/TestimonialVideo";
 import TestimonyVideoAltone from "../components/TestimonialVideoAltone";
@@ -40,9 +43,11 @@ import FooterSectionaltone from "../../components/layout/Footeraltone";
 import FooterSectionalttwo from "../../components/layout/Footeralttwo";
 import FooterSectionaltthree from "../../components/layout/Footeraltthree";
 
+import Navbarnoroom from "../../components/layout/Navbarnoroom";
 import NavbarSectionaltone from "../../components/layout/Navbaraltone";
 import NavbarSectionalttwo from "../../components/layout/Navbaralttwo";
 import NavbarSectionaltthree from "../../components/layout/Navbaraltthree";
+import NavbarSectionaltroomone from "../../components/layout/Navbaraltroomone";
 
 import Modal from "../../components/common/Modal";
 
@@ -53,6 +58,7 @@ import Gallery from "../components/Gallery";
 
 import ServicesSectioninf from "@/components/ServicesAltInf";
 import ServicesSection from "@/components/Services";
+import ServicesHorizontal from "@/components/ServicesHorizontal";
 import ServicesOneSection from "../../components/ServicesOne";
 import ServicesTwoSection from "../../components/ServicesTwo";
 
@@ -60,9 +66,12 @@ export default function IndexPage() {
 
   return (
     <main className={` bg-white relative font-montserrat`}>
-      <NavbarSectionaltone />
+      {/* <Navbarnoroom /> */}
+      {/* <NavbarSectionaltone /> */}
       {/* <NavbarSectionalttwo /> */}
       {/* <NavbarSectionaltthree /> */}
+
+      <NavbarSectionaltroomone />
 
       {/* <FloatingButton /> */}
       <FloatingButtonExpand />
@@ -70,9 +79,9 @@ export default function IndexPage() {
       <Heroaltone />
 
       {/* <RoomSectionaltfour /> GAUSA PAKE< DESAIN JELEKKKKKK*/}
-      <RoomSectionaltthree />
-      <RoomSectionalttwo />
-      <RoomSectionaltone />
+      {/* <RoomSectionaltthree /> */}
+      {/* <RoomSectionalttwo /> */}
+      {/* <RoomSectionaltone /> */}
       <Room />
 
       {/* <AboutSectionaltone /> */}
@@ -87,18 +96,22 @@ export default function IndexPage() {
 
       {/* <FacilitySectionaltone /> */}
 
-      <ServicesSectioninf />
-      <ServicesSection />
-      <ServicesOneSection />
-      <ServicesTwoSection />
+      {/* <ServicesSectioninf /> */}
+      {/* <ServicesSection /> */}
+      <ServicesHorizontal />
+      
+      {/* <ServicesOneSection /> */}
+      {/* <ServicesTwoSection /> */}
 
       {/* <ActivitiesSection jelek uga /> */}
       <ActivitiesSectionaltone />
-      <ActivitiesSectionalttwo />
+      {/* <ActivitiesSectionalttwo /> */}
+
+      {/* <OtherActivitiesSection /> */}
 
       {/* <TestimonyVideo /> */}
-      {/* <TestimonyVideoAltone /> */}
-      <TestimonyVideoAltthree />
+      <TestimonyVideoAltone />
+      {/* <TestimonyVideoAltthree /> */}
 
       <FaqSection />
 
@@ -108,7 +121,8 @@ export default function IndexPage() {
       <CTASectionaltone />
 
       {/* <Contact /> */}
-      <MultipleContact />
+      {/* <MultipleContact /> */}
+      <MultipleContactnoemail />
 
       {/* <FooterSection /> */}
       {/* <FooterSectionaltone /> */}

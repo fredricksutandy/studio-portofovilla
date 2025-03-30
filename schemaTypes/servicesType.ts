@@ -61,6 +61,12 @@ export const service = defineType({
               validation: (rule) => rule.required().error('Deskripsi layanan wajib diisi.'),
             }),
             defineField({
+              name: 'servicePrice',
+              title: 'Harga Layanan',
+              type: 'string',
+              description: 'Tulis detail harga layanan, termasuk biaya tambahan jika ada. Bisa dikosongkan jika layanan tersedia gratis.',
+            }),
+            defineField({
               name: 'serviceLink',
               title: 'Tautan Informasi Layanan',
               type: 'url',

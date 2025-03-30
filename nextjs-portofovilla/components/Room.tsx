@@ -8,6 +8,8 @@ import Link from "next/link";
 import imageUrlBuilder from '@sanity/image-url';
 import '../src/styles/arrow-animation.css';
 import { ArrowRight } from '@carbon/icons-react';
+import { summarizeText } from "../components/common/summarizeText";
+
 
 const builder = imageUrlBuilder(client);
 const urlFor = (source: any) => builder.image(source).auto('format').fit('max');
@@ -124,25 +126,13 @@ const RoomSection = () => {
                 </ul>
               <h2 className={`font-krona text-xl md:text-2xl font-semibold text-neutral-800 mb-2 under`}>{room.roomName}</h2>
               <p className={`text-neutral-500 text-xl font-semibold mb-4`}>IDR {room.price} / malam</p>
-              <p className="text-gray-700 text-sm mb-5">{room.description}</p>
               
-              {/* <ul className="mt-2 text-gray-500 text-sm">
-                {room.facilities?.map((facility: string, index: number) => (
-                  <li key={index}>• {facility}</li>
-                ))}
-              </ul> */}
-              {/* Displaying room image */}
+              <p className="text-gray-700 text-base max-w-[560px] mb-6">
+                    {summarizeText(room.description)}
+                  </p>
               
-              {/* <Link
-              href={`pages/${room.slug.current}`} prefetch={true}
-                className="flex items-center mt-4 transition-all hover:translate-x-1 gap-2 border border-primary justify-center w-full lg:w-fit py-4 px-6">
-                <p className="block m-0 text-primary hover:underline">
-                  View Details
-                </p>
-                <Image src={arrowRight} alt="guest icon" width={16} height={16} className="invert"/>
-              </Link> */}
               <Link
-                href={`/room/${room.slug.current}`}
+                href={`/pages/${room.slug.current}`}
                 passHref className="bg-primary flex text-white items-center justify-center transition-all duration-500 ease-in-out hover:translate-x-1 gap-2 w-full md:w-fit px-6 py-4 mb-4 rounded-lg hover:underline hover-rtw group">
                 <p className="block m-0 text-base font-medium">
                   View Details

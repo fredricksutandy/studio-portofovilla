@@ -26,6 +26,7 @@ const SERVICE_QUERY = `*[_type == "service"][0]{
     serviceDescription,
     serviceImage,
     serviceLink,
+    servicePrice,
   }
 }`;
 
@@ -68,25 +69,38 @@ const ServicesSection = () => {
           <div
             key={index}
             className={`w-full px-0 bg-white sticky top-0 z-[${index}] ${
-              index === serviceData.services.length - 1 ? "pb-10" : "pb-[184px]"
+              index === serviceData.services.length - 1 ? "pb-4" : "pb-[184px]"
             }`}
           >
-            <Image
-              src={urlFor(service.serviceImage)}
-              alt={service.serviceTitle}
-              width={1320}
-              height={620}
-              className="w-full h-[540px] object-cover rounded"
-            />
+            
 
-            <div className="flex justify-between gap-4 mt-4 md:mt-6">
+            <div className="relative">
+              <Image
+                src={urlFor(service.serviceImage)}
+                alt={service.serviceTitle}
+                width={1320}
+                height={620}
+                className="w-full h-[400px] md:h-[540px] object-cover rounded"
+              />
+              <p className={`px-3 py-2 rounded text-lg font-semibold w-fit absolute bottom-4 left-4
+                  ${service.servicePrice && service.servicePrice.trim() !== "" 
+                    ? "bg-gray-200 text-gray-800" 
+                    : "bg-green-200 text-green-800"}
+                `}>
+                             {service.servicePrice && service.servicePrice.trim() !== "" 
+                  ? "+ " + service.servicePrice 
+                  : "Gratis!"}
+                </p>
+            </div>
+
+            <div className="flex flex-col md:flex-row justify-between gap-2 mt-4 md:mt-6">
               <div>
-                <h3 className="tracking-[2px] text-2xl lg:text-5xl font-krona font-semibold mb-4">
+                <h3 className="tracking-[2px] text-2xl lg:text-5xl font-krona font-semibold">
                   {service.serviceTitle}
                 </h3>
               </div>
-              <div className="flex items-end flex-col">
-              <p className="text-end ms-auto text-base max-w-[560px]">{service.serviceDescription}</p>
+              <div className="flex items-end flex-col gap-2">
+              <p className="text-start md:text-end ms-0 me-auto md:ms-auto text-base max-w-[560px]">{service.serviceDescription}</p>
               {service.serviceLink && service.serviceLink.trim() !== "" && (
                 <Link
                   href={service.serviceLink}

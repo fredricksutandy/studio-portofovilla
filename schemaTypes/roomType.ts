@@ -25,15 +25,45 @@ export const room = defineType({
       title: 'Deskripsi',
       type: 'text',
       description: 'Deskripsi lengkap tentang kamar, fasilitas, dan kelebihannya.',
-      validation: (Rule) => Rule.required().min(10).max(500).error('Deskripsi harus antara 10-500 karakter.'),
+      validation: (Rule) => Rule.required().min(10).error('Deskripsi harus antara 10-500 karakter.'),
     }),
     defineField({
       name: 'price',
       title: 'Harga',
       type: 'string',
-      description: 'Harga per malam atau tarif kamar.',
-      validation: (Rule) => Rule.required().regex(/^\d+$/, { name: 'Harga', invert: false }).error('Harga harus berupa angka.'),
+      description: 'Harga per malam atau tarif kamar, bisa menjadi harga rata-rata jika harga kamar bergantung kepada hari atau musim. Pastikan penulisan harga seperti format berikut: Rp.850.000',
+      validation: (Rule) => 
+        Rule.required()
+      .regex(/^Rp\.?\s?\d+(\.\d+)?$/, { name: 'Harga', invert: false })
+      .error('Harga harus dimulai dengan "Rp" dan berupa angka. Gunakan format seperti "Rp.850.000".'),      
     }),
+    defineField({
+      name: 'priceRange',
+      title: 'Rentang Harga',
+      type: 'string',
+      description: "Rentang harga, jika harga kamar/villa anda bergantung kepada tanggal dan musim. penulsan dalam format: 'Rp.650.000 - Rp.850.000'.",
+      validation: (Rule) => 
+        Rule
+          .regex(/^Rp\.\d{1,3}(\.\d{3})? - Rp\.\d{1,3}(\.\d{3})?$/, {
+            name: "price range format",
+          })
+          .error("Gunakan format yang benar, contoh: 'Rp.650.000 - Rp.850.000'."),      
+    }),
+
+    defineField({
+      name: 'promotionDetails',
+      title: 'Detail Promo',
+      type: 'string',
+      description: 'Masukkan deskripsi promo yang sedang berlangsung, termasuk periode dan ketentuan jika ada. (Promo disarankan pendek dan tidak banyak text)'
+    }),
+    defineField({
+      name: 'priceDisclaimer',
+      title: 'Disclaimer harga',
+      type: 'text',
+      description: 'Berikan penjelasan mengenai perubahan harga, kebijakan platform, serta ketentuan hukum yang berlaku untuk menghindari complain dan Kesalahpahaman.',
+    }),
+    
+
     defineField({
       name: 'guestsBooked',
       title: 'Jumlah Reservasi',
@@ -144,11 +174,39 @@ export const room = defineType({
       description: 'Aturan-aturan khusus untuk kamar yang harus diikuti oleh pengunjung.',
     }),
     defineField({
-      name: 'disclaimer',
-      title: 'Penafian',
-      type: 'text',
-      description: 'Tambahkan penafian atau kebijakan tambahan jika diperlukan.',
+      name: "policies",
+      title: "Kebijakan & Ketentuan",
+      type: "array",
+      description: "Tambahkan kebijakan & ketentuan jika diperlukan.",
+      of: [
+        {
+          type: "object",
+          fields: [
+            {
+              name: "title",
+              title: "Judul",
+              type: "string",
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: "description",
+              title: "Deskripsi",
+              type: "array", // Change text to block content
+              of: [
+                {
+                  type: "block",
+                  styles: [], // ❌ Removes all heading options
+                  lists: [], // ❌ Removes bullet & numbered lists
+                },
+              ],
+              validation: (Rule) => Rule.required(),
+            },
+          ],
+        },
+      ],
     }),
+
+    
 
     // Extra Amenities
     defineField({

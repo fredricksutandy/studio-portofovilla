@@ -64,10 +64,11 @@ const TestimonySplide = () => {
       gap: '16px',
       speed: 500,
       perMove: 1,
+      autoHeight: true,
       arrows: false,
       pagination: false,
       breakpoints: {
-        768: { perPage: 1 },
+        768: { perPage: 1, perMove: 1 },
         1024: { perPage: 2 },
       },
     }).mount();
@@ -116,7 +117,7 @@ const TestimonySplide = () => {
       <div className="max-w-[1296px] block m-auto">
 
         <div className="flex justify-between flex-col items-end md:flex-row  mb-8">
-          <div>
+          <div className='w-full'>
             <div className="flex flex-row items-center gap-2 mb-2">
               <Image src={testimony} alt="testimony icon" width={80} height={64} className="w-16 mb-2" />
               <h2 className="font-krona text-base md:text-lg text-primary font-medium leading-[100%!important]">{testimonyData.title}</h2>
@@ -151,7 +152,7 @@ const TestimonySplide = () => {
           <ul className="splide__list">
             {testimonyData.testimonies?.map((testimony: any, index: number) => (
               <li className="splide__slide" key={index}>
-                <div className="flex flex-col min-h-[380px] rounded bg-white border border-[#d9d9d9] p-6 justify-between gap-2 transition-all">
+                <div className="flex flex-col min-h-[380px] h-full rounded bg-white border border-[#d9d9d9] p-6 justify-between gap-2 transition-all">
                   
                   {/* <div className="flex gap-1">
                     {Array(testimony.testimonyRating || 0)
@@ -161,38 +162,38 @@ const TestimonySplide = () => {
                       ))}
                   </div> */}
 
-              <div  className="flex flex-col items-start text-center w-full"
+              <div  className="flex flex-col items-start text-start w-full"
               >
                 <div className="flex gap-2 items-center">
-                <p className="text-primary text-lg font-semibold">{testimony.testimonyRating}</p>
-                <div className="relative h-[16px] w-fit">
-                <Image
-                  src={starTemplateWhite}
-                  alt="{platform.platformName}"
-                  width={300}
-                  height={300}
-                  className="w-[80px] h-[16px] relative z-30 bg-contain bg-no-repeat top-0"
-                />
-                <Image
-                  src={starBackhold}
-                  alt="{platform.platformName}"
-                  width={300}
-                  height={300}
-                  className="w-[80px] h-[16px] absolute z-10 bg-contain bg-no-repeat top-0 left-0"
-                />
-                  <div
-                    className="absolute top-0 left-0 h-full bg-green-700 z-20"
-                    style={{
-                      width: `${(parseFloat(testimony.testimonyRating) / 5) * 100}%`,
-                    }}
-                  ></div>
-                </div>
+                  <p className="text-primary text-lg font-semibold">{testimony.testimonyRating}</p>
+                  <div className="relative h-[16px] w-fit">
+                    <Image
+                      src={starTemplateWhite}
+                      alt="{platform.platformName}"
+                      width={300}
+                      height={300}
+                      className="w-[80px] h-[16px] relative z-30 bg-contain bg-no-repeat top-0"
+                    />
+                    <Image
+                      src={starBackhold}
+                      alt="{platform.platformName}"
+                      width={300}
+                      height={300}
+                      className="w-[80px] h-[16px] absolute z-10 bg-contain bg-no-repeat top-0 left-0"
+                    />
+                      <div
+                        className="absolute top-0 left-0 h-full bg-green-700 z-20"
+                        style={{
+                          width: `${(parseFloat(testimony.testimonyRating) / 5) * 100}%`,
+                        }}
+                      ></div>
+                    </div>
                 </div>
                 <p className="text-primary text-2xl font-semibold mt-4 mb-4">
                     "{testimony.testimonyHighlight}"
                   </p>
                   
-                  <p className="text-black text-lg text-start">{testimony.testimony}</p>
+                  <p className="text-black text-start">{testimony.testimony}</p>
                 
                 </div>
                   <div className="flex items-center gap-4">

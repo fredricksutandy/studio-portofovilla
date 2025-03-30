@@ -25,6 +25,7 @@ const SERVICE_QUERY = `*[_type == "service"][0]{
     serviceDescription,
     serviceImage,
     serviceLink,
+    servicePrice,
   },
   serviceContact
 }`;
@@ -113,12 +114,23 @@ const ServiceSection = () => {
                 alt={service.serviceTitle}
                 width={1320}
                 height={640}
-                className={`w-full ${imageHeightClass} object-cover`}
+                className={`w-full ${imageHeightClass} object-cover rounded`}
               />
               <div className="mt-4">
-                <h3 className="tracking-wider text-lg lg:text-xl font-semibold text-neutral-400 mb-2">
+              <div className="flex flex-wrap gap-2 items-center">
+              <p className={`px-3 py-2 rounded-lg w-fit text-sm font-medium h-fit mb-2
+                  ${service.servicePrice && service.servicePrice.trim() !== "" 
+                    ? "bg-gray-200 text-gray-800" 
+                    : "bg-green-100 text-green-700"}
+                  `}>
+                            {service.servicePrice && service.servicePrice.trim() !== "" 
+                  ? "+ " + service.servicePrice 
+                  : "Gratis!"}
+                </p>
+                <h3 className="tracking-wider text-lg lg:text-xl font-medium text-secondary mb-2">
                   {service.serviceTitle}
                 </h3>
+              </div>
                 <p className="font-krona text-xl lg:text-2xl mb-2">{service.serviceTagline}</p>
                 <p className="text-start text-sm md:text-base max-w-[580px] mb-4">{service.serviceDescription}</p>
                 {service.serviceLink && service.serviceLink.trim() !== "" && (
