@@ -28,7 +28,7 @@ const SectionNav = () => {
   }, []);
 
   return (
-    <section className="top-0 sticky w-full max-w-[1296px] h-fit z-40 mx-auto bg-white border-b border-graymuted overflow-auto">
+    <section className="top-0 sticky w-full max-w-[1296px] h-fit z-50 mx-auto bg-white border-b border-graymuted overflow-auto">
       <div className="flex gap-6 p-4 ps-0 text-sm md:text-base">
       <a href="#kamar" className={activeSection === "kamar" ? "text-secondary font-semibold w-fit whitespace-nowrap" : "font-semibold w-fit whitespace-nowrap text-neutral-600 transition-all hover:text-secondary"}>Tentang kamar</a>
       <a href="#fasilitas" className={activeSection === "fasilitas" ? "text-secondary font-semibold w-fit whitespace-nowrap" : "font-semibold w-fit whitespace-nowrap text-neutral-600 transition-all hover:text-secondary"}>Fasilitas</a>

@@ -79,32 +79,20 @@ const ServicesSection = () => {
               />
 
               <div className="flex flex-col md:flex-row gap-2 md:gap-4 flex-wrap items-start md:items-center">
-              <h3 className="tracking-[2px] text-xl max-w-md lg:text-2xl font-krona font-semibold mb-0 md:mb-2">
-                {service.serviceTitle}
-              </h3>
-              <p className={`px-3 py-2 rounded-lg w-fit text-sm font-medium h-fit mb-4 md:mb-2
-  ${service.servicePrice && service.servicePrice.trim() !== "" 
-    ? "bg-gray-200 text-gray-800" 
-    : "bg-green-200 text-green-800"}
-`}>
-             {service.servicePrice && service.servicePrice.trim() !== "" 
-  ? "+ " + service.servicePrice 
-  : "Gratis!"}
-            </p>
+                <h3 className="tracking-[2px] text-xl max-w-md lg:text-2xl font-krona font-semibold mb-0 md:mb-2">
+                  {service.serviceTitle}
+                </h3>
+                <p className={`px-3 py-2 rounded-lg w-fit text-sm font-medium h-fit mb-4 md:mb-2
+                  ${service.servicePrice && service.servicePrice.trim() !== "" 
+                    ? "bg-gray-200 text-gray-800" 
+                    : "bg-green-200 text-green-800"}
+                `}>
+                            {service.servicePrice && service.servicePrice.trim() !== "" 
+                  ? "+ " + service.servicePrice 
+                  : "Gratis!"}
+                </p>
               </div>
               <p className="text-base mb-4">{service.serviceDescription}</p>
-
-                {/* <h3 className="font-krona tracking-wider text-lg text-neutral-400 mb-2">
-                  {service.serviceTitle}
-                </h3>
-                <p className="font-montserrat font-bold text-xl lg:text-3xl mb-2">{service.serviceTagline}</p>
-                <p className="text-base mb-6">{service.serviceDescription}</p> */}
-{/* <p className="font-krona tracking-wider text-lg text-neutral-400 mb-1">{service.serviceTagline}</p>
-<h3 className=" font-montserrat font-bold text-xl lg:text-3xl mb-2">
-                  {service.serviceTitle}
-                </h3>
-                
-                <p className="text-base mb-6">{service.serviceDescription}</p> */}
 
               {service.serviceLink && service.serviceLink.trim() !== "" && (
                 <Link

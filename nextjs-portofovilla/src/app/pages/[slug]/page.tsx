@@ -196,15 +196,17 @@ export default async function RoomDetails({ params }: { params: { slug: string }
           <h1 className="font-krona text-2xl md:text-4xl font-bold">{room.roomName}</h1>
 
           </div>
+          {room.promotionDetails && (
           <CollapsibleCard
-  title="Promo Terbatas!"
-  content={room.promotionDetails}
-  bgColor="text-primary "
-  textSize="text-base"
-  fontWeight="font-semibold"
-  defaultState={true}
-  hideOnDesktop={true}
-/>
+            title="Promo Terbatas!"
+            content={room.promotionDetails}
+            bgColor="text-primary "
+            textSize="text-base"
+            fontWeight="font-semibold"
+            defaultState={true}
+            hideOnDesktop={true}
+          />
+          )}
 
 
           <ul className="flex flex-wrap gap-6">
@@ -375,19 +377,20 @@ export default async function RoomDetails({ params }: { params: { slug: string }
   </section>
   
   <section className="pt-14 pb-20 max-w-[1296px] mx-auto px-4 font-montserrat" id="kebijakan">
-  <div className="flex items-center gap-2 mb-6">
-  <Information width={32} height={32} className="text-amber-500 mt-[1px]"/><h2 className="text-lg md:text-2xl font-semibold leading-[100%] text-amber-500">Penting untuk dibaca</h2>
-  </div>
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-8 gap-x-16  relative font-montserrat">
-  {room.policies?.map((policy, index) => (
-          <div key={index} className="">
-            <h3 className="text-lg font-semibold mb-2 text-neutral-800">{policy.title}</h3>
-            <PortableText className="whitespace-pre-line text-neutral-600 text-sm leading-relaxed" value={policy.description} />
-          </div>
-        ))}
-</div>
+    <div className="flex items-center gap-2 mb-6">
+      <Information width={32} height={32} className="text-amber-500 mt-[1px]"/><h2 className="text-lg md:text-2xl font-semibold leading-[100%] text-amber-500">Penting untuk dibaca</h2>
+    </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-8 gap-x-16  relative font-montserrat">
+      {room.policies?.map((policy, index) => (
+        <div key={index} className="">
+          <h3 className="text-lg font-semibold mb-2 text-black">{index + 1}. {policy.title}</h3>
+          <PortableText className="whitespace-pre-line text-neutral-600 text-sm leading-relaxed" value={policy.description} />
+        </div>
+      ))}
+    </div>
   </section>
 
+  {room.priceDisclaimer && (
   <CollapsibleCard
   title="Disclaimer"
   content={room.priceDisclaimer}
@@ -397,6 +400,7 @@ export default async function RoomDetails({ params }: { params: { slug: string }
   defaultState={true}
   hideOnDesktop={true}
 />
+  )}
   
   <FooterSectionalttwo />
 

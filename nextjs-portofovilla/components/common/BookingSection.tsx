@@ -39,7 +39,7 @@ const BookingSection: React.FC<BookingSectionProps> = ({
   };
 
   return (
-    <section className="bg-white flex flex-col gap-3 mb-0 w-full left-0 fixed bottom-0 top-auto md:bottom-auto md:w-[calc(32%-16px)] md:sticky md:top-[80px] h-fit mt-8 md:mb-4 z-50">
+    <section className="bg-white flex flex-col gap-3 mb-0 w-full left-0 fixed bottom-0 top-auto md:bottom-auto md:w-[calc(32%-16px)] md:sticky md:top-[80px] h-fit mt-8 md:mb-4 z-40">
       {/* <div className="hidden w-full md:block text-sm font-medium text-white mt-2 bg-gradient-to-r from-[#4caf50] to-[#1b691f] p-4 rounded-lg mx-auto mb-0">
       <div 
         className="flex gap-2 items-center text-base font-semibold justify-between cursor-pointer"
@@ -58,7 +58,7 @@ const BookingSection: React.FC<BookingSectionProps> = ({
         </p>
       )}
     </div> */}
-
+{limitedOfferText && (
 <CollapsibleCard
   title="Promo Terbatas!"
   content={limitedOfferText}
@@ -68,6 +68,7 @@ const BookingSection: React.FC<BookingSectionProps> = ({
   defaultState={true}
   hideOnMobile={true}
 />
+)}
 
 
       <div className='rounded-0 border border-graymuted md:rounded-xl p-4 md:p-5'>
@@ -255,7 +256,7 @@ const BookingSection: React.FC<BookingSectionProps> = ({
           <p className="text-sm font-normal mt-2">Harga dapat berubah sewaktu-waktu sesuai kebijakan platform, permintaan musiman, dan faktor lainnya. Rentang harga diambil dari berbagai sumber, termasuk OTA, harga langsung villa, dan promosi yang berlaku.</p>
         )}
       </div> */}
-
+{priceDisclaimer && (
 <CollapsibleCard
   title="Disclaimer"
   content={priceDisclaimer}
@@ -264,6 +265,7 @@ const BookingSection: React.FC<BookingSectionProps> = ({
   defaultState={true}
   hideOnMobile={true}
 />
+)}
 
       
     </section>

@@ -129,7 +129,7 @@ export default function IndexPage() {
       <FooterSectionalttwo />
       <FooterSectionaltthree />
 
-      <Modal />
+      {/* <Modal /> */}
     </main>
   );
 }
