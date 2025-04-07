@@ -37,7 +37,10 @@ const GalleryPage = () => {
   return (
     <section className="max-w-full mx-auto bg-white py-10 md:py-[144px] px-4 md:px-6 overflow-hidden relative" id="gallery">
 
-      <div className="w-full px-4 flex justify-between items-end flex-wrap mx-auto max-w-[1296px] mb-10">
+      
+      <SplideComponent data={swiperData1} autoScrollSpeed={0.3} />
+      <SplideComponent data={swiperData2} autoScrollSpeed={0.3} reverse={true} />
+<div className="w-full px-4 flex justify-between items-end flex-wrap mx-auto max-w-[1296px] mt-10">
         <div className='mb-4 md:mb-0 mx-auto md:mx-0'>
           <h2 className="text-center md:text-start font-krona text-2xl lg:text-4xl text-primary font-semibold mb-2">
             {galleryData.title}
@@ -52,9 +55,6 @@ const GalleryPage = () => {
           type="white" // or "green"
           iconType={InstagramIcon.src} radius={'lg'} width={'fit'} displayMobile={true} displayDesktop={true}/>
       </div>
-      <SplideComponent data={swiperData1} autoScrollSpeed={0.3} />
-      <SplideComponent data={swiperData2} autoScrollSpeed={0.3} reverse={true} />
-
     </section>
   );
 };

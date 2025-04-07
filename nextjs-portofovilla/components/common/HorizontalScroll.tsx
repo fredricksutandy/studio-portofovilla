@@ -95,7 +95,7 @@ const HorizontalScroll = ({ items = [] }: HorizontalScrollProps) => {
   const setupGSAP = () => {
     if (!triggerRef.current || !sectionRef.current || cardWidth === 0) return;
 
-    const totalWidth = items.length * cardWidth;
+    const totalWidth = (items.length + 1) * cardWidth;
     const totalDistance = totalWidth - window.innerWidth;
     sectionRef.current.style.width = `${totalWidth}px`;
 
@@ -108,7 +108,7 @@ const HorizontalScroll = ({ items = [] }: HorizontalScrollProps) => {
         scrollTrigger: {
           trigger: triggerRef.current,
           start: "top top",
-          end: `+=${items.length * cardWidth}px`,
+          end: `+=${(items.length + 1) * cardWidth}px`,
           scrub: 0.6,
           pin: true,
           anticipatePin: 1,
@@ -172,6 +172,11 @@ const HorizontalScroll = ({ items = [] }: HorizontalScrollProps) => {
               )}
             </div>
         ))}
+        <div className="w-screen md:w-full max-w-[600px] md:px-8 px-4 flex-shrink-0 flex flex-col rounded-lg self-stretch bg-primary text-white cursor-pointer">
+          <div className="flex items-center justify-center h-full">
+            <p className="text-lg font-medium">Explore More</p>
+          </div>
+        </div>
       </div>
     </section>
   );
