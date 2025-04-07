@@ -110,33 +110,59 @@ export const room = defineType({
       name: 'facilities',
       title: 'Fasilitas',
       type: 'array',
+      description: 'Kategori fasilitas kamar seperti Bedroom, Bathroom, Kitchen, dll, masing-masing dengan daftar item di dalamnya.',
       of: [
         {
           type: 'object',
+          title: 'Kategori Fasilitas',
           fields: [
             defineField({
-              name: 'name',
-              title: 'Nama Fasilitas',
+              name: 'category',
+              title: 'Kategori',
               type: 'string',
-              description: 'Nama fasilitas yang tersedia di kamar.',
+              description: 'Kategori fasilitas seperti Bedroom, Bathroom, Kitchen, dll.',
+              validation: (Rule) => Rule.required().error('Kategori fasilitas wajib diisi'),
             }),
             defineField({
-              name: 'icon',
-              title: 'Ikon/Gambar',
-              type: 'image',
-              options: { hotspot: true },
-              description: 'Ikon atau gambar yang mewakili fasilitas kamar.',
+              name: 'items',
+              title: 'Daftar Item Fasilitas',
+              type: 'array',
+              of: [
+                {
+                  type: 'object',
+                  fields: [
+                    defineField({
+                      name: 'name',
+                      title: 'Nama Item',
+                      type: 'string',
+                      description: 'Nama item fasilitas seperti Bantal, Handuk, AC, dll.',
+                      validation: (Rule) => Rule.required().error('Nama item fasilitas wajib diisi'),
+                    }),
+                    defineField({
+                      name: 'icon',
+                      title: 'Ikon/Gambar',
+                      type: 'image',
+                      options: { hotspot: true },
+                      description: 'Ikon atau gambar item ini.',
+                    }),
+                  ],
+                  preview: {
+                    select: {
+                      title: 'name',
+                      media: 'icon',
+                    },
+                  },
+                },
+              ],
             }),
           ],
           preview: {
             select: {
-              title: 'name',
-              media: 'icon',
+              title: 'category',
             },
           },
         },
       ],
-      description: 'Daftar fasilitas dengan ikon atau gambar untuk kamar ini.',
     }),
 
     // Address and Map
