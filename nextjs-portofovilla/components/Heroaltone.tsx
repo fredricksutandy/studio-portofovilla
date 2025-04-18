@@ -48,8 +48,7 @@ const Hero = () => {
       )}
 
       {/* Text Container */}
-      <div className="absolute top-3/4 left-1/4 transform text-white text-start">
-      {/* Center text */}
+      <div className="max-w-[1296px] w-full absolute left-1/2 -translate-x-1/2 px-6 bottom-[15%] text-white">
         <h1 className={`text-2xl md:text-5xl font-bold mb-2 text-gray-100 font-krona`}>
           {heroData.title}
         </h1>

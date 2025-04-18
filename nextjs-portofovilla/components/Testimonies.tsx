@@ -7,12 +7,18 @@ import Image from "next/image";
 import testimony from '../public/light-green-testimony-ico.svg';
 import starTemplateWhite from '../public/star-template-white.png';
 import starBackhold from '../public/star-backhold.png';
-import staroutline from '../public/staroutline-ico.svg';
+import starTemplate from '../public/star-template-white.png';
 import ButtonWa from "./common/ButtonWa";
 import imageUrlBuilder from "@sanity/image-url";
 import { LicenseDraft } from "@carbon/icons-react";
 import GmapLogo from '../public/google-maps-2020-icon.svg';
-
+import airbnbLogo from '../public/colored-ico/Airbnb-Logo.wine.svg';
+import tiketComLogo from '../public/colored-ico/Tiket.com_logo.svg';
+import bookingComLogo from '../public/colored-ico/Booking.com-Logo.wine.svg';
+import agodaLogo from '../public/colored-ico/Agoda_transparent_logo.svg';
+import tripComLogo from '../public/colored-ico/Trip.com_logo.svg.svg';
+import travelokaLogo from '../public/colored-ico/traveloka-logo-brandlogo.net.svg';
+import googleLogo from '../public/colored-ico/devicon_google.svg';
 
 const builder = imageUrlBuilder(client);
 const urlFor = (source) => builder.image(source).url();
@@ -31,6 +37,16 @@ const TestimonySection = () => {
     fetchTestimonyData();
   }, []);
 
+  const platformImages: Record<string, string> = {
+    Airbnb: airbnbLogo,
+    'Tiket-com': tiketComLogo,
+    'Booking-com': bookingComLogo,
+    Agoda: agodaLogo,
+    'Trip-com': tripComLogo,
+    Traveloka: travelokaLogo,
+    Google: googleLogo
+  };
+
   if (!testimonyData) {
     return <div>Loading...</div>; // Loading state
   }
@@ -46,9 +62,60 @@ const TestimonySection = () => {
         <h3 className="font-montserrat mx-auto text-center mb-10 text-3xl md:text-5xl font-bold text-white max-w-[990px]">{testimonyData.subtitle}</h3>
 
 
-        <div className="flex gap-2 mb-6 md:mb-12 items-center justify-center">
+        {/* <div className="flex gap-2 mb-6 md:mb-12 items-center justify-center">
         <Image src={staroutline} alt="Asterisk icon" width={32} height={32} className="w-[24px] h-[24px] md:w-[32px] md:h-[32px] filter grayscale brightness-0 invert"/>
         <p className="text-lg md:text-2xl text-white"><span className="text-xl md:text-2xl font-semibold">4.8 </span> dari <span className="text-xl md:text-2xl font-semibold">5 </span> Pengunjung kami merasa puas!</p>
+        </div> */}
+        <div className="flex gap-3 flex-wrap mb-8 md:mb-16 items-start md:items-center justify-center max-w-[660px] mx-auto">
+        {testimonyData?.platformRating?.length > 0 ? (
+            testimonyData.platformRating.map((platform: any) => (
+
+              
+
+              <div key={platform.platformName} className="flex flex-col items-center text-center gap-2 bg-white py-3 px-4 rounded-full"
+              >
+                <div className="relative h-[14px] w-fit">
+                <Image
+                  src={starTemplate}
+                  alt="{platform.platformName}"
+                  width={300}
+                  height={300}
+                  className="w-[72px] h-[14px] relative z-30 bg-contain bg-no-repeat top-0"
+                />
+                <Image
+                  src={starBackhold}
+                  alt="{platform.platformName}"
+                  width={300}
+                  height={300}
+                  className="w-[72px] h-[14px] absolute z-10 bg-contain bg-no-repeat top-0 left-0"
+                />
+                  {/* <div className="bg-star-template w-[128px] h-[26px] relative z-30 bg-contain bg-no-repeat"></div>
+                  <div className="bg-star-holder w-[128px] h-[26px] absolute z-10 bg-contain bg-no-repeat top-0 left-0"></div> */}
+                  <div
+                    className="absolute top-0 left-0 h-full bg-green-700 z-20"
+                    style={{
+                      width: `${(parseFloat(platform.rating) / 5) * 100}%`,
+                    }}
+                  ></div>
+                </div>
+
+                <div className="flex gap-1 items-center">
+                <p className="text-sm font-normal text-neutral-600">
+  Rated <span className="font-semibold">{platform.rating}</span> in
+</p>
+                <Image
+                  src={platformImages[platform.platformName]}
+                  alt={platform.platformName}
+                  width={300}
+                  height={300}
+                  className="inline mr-2 w-auto h-4"
+                />
+                </div>
+              </div>
+            ))
+          ) : (
+            <p className="text-center col-span-full">No platform ratings available.</p>
+          )}
         </div>
 
         <div className="w-full mb-[80px] z-10 p-0 md:py-10 relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 bg-white rounded-3xl overflow-hidden">

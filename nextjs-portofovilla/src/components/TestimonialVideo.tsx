@@ -143,59 +143,49 @@ const TestimonySplide = () => {
         <div className="flex gap-3 flex-wrap mb-8 md:mb-16 items-start md:items-center justify-center max-w-[660px] mx-auto">
         {testimonyData?.platformRating?.length > 0 ? (
             testimonyData.platformRating.map((platform: any) => (
-
-              
-
               <div key={platform.platformName} className="flex flex-col items-center text-center gap-2 bg-lightbg py-3 px-4 rounded-full"
               >
                 <div className="relative h-[14px] w-fit">
-                <Image
-                  src={starTemplate}
-                  alt="{platform.platformName}"
-                  width={300}
-                  height={300}
-                  className="w-[72px] h-[14px] relative z-30 bg-contain bg-no-repeat top-0"
-                />
-                <Image
-                  src={starBackhold}
-                  alt="{platform.platformName}"
-                  width={300}
-                  height={300}
-                  className="w-[72px] h-[14px] absolute z-10 bg-contain bg-no-repeat top-0 left-0"
-                />
-                  {/* <div className="bg-star-template w-[128px] h-[26px] relative z-30 bg-contain bg-no-repeat"></div>
-                  <div className="bg-star-holder w-[128px] h-[26px] absolute z-10 bg-contain bg-no-repeat top-0 left-0"></div> */}
+                  <Image
+                    src={starTemplate}
+                    alt="{platform.platformName}"
+                    width={300}
+                    height={300}
+                    className="w-[72px] h-[14px] relative z-30 bg-contain bg-no-repeat top-0"
+                  />
+                  <Image
+                    src={starBackhold}
+                    alt="{platform.platformName}"
+                    width={300}
+                    height={300}
+                    className="w-[72px] h-[14px] absolute z-10 bg-contain bg-no-repeat top-0 left-0"
+                  />
                   <div
                     className="absolute top-0 left-0 h-full bg-green-700 z-20"
                     style={{
                       width: `${(parseFloat(platform.rating) / 5) * 100}%`,
                     }}
-                  ></div>
+                  >
+                  </div>
                 </div>
 
                 <div className="flex gap-1 items-center">
-                <p className="text-sm font-normal text-neutral-600">
-  Rated <span className="font-semibold">{platform.rating}</span> in
-</p>
-                <Image
-                  src={platformImages[platform.platformName]}
-                  alt={platform.platformName}
-                  width={300}
-                  height={300}
-                  className="inline mr-2 w-auto h-4"
-                />
+                  <p className="text-sm font-normal text-neutral-600">
+                    Rated <span className="font-semibold">{platform.rating}</span> in
+                  </p>
+                  <Image
+                    src={platformImages[platform.platformName]}
+                    alt={platform.platformName}
+                    width={300}
+                    height={300}
+                    className="inline mr-2 w-auto h-4"
+                  />
                 </div>
               </div>
             ))
           ) : (
             <p className="text-center col-span-full">No platform ratings available.</p>
           )}
-          {/* <Image src={staroutline} alt="Star outline icon" width={40} height={40} className="w-[24px] h-[24px] md:w-[40px] md:h-[40px] mt-1 md:mt-0" />
-          <p className="text-lg md:text-3xl font-medium text-secondary">
-            <span className="text-lg md:text-3xl font-semibold">4.8 </span> dari{' '}
-            <span className="text-lg md:text-3xl font-semibold">5 </span> Pengunjung kami merasa
-            puas!
-          </p> */}
         </div>
       </div>
 
