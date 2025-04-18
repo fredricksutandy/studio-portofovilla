@@ -28,6 +28,7 @@ import ActivitiesSectionalttwo from "../../components/Activitiesalttwo";
 
 import OtherActivitiesSection from "../components/OtherActivities";
 
+import Testimonies from "../../components/Testimonies";
 import TestimonyVideo from "../components/TestimonialVideo";
 import TestimonyVideoAltone from "../components/TestimonialVideoAltone";
 import TestimonyVideoAltthree from "../components/TestimonialVideoAltthree";
@@ -110,7 +111,8 @@ export default function IndexPage() {
       {/* <OtherActivitiesSection /> */}
 
       {/* <TestimonyVideo /> */}
-      <TestimonyVideoAltone />
+      <Testimonies />
+      {/* <TestimonyVideoAltone /> */}
       {/* <TestimonyVideoAltthree /> */}
 
       <FaqSection />

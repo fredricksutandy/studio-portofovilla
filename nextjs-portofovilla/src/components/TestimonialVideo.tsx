@@ -7,7 +7,7 @@ import Splide from '@splidejs/splide';
 import '@splidejs/splide/dist/css/splide.min.css';
 
 import palmLeaf from '../../public/palm-leaf-shadow.png';
-import testimony from '../../public/testimony-ico.svg';
+import testimony from '../../public/light-green-testimony-ico.svg';
 import GmapLogo from '../../public/google-maps-2020-icon.svg';
 import { LicenseDraft } from "@carbon/icons-react";
 import starTemplate from '../../public/star-template.png';
@@ -127,41 +127,41 @@ const TestimonySplide = () => {
   }
 
   return (
-    <section className="splide splidetestimonial max-w-full mx-auto bg-lightbg py-10 md:py-[144px] px-4 md:px-6 relative" id="testimonies">
-      <Image src={palmLeaf} alt="palm-leaf" className="absolute right-0 bottom-0 z-0" />
+    <section className="splide splidetestimonial max-w-full mx-auto bg-floral-bg py-10 md:py-[144px] px-4 md:px-6 relative rounded-[32px] md:rounded-[80px]" id="testimonies">
+      {/* <Image src={palmLeaf} alt="palm-leaf" className="absolute right-0 bottom-0 z-0" /> */}
 
       <div className="max-w-[1296px] block m-auto">
         <div className="flex flex-col items-center gap-2 mb-2 md:mb-6">
           <Image src={testimony} alt="Asterisk icon" width={80} height={64} className="w-16 md:w-20 mb-2 mx-auto" />
-          <h2 className="font-krona text-base md:text-lg text-primary font-medium leading-[100%!important]">{testimonyData.title}</h2>
+          <h2 className="font-krona text-base md:text-lg text-[#99CE8F] font-medium leading-[100%!important]">{testimonyData.title}</h2>
         </div>
 
-        <h3 className="font-montserrat mx-auto text-center mb-10 md:mb-16 text-2xl md:text-4xl font-bold text-black max-w-[990px]">{testimonyData.subtitle}</h3>
+        <h3 className="font-montserrat mx-auto text-center mb-10 md:mb-16 text-2xl md:text-4xl font-bold text-white max-w-[990px]">{testimonyData.subtitle}</h3>
 
         
 
-        <div className="flex gap-10 flex-wrap mb-8 md:mb-16 items-start md:items-center justify-center">
+        <div className="flex gap-3 flex-wrap mb-8 md:mb-16 items-start md:items-center justify-center max-w-[660px] mx-auto">
         {testimonyData?.platformRating?.length > 0 ? (
             testimonyData.platformRating.map((platform: any) => (
 
               
 
-              <div key={platform.platformName} className="flex flex-col items-center text-center gap-2"
+              <div key={platform.platformName} className="flex flex-col items-center text-center gap-2 bg-lightbg py-3 px-4 rounded-full"
               >
-                <div className="relative h-[16px] w-fit">
+                <div className="relative h-[14px] w-fit">
                 <Image
                   src={starTemplate}
                   alt="{platform.platformName}"
                   width={300}
                   height={300}
-                  className="w-[80px] h-[16px] relative z-30 bg-contain bg-no-repeat top-0"
+                  className="w-[72px] h-[14px] relative z-30 bg-contain bg-no-repeat top-0"
                 />
                 <Image
                   src={starBackhold}
                   alt="{platform.platformName}"
                   width={300}
                   height={300}
-                  className="w-[80px] h-[16px] absolute z-10 bg-contain bg-no-repeat top-0 left-0"
+                  className="w-[72px] h-[14px] absolute z-10 bg-contain bg-no-repeat top-0 left-0"
                 />
                   {/* <div className="bg-star-template w-[128px] h-[26px] relative z-30 bg-contain bg-no-repeat"></div>
                   <div className="bg-star-holder w-[128px] h-[26px] absolute z-10 bg-contain bg-no-repeat top-0 left-0"></div> */}
@@ -174,7 +174,7 @@ const TestimonySplide = () => {
                 </div>
 
                 <div className="flex gap-1 items-center">
-                <p className="text-base font-normal text-neutral-600">
+                <p className="text-sm font-normal text-neutral-600">
   Rated <span className="font-semibold">{platform.rating}</span> in
 </p>
                 <Image
@@ -182,7 +182,7 @@ const TestimonySplide = () => {
                   alt={platform.platformName}
                   width={300}
                   height={300}
-                  className="inline mr-2 w-auto h-5"
+                  className="inline mr-2 w-auto h-4"
                 />
                 </div>
               </div>
@@ -206,7 +206,7 @@ const TestimonySplide = () => {
           <ul className="splide__list">
             {testimonyData.testimonies?.map((testimony: any, index: number) => (
               <li className="splide__slide" key={index}>
-                <div className="flex flex-col h-[280px] rounded bg-white p-6 justify-between gap-2 transition-all">
+                <div className="flex flex-col h-full bg-white p-6 justify-between gap-2 transition-all rounded-3xl">
                   
                   {/* <div className="flex gap-1">
                     {Array(testimony.testimonyRating || 0)
@@ -218,20 +218,20 @@ const TestimonySplide = () => {
 
               <div  className="flex flex-col items-start text-center gap-2 w-full"
               >
-                <div className="relative h-[16px] w-fit">
+                <div className="relative h-[24px] w-fit">
                 <Image
                   src={starTemplateWhite}
                   alt="{platform.platformName}"
                   width={300}
                   height={300}
-                  className="w-[80px] h-[16px] relative z-30 bg-contain bg-no-repeat top-0"
+                  className="w-[120px] h-[24px] relative z-30 bg-contain bg-no-repeat top-0"
                 />
                 <Image
                   src={starBackhold}
                   alt="{platform.platformName}"
                   width={300}
                   height={300}
-                  className="w-[80px] h-[16px] absolute z-10 bg-contain bg-no-repeat top-0 left-0"
+                  className="w-[120px] h-[24px] absolute z-10 bg-contain bg-no-repeat top-0 left-0"
                 />
                   <div
                     className="absolute top-0 left-0 h-full bg-green-700 z-20"
@@ -243,7 +243,7 @@ const TestimonySplide = () => {
                 <p className="text-primary text-xl md:text-2xl font-semibold">
                     {testimony.testimonyHighlight}
                   </p>
-                  <p className="text-black text-base text-start">{testimony.testimony}</p>
+                  <p className="text-black text-sm md:text-base text-start">{testimony.testimony}</p>
                 
                 </div>
                   <div className="flex items-center gap-2">
@@ -277,7 +277,7 @@ const TestimonySplide = () => {
       <ButtonWa 
         link={testimonyData.linkFeedback}
           text="Tulis ulasanmu"
-          type="transparent-border"
+          type="green"
           iconType={<LicenseDraft size={24} />}
           radius='lg'
           width='fit'

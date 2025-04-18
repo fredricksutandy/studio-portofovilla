@@ -3,81 +3,82 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from 'next/link';
 import Image from 'next/image';
+import { client } from "@/sanity/client"; 
+import imageUrlBuilder from '@sanity/image-url';
+// import type { SanityDocument } from "next-sanity";
+import gsap from "gsap";
+import { Close, Menu, ChevronDown, ArrowRight } from '@carbon/icons-react';
+
 import portofovillalogomono from '../../public/portofovilla logo mono.svg';
 import leafroom from '../../public/leaf-room-placeholder.png'
 import WaLogo from '../../public/logos_whatsapp-icon.svg'
-import { client } from "@/sanity/client"; 
-import type { SanityDocument } from "next-sanity";
+
 import { quickLinks } from "../../src/constant/link"; 
-import { Close, Menu, ChevronDown, ArrowRight } from '@carbon/icons-react';
-import imageUrlBuilder from '@sanity/image-url';
-import gsap from "gsap";
 
 const builder = imageUrlBuilder(client);
 const urlFor = (source: any) => builder.image(source).auto('format').fit('max');
 
+// ---------------------------
+// Queries
+// ---------------------------
 const ROOM_QUERY = `*[_type == "room"] {
   roomName,
   slug,
   image
 }`;
 
-const CONTACT_QUERY = `*[_type == "contact"][0]`;
-
-interface Room {
-  _id: string;
-  name: string;
-  image: string;
-  description: string;
-}
+const CONTACT_QUERY = `*[_type == "multipleContact"][0]{ phoneInfo }`;
 
 const Navbar = () => {
   const [isRoomsOpen, setIsRoomsOpen] = useState(false);
-  const [contactData, setContactData] = useState(false);
   const [rooms, setRooms] = useState<Room[]>([]);
   const [hoveredImage, setHoveredImage] = useState(leafroom);
   const [currentImage, setCurrentImage] = useState(leafroom);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [contact, setContact] = useState<string>("");
 
   const imgRef = useRef<HTMLImageElement>(null);
-
   const navRef = useRef<HTMLElement | null>(null);
 
+  // ---------------------------
+  // Scroll & Outside Click Effects
+  // ---------------------------
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (navRef.current && !navRef.current.contains(event.target as Node)) {
         setIsRoomsOpen(false); // Close the dropdown
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
- useEffect(() => {
+  // ---------------------------
+  // Image Transition (GSAP)
+  // ---------------------------
+  useEffect(() => {
   if (!hoveredImage || hoveredImage === currentImage || !imgRef.current) return;
+    gsap.to(imgRef.current, {
+      opacity: 0,
+      duration: 0.5,
+      onComplete: () => {
+        setCurrentImage(hoveredImage);
+        gsap.to(imgRef.current, { opacity: 1, duration: 0.4 });
+      },
+    });
+  }, [hoveredImage, currentImage]); 
 
-  gsap.to(imgRef.current, {
-    opacity: 0,
-    duration: 0.5,
-    onComplete: () => {
-      setCurrentImage(hoveredImage); // Update image
-      gsap.to(imgRef.current, { opacity: 1, duration: 0.4 });
-    },
-  });
-}, [hoveredImage, currentImage]); // Added `currentImage` as dependency
-  
-
-  // Sanity query to fetch the 'contact' document
-  
+  // ---------------------------
+  // Fetch data from Sanity
+  // ---------------------------
   const fetchData = useCallback(async () => {
     try {
       const [contactData, roomsData] = await Promise.all([
-        client.fetch<SanityDocument>(CONTACT_QUERY),
-        client.fetch(ROOM_QUERY),
+        client.fetch<ContactType>(CONTACT_QUERY),
+        client.fetch<Room[]>(ROOM_QUERY),
       ]);
   
-      setContactData(contactData);
+      setContact(contactData?.phoneInfo?.[0]?.phoneUrl ?? "");
       setRooms(roomsData);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -88,23 +89,26 @@ const Navbar = () => {
     fetchData();
   }, [fetchData]);
   
-    if (!contactData) {
+    if (!contact) {
       return <div>Loading...</div>; // Loading state
     }
 
+  // ---------------------------
+  // Render
+  // ---------------------------
   return (
     <nav
       ref={navRef}
-      className="w-full z-50 
+      className="w-full z-[60] 
        bg-white text-black font-montserrat"
     >
     <div className="max-w-[1296px] mx-auto flex items-center justify-between p-4">
-      {/* Logo */}
+
       <Link href="/">
         <Image src={portofovillalogomono} alt='logo' width={80} className="invert" />
       </Link>
 
-      {/* Mobile Menu Button */}
+
       <button
         className="lg:hidden focus:outline-none rounded transition-colors"
         onClick={() => setIsMenuOpen((prev) => !prev)}
@@ -134,7 +138,7 @@ const Navbar = () => {
       </ul>
 
       {/* Contact Button */}
-      <Link href="#contact" className="hidden lg:flex font-semibold gap-2 p-3 bg-secondary text-white
+      <Link href={contact} className="hidden lg:flex font-semibold gap-2 p-3 bg-secondary text-white
       text-[14px] rounded items-center">
         <Image src={WaLogo} alt='WAlogo' width={20} height={20} />
         Hubungi kami
@@ -148,7 +152,7 @@ const Navbar = () => {
     <div
           className={`p-4 left-0 w-full absolute top-[61px] flex flex-col gap-4 shadow-2xl justify-between bg-white/70 backdrop-blur-lg text-black transition-transform duration-700 border-t border-graymuted z-50 h-fit ${
             isMenuOpen ? 'flex' : 'hidden'
-          } lg:hidden z-40`}
+          } lg:hidden z-[60]`}
         >
           <div className="flex flex-col gap-6">
             {quickLinks.map(({ name, href }) => (
@@ -162,7 +166,7 @@ const Navbar = () => {
                     isRoomsOpen ? 'max-h-fit opacity-100 pb-6 mt-4' : 'max-h-0 opacity-0 pb-0 mt-0'
                   }`}>
                     {rooms.map((room) => (
-                      <Link className='flex gap-4 items-center' key={room.slug?.current || room._id} href={`/room/${room.slug?.current}`}>
+                      <Link className='flex gap-4 items-center' key={room.slug?.current || room._id} href={`/pages/${room.slug?.current}`}>
                       {room.roomName}
                       <ArrowRight width={16} height={16} className="transition-all mt-[2px]"/>
                     </Link>
@@ -177,7 +181,7 @@ const Navbar = () => {
             ))}
           </div>
 
-          <Link href="#contact" className={`w-full flex font-semibold gap-2 p-4 text-center justify-center bg-secondary text-white text-[14px] rounded items-center`}>
+          <Link href={contact} className={`w-full flex font-semibold gap-2 p-4 text-center justify-center bg-secondary text-white text-[14px] rounded items-center`}>
               <Image src={WaLogo} alt='WAlogo' width={20} height={20}/>
               Hubungi kami
             </Link>

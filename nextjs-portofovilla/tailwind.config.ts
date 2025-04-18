@@ -30,6 +30,7 @@ const config: Config = {
         'contact-bg-2': "url('/contact-placeholder.jpg')",
         'contact-bg-3': "url('/contact-placeholder2.jpg')",
         'announcement-bg': "url('/mingcute_leaf-line-group.svg')",
+        'floral-bg': "url('/floral-bg.png')",
         'cta': "url('/palm-bg-cta.png')",
         'trivia': "url('/trivia-bg.png')",
       },

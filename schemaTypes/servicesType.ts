@@ -87,7 +87,7 @@ export const service = defineType({
     }),
     defineField({
       name: 'serviceContact',
-      title: 'Kontak Person Layanan',
+      title: 'URL/Link Kontak Person Layanan',
       type: 'string',
       description: 'Masukkan kontak (Link WA atau link email) untuk orang yang bertanggung jawab atas layanan ini.',
       validation: (rule) =>

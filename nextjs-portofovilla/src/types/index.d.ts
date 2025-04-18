@@ -112,3 +112,34 @@ interface Activities {
   activitiesRange: string;
 }
 
+// A single category of facilities
+interface RoomFacilityType {
+  category: string;
+  items: {
+    name: string;
+    icon?: {
+      url?: string;
+      lqip?: string;
+    };
+  }[];
+}
+
+// Full props for the Facilities component
+interface FacilitiesRoomSectionProps {
+  facilities?: RoomFacilityType[];
+}
+
+// Navbar room & contact type
+interface Room {
+  _id: string;
+  slug: {
+    current: string;
+  };
+  roomName: string;
+  image: any;
+}
+
+interface ContactType {
+  phoneInfo: { phoneUrl: string }[];
+}
+

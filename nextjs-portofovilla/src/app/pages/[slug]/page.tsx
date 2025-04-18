@@ -1,12 +1,12 @@
 import { Metadata } from "next";
 import { client } from "@/sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
-import Image from "next/image";
 import ButtonWa from "../../../../components/common/ButtonWa";
 import WaLogo from '../../../../public/logos_whatsapp-icon.svg'
 import SectionNav from "../../../../components/common/SectionNavigation";
 import FooterSectionalttwo from "../../../../components/layout/Footeralttwo";
-import NavbarDetailSection from "../../../../components/layout/NavbarDetail";
+import FacilitiesRoomSection from "../../../../components/common/RoomComponents/Facilities";
+// import NavbarDetailSection from "../../../../components/layout/NavbarDetail";
 import ExpandableSection from "../../../../components/common/Expandable";
 import NavbarDetailSectionaltone from "../../../../components/layout/NavbarDetailaltone";
 import { PortableText } from "@portabletext/react";
@@ -31,16 +31,35 @@ interface RoomData {
   priceRange: string;
   promotionDetails: string;
   priceDisclaimer: string;
-  specifications?: { name: string; icon?: { url: string; lqip: string } }[];
-  facilities?: { name: string; icon?: { url: string; lqip: string } }[];
+  specifications?: { name: string; icon?: { url?: string; lqip?: string } }[];
+  facilities?: {
+    category: string;
+    items: {
+      name: string;
+      icon?: {
+        url?: string;
+        lqip?: string;
+      };
+    }[];
+  }[];
   address?: string;
   gmapUrl?: string;
   checkIn?: string;
   checkOut?: string;
   rulesList?: string[];
-  policies?: string;
-  extraAmenities?: string[];
-  bookingMethod?: string[];
+  policies?: {
+    title: string;
+    description: string;
+  }[];
+  
+  extraAmenities?: {
+    name: string;
+    price: string;
+  }[];
+  bookingMethod?: {
+    platform: string;
+    link: string;
+  }[];
   image?: {
     asset: any;
     url: string;
@@ -71,18 +90,21 @@ async function getRoomData(slug: string): Promise<RoomData | null> {
         asset->{
           url,
           metadata {
-            lqip // Include lqip here
+            lqip
           }
         }
       }
     },
-    facilities[]{
-      name,
-      icon {
-        asset->{
-          url,
-          metadata {
-            lqip // Include lqip here
+    facilities[] {
+      category,
+      items[] {
+        name,
+        icon {
+          asset->{
+            url,
+            metadata {
+              lqip
+            }
           }
         }
       }
@@ -234,27 +256,34 @@ export default async function RoomDetails({ params }: { params: { slug: string }
 
         </section>
 
-        <section id="fasilitas" className="pt-14 pb-14 border-b border-graymuted">
+        <FacilitiesRoomSection facilities={room.facilities} />
+{/* Facilities */}
+        {/* <section id="fasilitas" className="pt-14 pb-14 border-b border-graymuted">
         <h2 className="text-lg md:text-2xl font-semibold mb-4">Fasilitas</h2>
-          <ul className="flex flex-wrap gap-4">
-          {room.facilities?.map((facility: any, index: number) => {
-              return (
-                <li key={index} className="p-4 border border-graymuted w-fit rounded flex items-center gap-2">
-                  <h3 className="text-sm md:text-base">{facility.name}</h3>
-                  {facility.icon?.asset?.url && (
-                    <img 
-                    src={urlFor(facility.icon).url()} 
-                    alt={facility.name} 
-                    width={24} 
-                    height={24} 
-                    className="object-cover"
-                  />
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-        </section>
+
+          <div className="space-y-6">
+            {room.facilities?.map((categoryItem, index) => (
+              <div key={index}>
+                <h3 className="text-lg font-semibold mb-3">{categoryItem.category}</h3>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                  {categoryItem.items?.map((item, itemIndex) => (
+                    <div key={itemIndex} className="flex items-center gap-2">
+                      {item.icon && (
+                        <img
+                          src={item.icon.asset?.url}
+                          alt={item.name}
+                          className="w-6 h-6 object-contain"
+                        />
+                      )}
+                      <span className="text-sm">{item.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </section> */}
 
         <section id="lokasi" className="space-y-2 pt-14 pb-14 border-b border-graymuted">
           <h2 className="text-lg md:text-2xl font-semibold mb-4">Lokasi</h2>

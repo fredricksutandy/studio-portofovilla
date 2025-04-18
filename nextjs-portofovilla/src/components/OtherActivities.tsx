@@ -34,7 +34,7 @@ const ActivitiesSection = () => {
 
   return (
     <section className="max-w-[1296px] mx-auto relative">
-      <h2 className="text-2xl font-semibold text-start mb-8">
+      <h2 className="text-2xl font-semibold text-center mb-12">
         Kegiatan sekitar lainnya
       </h2>
 
