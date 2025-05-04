@@ -7,11 +7,10 @@ import Splide from '@splidejs/splide';
 import '@splidejs/splide/dist/css/splide.min.css';
 import imageUrlBuilder from '@sanity/image-url';
 import type { SanityDocument } from 'next-sanity';
-import palmLeaf from '../../public/palm-leaf-shadow.png';
 import activitiesIcon from '../../public/activities-ico.svg';
 import { ArrowRight, PanHorizontal, Time } from '@carbon/icons-react';
 import OtherActivitiesSection from "../../src/components/OtherActivities";
-
+import palmLeaf from '../../public/palm-leaf-shadow.png';
 
 import '../styles/custom-swiper.css';
 import '../styles/custom-swiper-alt-top.css';
@@ -106,19 +105,15 @@ const ActivitiesSplide = () => {
   }
 
   return (
-    <section className="splide max-w-full mx-auto bg-white px-4 md:px-6 py-10 md:py-[120px] overflow-hidden relative" id="activities">
-      <Image src={palmLeaf} alt="palm-leaf" className="absolute left-0 bottom-0 z-0 scale-x-[-1]" />
-
+    <section className="splide max-w-full mx-auto bg-white px-4 md:px-6 py-20 md:py-[120px] overflow-hidden relative" id="activities">
+      <Image src={palmLeaf} alt="palm-leaf" className="absolute -left-[40px] top-0 z-0 scale-x-[-1] rotate-[7deg]" />
+      <Image src={palmLeaf} alt="palm-leaf" className="absolute -right-[40px] bottom-6 z-0 rotate-[-7deg]" />
       <div className="max-w-[1296px] mx-auto mb-8">
-      <div className="flex flex-row  items-end gap-2 mb-6">
-            <Image src={activitiesIcon} alt="Asterisk icon" width={48} height={48} className=""/>
-            <h2 className="font-krona text-base md:text-lg text-primary font-medium leading-[100%!important]">{activitiesData.title}</h2>
+      <div className="flex flex-row items-end mb-4">
+            <Image src={activitiesIcon} alt="Asterisk icon" width={40} height={40} className=""/>
+            <h2 className="font-krona text-base text-primary font-medium leading-[100%!important]">{activitiesData.title}</h2>
           </div>
-        {/* <Image src={activitiesIcon} alt="Activities icon" width={100} height={100} className="mb-8 mx-auto" />
-        <h2 className="font-krona text-2xl lg:text-4xl text-primary font-semibold mb-4 text-center">
-          {activitiesData.title}
-        </h2> */}
-        <h3 className="font-montserrat text-2xl md:text-4xl font-bold text-black mb-2 max-w-[990px]">
+        <h3 className="font-montserrat text-2xl md:text-3xl font-semibold text-black mb-2 max-w-[780px]">
           {activitiesData.subtitle}
         </h3>
       </div>

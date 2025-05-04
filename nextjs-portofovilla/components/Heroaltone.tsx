@@ -48,11 +48,11 @@ const Hero = () => {
       )}
 
       {/* Text Container */}
-      <div className="max-w-[1296px] w-full absolute left-1/2 -translate-x-1/2 px-6 bottom-[15%] text-white">
-        <h1 className={`text-2xl md:text-5xl font-bold mb-2 text-gray-100 font-krona`}>
+      <div className="max-w-[1296px] w-full absolute left-1/2 -translate-x-1/2 px-6 bottom-[10%] text-white">
+        <h1 className={`text-2xl md:text-6xl font-bold mb-2 text-gray-100 font-krona`}>
           {heroData.title}
         </h1>
-        <h2 className="text-lg md:text-xl">{heroData.subtitle}</h2>
+        <h2 className="text-lg md:text-2xl">{heroData.subtitle}</h2>
       </div>
     </div>
   );

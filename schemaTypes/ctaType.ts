@@ -7,47 +7,49 @@ export const CTA = defineType({
   fields: [
     defineField({
       name: 'title',
-      title: 'Title',
+      title: 'Judul CTA',
+      description: 'Judul utama yang akan ditampilkan di bagian Call-to-Action (misal: Booking Sekarang!)',
       type: 'string',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'subtitle',
-      title: 'Sub-title',
-      type: 'string',
+      title: 'Deskripsi CTA',
+      description: 'Deskripsi singkat yang mendukung ajakan, seperti promosi atau penjelasan tambahan.',
+      type: 'text',
+      rows: 3,
     }),
     defineField({
-        name: 'buttonName',
-        title: 'Button Name',
-        type: 'string',
-      }),
-      defineField({
-        name: 'buttonLink',
-        title: 'Button Link',
-        type: 'url',
-      }),
+      name: 'buttonName',
+      title: 'Nama Tombol',
+      description: 'Teks pada tombol CTA (misal: Pesan Sekarang)',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'buttonLink',
+      title: 'Link Tombol',
+      description: 'URL tujuan saat tombol diklik (misal: /booking atau link WhatsApp)',
+      type: 'url',
+      validation: (Rule) => Rule.required(),
+    }),
     defineField({
       name: 'slug',
       title: 'Slug',
+      description: 'Slug halaman CTA ini, berguna jika ingin ditampilkan di halaman tertentu.',
       type: 'slug',
       options: {
-        source: 'title',  // Automatically generate from the title
-        maxLength: 96,    // Optional: Limit the length of the slug
+        source: 'title',
+        maxLength: 96,
       },
     }),
     defineField({
-      name: 'imageLeft',
-      title: 'Image-left',
-      type: 'image', // Sanity's image type
+      name: 'image',
+      title: 'Gambar CTA',
+      description: 'Gambar ilustrasi untuk mendukung konten CTA. Pilih satu gambar saja.',
+      type: 'image',
       options: {
-        hotspot: true, // Enables image cropping and focus area
-      },
-    }),
-    defineField({
-      name: 'imageRight',
-      title: 'Image-right',
-      type: 'image', // Sanity's image type
-      options: {
-        hotspot: true, // Enables image cropping and focus area
+        hotspot: true,
       },
     }),
   ],

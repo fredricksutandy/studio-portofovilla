@@ -46,7 +46,7 @@ const CertificateAwardSection = () => {
       <div className="w-full lg:w-[calc(60%-12px)]">
       <h2 className="font-krona text-base text-primary font-medium mb-2">{certifAwardData.title}</h2>
 
-      <h3 className="font-semibold text-xl md:text-2xl ">
+      <h3 className="font-medium text-xl max-w-[600px]">
         {certifAwardData.subtitle}
       </h3>
       </div>

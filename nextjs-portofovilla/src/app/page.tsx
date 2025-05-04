@@ -63,6 +63,8 @@ import ServicesHorizontal from "@/components/ServicesHorizontal";
 import ServicesOneSection from "../../components/ServicesOne";
 import ServicesTwoSection from "../../components/ServicesTwo";
 
+import PlatformAvailable from "../../components/common/PlatformAvailable";
+
 export default function IndexPage() {
 
   return (
@@ -110,14 +112,16 @@ export default function IndexPage() {
 
       {/* <OtherActivitiesSection /> */}
 
-      {/* <TestimonyVideo /> */}
-      <Testimonies />
+      <TestimonyVideo />
+      {/* <Testimonies /> */}
       {/* <TestimonyVideoAltone /> */}
       {/* <TestimonyVideoAltthree /> */}
 
       <FaqSection />
 
       <Gallery />
+
+      <PlatformAvailable />
 
       {/* <CTASection /> */}
       <CTASectionaltone />
@@ -128,7 +132,7 @@ export default function IndexPage() {
 
       {/* <FooterSection /> */}
       {/* <FooterSectionaltone /> */}
-      <FooterSectionalttwo />
+      {/* <FooterSectionalttwo /> */}
       <FooterSectionaltthree />
 
       {/* <Modal /> */}

@@ -59,7 +59,7 @@ export const otherActivities = defineType({
                     prepare(selection) {
                       return {
                         title: selection.title,
-                        subtitle: `Jarak: ${selection.subtitle} km`,
+                        subtitle: `Jarak: ${selection.subtitle}`,
                       };
                     },
                   },

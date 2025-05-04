@@ -7,6 +7,8 @@ import { client } from "@/sanity/client";
 import imageUrlBuilder from '@sanity/image-url';
 import gsap from "gsap";
 import { Close, Menu, ChevronDown, ArrowRight } from '@carbon/icons-react';
+import { usePathname } from 'next/navigation';
+
 
 import portofovillalogomono from '../../public/portofovilla logo mono.svg';
 import leafroom from '../../public/leaf-room-placeholder.png';
@@ -28,6 +30,8 @@ const ROOM_QUERY = `*[_type == "room"] {
   image
 }`;
 
+
+
 const CONTACT_QUERY = `*[_type == "multipleContact"][0]{ phoneInfo }`;
 
 const Navbar = () => {
@@ -41,7 +45,8 @@ const Navbar = () => {
 
   const imgRef = useRef<HTMLImageElement>(null);
   const navRef = useRef<HTMLElement | null>(null);
-
+  const pathname = usePathname();
+  const isHome = pathname === '/';
   // ---------------------------
   // Scroll & Outside Click Effects
   // ---------------------------
@@ -84,6 +89,23 @@ const Navbar = () => {
   }, [hoveredImage, currentImage]);
 
   // ---------------------------
+  // hash removal function and 
+  // ---------------------------
+  useEffect(() => {
+    if (isHome && window.location.hash) {
+      const target = document.querySelector(window.location.hash);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+  
+      setTimeout(() => {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }, 800); // Delay to match scroll timing
+    }
+  }, [isHome]);
+  
+
+  // ---------------------------
   // Fetch data from Sanity
   // ---------------------------
   const fetchData = useCallback(async () => {
@@ -107,15 +129,25 @@ const Navbar = () => {
   // ---------------------------
   // Render
   // ---------------------------
+  function removeHashFromUrl(e: React.MouseEvent<HTMLAnchorElement>) {
+    const href = e.currentTarget.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      setTimeout(() => {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }, 500); // Adjust to match your scroll duration
+    }
+  }
+  
+
   return (
     <nav
       ref={navRef}
-      className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 ${
+      className={`fixed top-0 left-0 w-full z-50 transition-colors duration-500 ${
         isMenuOpen || isRoomsOpen || isScrolled ? 'bg-white text-black border-b border-graymuted' : 'bg-transparent text-white'
       }`}
     >
       <AnnouncementBanner />
-      <div className="max-w-[1296px] mx-auto flex items-center justify-between p-4">
+      <div className={`max-w-[1296px] relative mx-auto flex items-center justify-between p-4 z-[80] `}>
         {/* Logo */}
         <Link href="/">
           <Image
@@ -137,24 +169,38 @@ const Navbar = () => {
 
         {/* Desktop Links */}
         <ul className="hidden lg:flex space-x-6">
-          {quickLinks.map(({ name, href }) =>
-            name === "Rooms" ? (
-              <li key={href} className="relative">
-                <button
-                  onClick={() => setIsRoomsOpen(prev => !prev)}
-                  className="hover:underline flex items-center gap-2"
-                >
-                  Rooms <ChevronDown className={`w-4 h-4 transition-transform ${isRoomsOpen ? 'rotate-180' : ''}`} />
-                </button>
-              </li>
-            ) : (
-              <li key={href}>
-                <Link href={href} className="hover:underline">
-                  {name}
-                </Link>
-              </li>
-            )
-          )}
+        {quickLinks.map(({ name, href }) => {
+  const isHashLink = href.includes('#');
+  const adjustedHref = isHome && isHashLink && href.startsWith('/#') ? href.replace('/', '') : href;
+
+  return name === "Rooms" ? (
+    <li key={href} className="relative">
+      <button
+        onClick={() => setIsRoomsOpen(prev => !prev)}
+        className="hover:underline flex items-center gap-2"
+      >
+        Rooms <ChevronDown className={`w-4 h-4 transition-transform ${isRoomsOpen ? 'rotate-180' : ''}`} />
+      </button>
+    </li>
+  ) : (
+    <li key={href}>
+      {isHashLink && isHome ? (
+        <a
+          href={adjustedHref}
+          className="hover:underline"
+          onClick={removeHashFromUrl}
+        >
+          {name}
+        </a>
+      ) : (
+        <Link href={adjustedHref} className="hover:underline">
+          {name}
+        </Link>
+      )}
+    </li>
+  );
+})}
+
         </ul>
 
         {/* Contact Button (Desktop) */}
@@ -172,47 +218,80 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div
+      {/* <div
         className={`p-4 lg:hidden flex-col gap-4 shadow-2xl bg-white/70 backdrop-blur-lg text-black transition-transform duration-700 border-t border-graymuted ${
           isMenuOpen ? 'flex' : 'hidden'
         }`}
+      > */}
+      <div
+  className={`
+     w-full flex-col gap-4 shadow-2xl justify-between 
+    bg-white/70 backdrop-blur-lg text-black z-[60] h-fit
+    transition-all duration-500 ease-in-out
+    transform ${isMenuOpen ? 'opacity-100 translate-y-0 pointer-events-auto visible max-h-[900px]' : 'opacity-0 -translate-y-2 pointer-events-none invisible max-h-0'}
+    lg:hidden
+  `}
+  style={{ transitionProperty: 'opacity, transform' }}
+>
+        <div className="flex flex-col gap-6 p-4">
+        {quickLinks.map(({ name, href }) => {
+  const isHashLink = href.includes('#');
+  const adjustedHref = isHome && isHashLink && href.startsWith('/#') ? href.replace('/', '') : href;
+
+  return name === "Rooms" ? (
+    <div key={href}>
+      <button
+        onClick={() => setIsRoomsOpen(prev => !prev)}
+        className="text-lg flex items-center gap-2 w-full"
       >
-        <div className="flex flex-col gap-6">
-          {quickLinks.map(({ name, href }) =>
-            name === "Rooms" ? (
-              <div key={href}>
-                <button
-                  onClick={() => setIsRoomsOpen(prev => !prev)}
-                  className="text-lg flex items-center gap-2 w-full"
-                >
-                  Rooms <ChevronDown className={`w-4 h-4 transition-transform ${isRoomsOpen ? 'rotate-180' : ''}`} />
-                </button>
-                <div
-                  className={`transition-all overflow-hidden flex flex-col gap-4 border-b border-[#d9d9d9] ${
-                    isRoomsOpen ? 'max-h-fit opacity-100 pb-6 mt-4' : 'max-h-0 opacity-0 pb-0 mt-0'
-                  }`}
-                >
-                  {rooms.map((room) => (
-                    <Link
-                      key={room.slug.current}
-                      href={`/pages/${room.slug.current}`}
-                      className="flex items-center gap-4"
-                    >
-                      {room.roomName}
-                      <ArrowRight className="w-4 h-4 mt-[2px]" />
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <Link key={href} href={href} className="text-lg hover:underline" onClick={() => setIsMenuOpen(false)}>
-                {name}
-              </Link>
-            )
-          )}
+        Rooms <ChevronDown className={`w-4 h-4 transition-transform ${isRoomsOpen ? 'rotate-180' : ''}`} />
+      </button>
+      <div
+        className={`transition-all overflow-hidden flex flex-col gap-4 border-b border-[#d9d9d9] ${
+          isRoomsOpen ? 'max-h-fit opacity-100 pb-6 mt-4' : 'max-h-0 opacity-0 pb-0 mt-0'
+        }`}
+      >
+        {rooms.map((room) => (
+          <Link
+            key={room.slug.current}
+            href={`/pages/${room.slug.current}`}
+            className="flex items-center gap-4"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            {room.roomName}
+            <ArrowRight className="w-4 h-4 mt-[2px]" />
+          </Link>
+        ))}
+      </div>
+    </div>
+  ) : isHashLink && isHome ? (
+    <a
+      key={href}
+      href={adjustedHref}
+      className="text-lg hover:underline"
+      onClick={(e) => {
+        removeHashFromUrl(e);
+        setIsMenuOpen(false);
+      }}
+    >
+      {name}
+    </a>
+  ) : (
+    <Link
+      key={href}
+      href={adjustedHref}
+      className="text-lg hover:underline"
+      onClick={() => setIsMenuOpen(false)}
+    >
+      {name}
+    </Link>
+  );
+})}
+
         </div>
 
         {/* Mobile Contact */}
+        <div className="p-4">
         {contact && (
           <Link
             href={contact}
@@ -222,46 +301,58 @@ const Navbar = () => {
             Hubungi kami
           </Link>
         )}
+        </div>
       </div>
 
       {/* Dropdown Menu (Desktop) */}
-      {isRoomsOpen && (
-        <div className="w-full hidden lg:flex max-w-[1272px] mx-auto justify-center gap-10 transition-all duration-300 p-4 bg-white overflow-hidden">
-          <div className="flex flex-col gap-6 w-[calc(50%-20px)]">
-            <a href="#room" className="text-xl font-semibold font-krona text-primary underline">Kamar kami</a>
-            <div className="flex flex-wrap gap-x-6 gap-y-4">
-              <div className="w-[calc(50%-12px)] border-t border-graymuted" />
-              <div className="w-[calc(50%-12px)] border-t border-graymuted" />
-              {rooms.map((room) => (
-                <Link
-                  key={room.slug.current}
-                  href={`/pages/${room.slug.current}`}
-                  className="w-[calc(50%-12px)] text-black flex items-center gap-2 group hover:translate-x-2 transition-all duration-500"
-                  onMouseEnter={() =>
-                    setHoveredImage(room.image ? urlFor(room.image).width(500).height(300).url() : "")
-                  }
-                >
-                  {room.roomName}
-                  <ArrowRight className="w-4 h-4 mt-[1px] opacity-0 -translate-x-3 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500" />
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Right: Image Preview */}
-          <div className="relative w-[calc(50%-20px)] h-[300px] overflow-hidden bg-primary/70 rounded-lg">
-            <Image
-              ref={imgRef}
-              src={currentImage}
-              alt="Room Preview"
-              width={700}
-              height={460}
-              className="rounded-lg w-full h-full object-cover"
-            />
+      <div
+        className={`
+          w-full gap-10 bg-white overflow-hidden
+          absolute left-0 right-0 z-50
+          transition-all duration-500 ease-in-out border-b border-[#d9d9d9]
+          ${isRoomsOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}
+        `}
+        style={{
+          transitionProperty: 'opacity, transform',
+        }}
+      >
+        <div className="max-w-[1296px] flex justify-center mx-auto gap-8 px-4 pb-6 pt-8">
+        <div className="flex flex-col gap-6 w-[calc(50%-20px)]">
+          <a href="#room" className="text-xl font-semibold font-krona text-primary underline">Kamar kami</a>
+          <div className="flex flex-wrap gap-x-6 gap-y-4">
+            <div className="w-[calc(50%-12px)] border-t border-graymuted" />
+            <div className="w-[calc(50%-12px)] border-t border-graymuted" />
+            {rooms.map((room) => (
+              <Link
+                key={room.slug.current}
+                href={`/pages/${room.slug.current}`}
+                className="w-[calc(50%-12px)] text-black flex items-center gap-2 group hover:translate-x-2 transition-all duration-500"
+                onMouseEnter={() =>
+                  setHoveredImage(room.image ? urlFor(room.image).width(500).height(300).url() : "")
+                }
+              >
+                {room.roomName}
+                <ArrowRight className="w-4 h-4 mt-[1px] opacity-0 -translate-x-3 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500" />
+              </Link>
+            ))}
           </div>
         </div>
-      )}
-    </nav>
+
+        {/* Right: Image Preview */}
+        <div className="relative w-[calc(50%-20px)] h-[300px] overflow-hidden bg-primary/70 rounded-lg">
+          <Image
+            ref={imgRef}
+            src={currentImage}
+            alt="Room Preview"
+            width={700}
+            height={460}
+            className="rounded-lg w-full h-full object-cover"
+          />
+        </div>
+      </div>
+    </div>
+
+  </nav>
   );
 };
 

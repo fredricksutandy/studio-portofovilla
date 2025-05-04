@@ -94,7 +94,7 @@ const FooterSection = () => {
             <div key={phone.phoneNumber} className="flex gap-2 justify-start md:justify-end text-neutral-300">
               <p className="text-sm">{phone.phoneName}</p> - 
               {phone.phoneUrl ? (
-                <a className="text-sm" href={phone.phoneUrl} target="_blank" rel="noopener noreferrer">
+                <a className="text-sm underline" href={phone.phoneUrl} target="_blank" rel="noopener noreferrer">
                   {phone.phoneNumber}
                 </a>
               ) : (

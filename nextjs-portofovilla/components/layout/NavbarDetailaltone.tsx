@@ -100,9 +100,9 @@ const Navbar = () => {
     <nav
       ref={navRef}
       className="w-full z-[60] 
-       bg-white text-black font-montserrat"
+        text-black font-montserrat"
     >
-    <div className="max-w-[1296px] mx-auto flex items-center justify-between p-4">
+    <div className="max-w-[1296px] bg-white relative mx-auto flex items-center justify-between p-4 z-[80]">
 
       <Link href="/">
         <Image src={portofovillalogomono} alt='logo' width={80} className="invert" />
@@ -150,86 +150,120 @@ const Navbar = () => {
     </div>
     {/* Mobile Menu */}
     <div
-          className={`p-4 left-0 w-full absolute top-[61px] flex flex-col gap-4 shadow-2xl justify-between bg-white/70 backdrop-blur-lg text-black transition-transform duration-700 border-t border-graymuted z-50 h-fit ${
-            isMenuOpen ? 'flex' : 'hidden'
-          } lg:hidden z-[60]`}
-        >
-          <div className="flex flex-col gap-6">
-            {quickLinks.map(({ name, href }) => (
-              name === "Rooms" ? (
-                <div key={href}>
-                  <button onClick={() => setIsRoomsOpen((prev) => !prev)} className="text-lg flex items-center gap-2 w-full">
-                    Rooms <ChevronDown className={`w-4 h-4 transition-transform ${isRoomsOpen ? 'rotate-180' : ''}`} />
-                  </button>
-                  {/* Accordion Dropdown */}
-                  <div className={`overflow-hidden flex justify-between gap-4 flex-col  border-b border-[#d9d9d9] transition-all duration-300 ${
-                    isRoomsOpen ? 'max-h-fit opacity-100 pb-6 mt-4' : 'max-h-0 opacity-0 pb-0 mt-0'
-                  }`}>
-                    {rooms.map((room) => (
-                      <Link className='flex gap-4 items-center' key={room.slug?.current || room._id} href={`/pages/${room.slug?.current}`}>
-                      {room.roomName}
-                      <ArrowRight width={16} height={16} className="transition-all mt-[2px]"/>
-                    </Link>
-                    ))}
-                  </div>
-                </div>
-              ) : (
-                <Link key={href} href={href} className="hover:underline text-lg" onClick={() => setIsMenuOpen(false)}>
-                  {name}
-                </Link>
-              )
+  className={`
+    p-4 left-0 w-full absolute top-[61px] flex-col gap-4 shadow-2xl justify-between 
+    bg-white/70 backdrop-blur-lg text-black border-t border-graymuted z-[60] h-fit
+    transition-all duration-500 ease-in-out
+    transform ${isMenuOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none'}
+    lg:hidden
+  `}
+  style={{ transitionProperty: 'opacity, transform' }}
+>
+  <div className="flex flex-col gap-6 mb-4">
+    {quickLinks.map(({ name, href }) =>
+      name === 'Rooms' ? (
+        <div key={href}>
+          <button
+            onClick={() => setIsRoomsOpen((prev) => !prev)}
+            className="text-lg flex items-center gap-2 w-full"
+          >
+            Rooms{' '}
+            <ChevronDown
+              className={`w-4 h-4 transition-transform ${
+                isRoomsOpen ? 'rotate-180' : ''
+              }`}
+            />
+          </button>
+
+          {/* Accordion Dropdown */}
+          <div
+            className={`overflow-hidden flex justify-between gap-4 flex-col border-b border-[#d9d9d9] transition-all duration-300 ${
+              isRoomsOpen
+                ? 'max-h-fit opacity-100 pb-6 mt-4'
+                : 'max-h-0 opacity-0 pb-0 mt-0'
+            }`}
+          >
+            {rooms.map((room) => (
+              <Link
+                className="flex gap-4 items-center"
+                key={room.slug?.current || room._id}
+                href={`/pages/${room.slug?.current}`}
+              >
+                {room.roomName}
+                <ArrowRight width={16} height={16} className="transition-all mt-[2px]" />
+              </Link>
             ))}
           </div>
-
-          <Link href={contact} className={`w-full flex font-semibold gap-2 p-4 text-center justify-center bg-secondary text-white text-[14px] rounded items-center`}>
-              <Image src={WaLogo} alt='WAlogo' width={20} height={20}/>
-              Hubungi kami
-            </Link>
         </div>
+      ) : (
+        <Link
+          key={href}
+          href={href}
+          className="hover:underline text-lg"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          {name}
+        </Link>
+      )
+    )}
+  </div>
+
+  <Link
+    href={contact}
+    className="w-full flex font-semibold gap-2 p-4 text-center justify-center bg-secondary text-white text-[14px] rounded items-center"
+  >
+    <Image src={WaLogo} alt="WAlogo" width={20} height={20} />
+    Hubungi kami
+  </Link>
+</div>
+
 
     {/* dropdown */}
     <div
-      className={`w-full absolute top-[61px] border-b hidden bg-white mx-auto z-50
-        ${isRoomsOpen ? "lg:block" : "hidden"}`}
-    >
+        className={`
+          w-full gap-10 bg-white overflow-hidden
+          absolute left-0 right-0 z-50
+          transition-all duration-500 ease-in-out border-b border-[#d9d9d9]
+          ${isRoomsOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}
+        `}
+        style={{
+          transitionProperty: 'opacity, transform',
+        }}
+      >
+        <div className="max-w-[1296px] flex justify-center mx-auto gap-8 px-4 pb-6 pt-8">
+        <div className="flex flex-col gap-6 w-[calc(50%-20px)]">
+          <a href="#room" className="text-xl font-semibold font-krona text-primary underline">Kamar kami</a>
+          <div className="flex flex-wrap gap-x-6 gap-y-4">
+            <div className="w-[calc(50%-12px)] border-t border-graymuted" />
+            <div className="w-[calc(50%-12px)] border-t border-graymuted" />
+            {rooms.map((room) => (
+              <Link
+                key={room.slug.current}
+                href={`/pages/${room.slug.current}`}
+                className="w-[calc(50%-12px)] text-black flex items-center gap-2 group hover:translate-x-2 transition-all duration-500"
+                onMouseEnter={() =>
+                  setHoveredImage(room.image ? urlFor(room.image).width(500).height(300).url() : "")
+                }
+              >
+                {room.roomName}
+                <ArrowRight className="w-4 h-4 mt-[1px] opacity-0 -translate-x-3 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500" />
+              </Link>
+            ))}
+          </div>
+        </div>
 
-<div className="max-w-[1296px] mx-auto flex gap-10 justify-center px-4 py-6 mt-2">
-<div className="flex w-[calc(50%-20px)] flex-col gap-6 overflow-hidden">
-      <a href="#room" className="text-xl font-semibold font-krona text-primary underline">Kamar kami</a>
-        <div className='flex flex-wrap gap-x-6 gap-y-4'>
-          <div className='w-[calc(50%-12px)] border-t border-graymuted'></div>
-          <div className='w-[calc(50%-12px)] border-t border-graymuted'></div>
-        {rooms.map((room) => (
-            <Link
-              key={room.slug?.current || room._id}
-              href={`/pages/${room.slug?.current}`}
-              className="text-black flex group items-center rounded gap-2 transition-all duration-500 hover:translate-x-2 w-[calc(50%-12px)] group"
-              onMouseEnter={() =>
-                setHoveredImage(room.image ? urlFor(room.image).width(500).height(300).url() : "")
-              }
-            >
-
-              {room.roomName}
-              <ArrowRight width={16} height={16} className="transition-all duration-500 -translate-x-3 mt-[1px] opacity-0 group-hover:opacity-100 group-hover:translate-x-0"/>
-              
-
-            </Link>
-        ))}
-  </div>
-      {/* Right Side - Room Image */}
-      
-      </div>
+        {/* Right: Image Preview */}
         <div className="relative w-[calc(50%-20px)] h-[300px] overflow-hidden bg-primary/70 rounded-lg">
           <Image
             ref={imgRef}
-            src={currentImage ?? leafroom}
-            alt="Room Image"
+            src={currentImage}
+            alt="Room Preview"
             width={700}
             height={460}
             className="rounded-lg w-full h-full object-cover"
           />
+        </div>
       </div>
-</div>
       
     </div>
   </nav>

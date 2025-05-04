@@ -10,7 +10,6 @@ import type { SanityDocument } from "next-sanity";
 const Navbar = ({ isHomePage }: { isHomePage: boolean }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Sanity query to fetch the 'contact' document
   const CONTACT_QUERY = `*[_type == "contact"][0]`;
 
   const [contactData, setContactData] = useState<any>(null);

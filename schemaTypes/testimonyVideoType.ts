@@ -51,10 +51,10 @@ export const testimonyVideo = defineType({
               options: {
                 list: [
                   { title: 'AirBNB', value: 'Airbnb' },
-                  { title: 'Booking.com', value: 'Booking-com' },
-                  { title: 'Tiket.com', value: 'Tiket-com' },
+                  { title: 'Booking.com', value: 'Booking.com' },
+                  { title: 'Tiket.com', value: 'Tiket.com' },
                   { title: 'Agoda', value: 'Agoda' },
-                  { title: 'Trip.com', value: 'Trip-com' },
+                  { title: 'Trip.com', value: 'Trip.com' },
                   { title: 'Traveloka', value: 'Traveloka' },
                   { title: 'Google', value: 'Google' },
                 ],
@@ -121,10 +121,10 @@ export const testimonyVideo = defineType({
               options: {
                 list: [
                   { title: 'AirBNB', value: 'Airbnb' },
-                  { title: 'Booking.com', value: 'Booking-com' },
-                  { title: 'Tiket.com', value: 'Tiket-com' },
+                  { title: 'Booking.com', value: 'Booking.com' },
+                  { title: 'Tiket.com', value: 'Tiket.com' },
                   { title: 'Agoda', value: 'Agoda' },
-                  { title: 'Trip.com', value: 'Trip-com' },
+                  { title: 'Trip.com', value: 'Trip.com' },
                   { title: 'Traveloka', value: 'Traveloka' },
                   { title: 'Google', value: 'Google' },
                 ],

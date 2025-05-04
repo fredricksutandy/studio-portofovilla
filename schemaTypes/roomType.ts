@@ -21,6 +21,47 @@ export const room = defineType({
       description: 'Slug untuk URL halaman kamar.',
     }),
     defineField({
+      name: 'gallery',
+      title: 'Galeri Gambar',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          title: 'Kategori Gambar',
+          fields: [
+            defineField({
+              name: 'category',
+              title: 'Kategori',
+              type: 'string',
+              description: 'Kategori untuk mengelompokkan gambar (contoh: Eksterior, Interior, Kamar Tidur, dll)',
+              validation: (Rule) => Rule.required().error('Kategori gambar wajib diisi'),
+            }),
+            defineField({
+              name: 'images',
+              title: 'Daftar Gambar',
+              type: 'array',
+              of: [
+                {
+                  type: 'image',
+                  options: { hotspot: true },
+                }
+              ],
+              description: 'Gambar-gambar dalam kategori ini',
+              validation: (Rule) => Rule.required().min(1).error('Setiap kategori harus memiliki minimal satu gambar'),
+            }),
+          ],
+          preview: {
+            select: {
+              title: 'category',
+              media: 'images.0',
+            },
+          },
+        },
+      ],
+      description: 'Galeri gambar yang dikategorikan untuk menampilkan kamar dari berbagai sudut.',
+      validation: Rule => Rule.required().min(1).error('Galeri gambar wajib diisi dengan minimal satu kategori'),
+    }),
+    defineField({
       name: 'description',
       title: 'Deskripsi',
       type: 'text',
@@ -284,10 +325,10 @@ export const room = defineType({
                 list: [
                   { title: 'Whatsapp', value: 'Whatsapp' },
                   { title: 'AirBNB', value: 'Airbnb' },
-                  { title: 'Booking.com', value: 'Booking-com' },
-                  { title: 'Tiket.com', value: 'Tiket-com' },
+                  { title: 'Booking.com', value: 'Booking.com' },
+                  { title: 'Tiket.com', value: 'Tiket.com' },
                   { title: 'Agoda', value: 'Agoda' },
-                  { title: 'Trip.com', value: 'Trip-com' },
+                  { title: 'Trip.com', value: 'Trip.com' },
                   { title: 'Traveloka', value: 'Traveloka' },
                 ],
               },
@@ -300,6 +341,13 @@ export const room = defineType({
               description: 'URL untuk melakukan pemesanan di platform yang dipilih.',
               validation: Rule => Rule.required().uri().error('Link wajib diisi dan valid'),
             },
+            {
+              name: 'advantage',
+              title: 'Keuntungan Pemesanan',
+              type: 'string',
+              description: 'Tulis keuntungan jika pelanggan memesan melalui platform ini. Contoh: "20% lebih murah."',
+              
+            }            
           ],
         },
       ],
@@ -314,19 +362,6 @@ export const room = defineType({
       description: 'Gambar utama yang digunakan untuk kamar.',
       options: { hotspot: true },
       validation: Rule => Rule.required().error('Gambar utama wajib diisi'),
-    }),
-    defineField({
-      name: 'gallery',
-      title: 'Galeri Gambar',
-      type: 'array',
-      of: [
-        {
-          type: 'image',
-          options: { hotspot: true }, // Memastikan setiap gambar di dalam array bisa menggunakan hotspot secara individu
-        },
-      ],
-      description: 'Gambar tambahan untuk menampilkan kamar dari berbagai sudut.',
-      validation: Rule => Rule.required().min(1).error('Galeri gambar wajib diisi dengan minimal satu gambar'),
     }),
   ],
 });

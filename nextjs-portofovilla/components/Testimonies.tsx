@@ -7,21 +7,15 @@ import Image from "next/image";
 import testimony from '../public/light-green-testimony-ico.svg';
 import starTemplateWhite from '../public/star-template-white.png';
 import starBackhold from '../public/star-backhold.png';
-import starTemplate from '../public/star-template-white.png';
 import ButtonWa from "./common/ButtonWa";
 import imageUrlBuilder from "@sanity/image-url";
 import { LicenseDraft } from "@carbon/icons-react";
 import GmapLogo from '../public/google-maps-2020-icon.svg';
-import airbnbLogo from '../public/colored-ico/Airbnb-Logo.wine.svg';
-import tiketComLogo from '../public/colored-ico/Tiket.com_logo.svg';
-import bookingComLogo from '../public/colored-ico/Booking.com-Logo.wine.svg';
-import agodaLogo from '../public/colored-ico/Agoda_transparent_logo.svg';
-import tripComLogo from '../public/colored-ico/Trip.com_logo.svg.svg';
-import travelokaLogo from '../public/colored-ico/traveloka-logo-brandlogo.net.svg';
-import googleLogo from '../public/colored-ico/devicon_google.svg';
+import { platformData } from '@/constant/platforms';
 
 const builder = imageUrlBuilder(client);
-const urlFor = (source) => builder.image(source).url();
+
+const urlFor = (source: any) => builder.image(source).url();
 // Sanity query to fetch the 'testimony' document
 const TESTIMONY_QUERY = `*[_type == "testimonyVideo"][0]`;
 
@@ -37,29 +31,19 @@ const TestimonySection = () => {
     fetchTestimonyData();
   }, []);
 
-  const platformImages: Record<string, string> = {
-    Airbnb: airbnbLogo,
-    'Tiket-com': tiketComLogo,
-    'Booking-com': bookingComLogo,
-    Agoda: agodaLogo,
-    'Trip-com': tripComLogo,
-    Traveloka: travelokaLogo,
-    Google: googleLogo
-  };
-
   if (!testimonyData) {
     return <div>Loading...</div>; // Loading state
   }
 
   return (
-    <section className="justify-between mx-auto bg-floral-bg bg-[100%] px-5 py-10 md:py-[144px] relative rounded-3xl md:rounded-[64px]" id="testimonies">
+    <section className="justify-between mx-auto bg-floral-bg bg-[100%] px-5 py-20 md:py-[120px] relative rounded-3xl md:rounded-[64px]" id="testimonies">
       <div className="max-w-[1296px] block m-auto">
       <div className="flex flex-col items-center gap-2 mb-2 md:mb-6">
-          <Image src={testimony} alt="Asterisk icon" width={80} height={64} className="w-16 md:w-20 mb-2 mx-auto" />
-          <h2 className="font-krona text-base md:text-lg text-[#99CE8F] font-medium leading-[100%!important]">{testimonyData.title}</h2>
+          <Image src={testimony} alt="Asterisk icon" width={48} height={48} className="w-14 md:w-16 mb-2 mx-auto" />
+          <h2 className="font-krona text-base text-[#99CE8F] font-medium leading-[100%!important]">{testimonyData.title}</h2>
         </div>
 
-        <h3 className="font-montserrat mx-auto text-center mb-10 text-3xl md:text-5xl font-bold text-white max-w-[990px]">{testimonyData.subtitle}</h3>
+        <h3 className="font-montserrat mx-auto text-center mb-10 text-3xl md:text-3xl font-bold text-white max-w-[990px]">{testimonyData.subtitle}</h3>
 
 
         {/* <div className="flex gap-2 mb-6 md:mb-12 items-center justify-center">
@@ -76,15 +60,15 @@ const TestimonySection = () => {
               >
                 <div className="relative h-[14px] w-fit">
                 <Image
-                  src={starTemplate}
-                  alt="{platform.platformName}"
+                  src={starTemplateWhite}
+                  alt={platform.platformName}
                   width={300}
                   height={300}
                   className="w-[72px] h-[14px] relative z-30 bg-contain bg-no-repeat top-0"
                 />
                 <Image
                   src={starBackhold}
-                  alt="{platform.platformName}"
+                  alt={platform.platformName}
                   width={300}
                   height={300}
                   className="w-[72px] h-[14px] absolute z-10 bg-contain bg-no-repeat top-0 left-0"
@@ -104,7 +88,7 @@ const TestimonySection = () => {
   Rated <span className="font-semibold">{platform.rating}</span> in
 </p>
                 <Image
-                  src={platformImages[platform.platformName]}
+                  src={platformData[platform.platformName]?.logo || platformData['Google'].logo}
                   alt={platform.platformName}
                   width={300}
                   height={300}
@@ -118,8 +102,8 @@ const TestimonySection = () => {
           )}
         </div>
 
-        <div className="w-full mb-[80px] z-10 p-0 md:py-10 relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 bg-white rounded-3xl overflow-hidden">
-          {testimonyData.testimonies?.slice(0, 3).map((testimony, index) => (
+        <div className="w-full mb-[80px] z-10 p-0 md:py-6 relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 bg-white rounded-3xl overflow-hidden">
+          {testimonyData.testimonies?.slice(0, 3).map((testimony: any, index: any) => (
             <div
             key={index}
             className={`flex flex-col bg-white p-8 md:px-10 justify-between self-stretch gap-2 transition-all border-b md:border-b-0 border-r border-neutral-200
@@ -153,7 +137,7 @@ const TestimonySection = () => {
                 <p className="text-primary text-xl md:text-2xl font-bold">
                     {testimony.testimonyHighlight}
                   </p>
-                  <p className="text-black text-sm md:text-base text-start">{testimony.testimony}</p>
+                  <p className="text-gray-700 text-sm text-start">{testimony.testimony}</p>
                 
                 </div>
                   <div className="flex items-center gap-2 mt-8">

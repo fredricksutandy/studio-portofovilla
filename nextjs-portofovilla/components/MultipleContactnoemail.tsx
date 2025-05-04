@@ -72,7 +72,7 @@ const ContactSection = () => {
                   <div key={index} className="mb-1">
                     <p className="block text-sm font-krona w-fit text-white mb-2">Social Media</p>
                     <div className="flex gap-3 flex-wrap">
-                        <a key={index} href={social.link} className="p-2 bg-white rounded-lg flex items-center justify-center w-fit gap-3 group transition-all duration-500 hover:scale-95">
+                        <a key={index} href={social.link} className="p-2 bg-white rounded flex items-center justify-center w-fit gap-3 group transition-all duration-500 hover:scale-95">
                           {social.icon && <Image width={16} height={16} src={urlFor(social.icon).url()} alt={`${social.platform} icon`} className="w-5 h-5 mt-[1px]" />}
                           {social.platform}
                           <ArrowUpRight className="text-bluelink mt-[1px] w-4 h-4 group-hover:rotate-45 transition-all duration-500"/>

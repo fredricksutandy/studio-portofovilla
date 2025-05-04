@@ -103,7 +103,7 @@ const FooterSection = () => {
               <div key={phone.phoneNumber} className="flex gap-2">
                 <p className="text-end">{phone.phoneName}</p> - 
                 {phone.phoneUrl ? (
-                  <a href={phone.phoneUrl} target="_blank" rel="noopener noreferrer">
+                  <a href={phone.phoneUrl} target="_blank" rel="noopener noreferrer" className="underline">
                     {phone.phoneNumber}
                   </a>
                 ) : (

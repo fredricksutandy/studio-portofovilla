@@ -70,21 +70,21 @@ const TriviaSection = () => {
               <div className="w-full p-6 bg-lightbg md:w-[calc(33%-16px)] min-w-[280px] relative">
                   <Image src={arrowLink} alt="palm-leaf" className="absolute right-4 top-4"/>
                   <p className="text-primary text-xl md:text-xl font-medium">{triviaData.reccomByOne}</p>
-                  <a className="text-black underline hover:text-blue-600 transition-all cursor-pointer text-base" href={triviaData.reccomOneURL}>{triviaData.reccomOne}</a>
+                  <a className="text-black underline hover:text-blue-600 transition-all cursor-pointer text-sm" href={triviaData.reccomOneURL}>{triviaData.reccomOne}</a>
               </div>
 
               <div className="w-full p-6 bg-lightbg md:w-[calc(33%-16px)] min-w-[280px] relative">
               <Image src={arrowLink} alt="palm-leaf" className="absolute right-4 top-4"/>
 
                   <p className="text-primary text-xl md:text-xl font-medium">{triviaData.reccomByTwo}</p>
-                  <a className="text-black underline hover:text-blue-600 transition-all cursor-pointer text-base" href={triviaData.reccomTwoURL}>{triviaData.reccomTwo}</a>
+                  <a className="text-black underline hover:text-blue-600 transition-all cursor-pointer text-sm" href={triviaData.reccomTwoURL}>{triviaData.reccomTwo}</a>
               </div>
 
               <div className="w-full p-6 bg-lightbg md:w-[calc(33%-16px)] min-w-[280px] relative">
               <Image src={arrowLink} alt="palm-leaf" className="absolute right-4 top-4"/>
 
                   <p className="text-primary text-xl md:text-xl font-medium">{triviaData.reccomByThree}</p>
-                  <a className="text-black underline hover:text-blue-600 transition-all cursor-pointer text-base" href={triviaData.reccomThreeURL}>{triviaData.reccomThree}</a>
+                  <a className="text-black underline hover:text-blue-600 transition-all cursor-pointer text-sm" href={triviaData.reccomThreeURL}>{triviaData.reccomThree}</a>
               </div>
           </div>
         </div>

@@ -15,6 +15,32 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 
+interface GalleryImage {
+  asset: {
+    url: string;
+    metadata?: {
+      lqip: string;
+    };
+  };
+}
+
+interface GalleryGroup {
+  category: string;
+  images: GalleryImage[];
+}
+
+interface RoomImageProps {
+  image: {
+    asset: {
+      url: string;
+      metadata: {
+        lqip: string;
+      };
+    };
+  };
+  gallery: GalleryGroup[];
+}
+
 // Initialize image builder
 const builder = imageUrlBuilder(client);
 
@@ -25,7 +51,7 @@ const RoomImage: React.FC<RoomImageProps> = ({ image, gallery }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFullScreenModalOpen, setIsFullScreenModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<any>(null); // To track the selected image
-
+console.log(gallery);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
@@ -39,6 +65,10 @@ const RoomImage: React.FC<RoomImageProps> = ({ image, gallery }) => {
     setSelectedImage(null); // Reset selected image
   };
 
+  const allGalleryImages = gallery
+  ?.flatMap(g => g.images)
+  ?.filter(img => img?.asset?.url);
+
   // Initialize Splide only on mobile screens
   useEffect(() => {
     const splideInstance = new Splide(".splide", {
@@ -50,9 +80,13 @@ const RoomImage: React.FC<RoomImageProps> = ({ image, gallery }) => {
       arrows: true,
       autoplay: true,
       interval: 3000,
-    }).mount();
-
-    return () => splideInstance.destroy(); // Cleanup on unmount
+    });
+    
+    splideInstance.mount();
+    
+    return () => {
+      splideInstance.destroy();
+    };
   }, []);
 
   return (
@@ -62,16 +96,16 @@ const RoomImage: React.FC<RoomImageProps> = ({ image, gallery }) => {
       <div className="flex flex-wrap gap-2 p-0 md:p-4 h-fit md:h-[460px] md:flex-row relative">
 
       <div className="px-5 py-2 bg-primary/80 text-white rounded-xl text-lg gap-2 font-montserrat font-semibold items-center hidden md:flex absolute bottom-6 right-6" onClick={openModal} >
-        <ImageCopy width={20} height={20}/> {gallery.length + 1}
+        <ImageCopy width={20} height={20}/> {allGalleryImages.length}
       </div>
 
-        <div className="splide splide-gallery md:hidden" >
+        <div className="splide splide-gallery md:hidden">
           <div className="splide__track">
             <ul className="splide__list" onClick={openModal}>
-              {gallery.map((img, index) => (
+              {allGalleryImages.map((img: GalleryImage, index: number) => (
                 <li key={index} className="splide__slide">
                   <Image
-                    src={urlFor(img).url()}
+                    src={img.asset.url}
                     alt={`Room Image ${index + 1}`}
                     width={760}
                     height={450}
@@ -96,10 +130,10 @@ const RoomImage: React.FC<RoomImageProps> = ({ image, gallery }) => {
           onClick={openModal}
         />
         <div className="hidden md:flex max-w-[540px] flex-wrap gap-2 flex-1 h-full items-stretch" onClick={openModal}>
-          {gallery.slice(0, 4).map((img, index) => (
+          {allGalleryImages.slice(0, 4).map((img, index) => (
             <Image
               key={index}
-              src={urlFor(img).url()}
+              src={img.asset.url}
               alt={`Room Image ${index + 1}`}
               width={280}
               height={240}
@@ -128,24 +162,29 @@ const RoomImage: React.FC<RoomImageProps> = ({ image, gallery }) => {
           <DialogTitle className="text-xl md:text-3xl font-semibold font-krona">Foto kamar</DialogTitle>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {gallery.map((img, index) => (
-              <div key={index} className="relative">
-                <Image
-                  src={urlFor(img).url()}
-                  alt={`Room Image ${index + 1}`}
-                  width={500}
-                  height={300}
-                  loading="lazy"
-                  objectFit="cover"
-                  className="rounded-lg w-full h-[300px] object-cover cursor-pointer transition-all hover:opacity-80"
-                  blurDataURL={image.asset.metadata.lqip}
-                  placeholder="blur"
-                  onClick={() => openFullScreenModal(img)} // Open full-screen modal
-                />
+          {gallery?.map((group, groupIndex) => (
+            <div key={groupIndex}>
+              <h3 className="text-xl md:text-2xl font-montserrat font-semibold mb-4">{group.category}</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-12">
+                {group.images
+                  ?.filter((img: GalleryImage) => img?.asset?.url)
+                  .map((img: GalleryImage, imgIndex: number) => (
+                    <div key={imgIndex} className="relative">
+                      <Image
+                        src={img.asset.url}
+                        alt={`${group.category} image ${imgIndex + 1}`}
+                        width={500}
+                        height={300}
+                        className="rounded-lg w-full h-[300px] object-cover cursor-pointer transition-all hover:opacity-80"
+                        placeholder="blur"
+                        blurDataURL={img.asset.metadata?.lqip || undefined}
+                        onClick={() => openFullScreenModal(img.asset.url)} // If modal is grouped-aware
+                      />
+                    </div>
+                  ))}
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </DialogPanel>
       </Dialog>
 
@@ -166,7 +205,7 @@ const RoomImage: React.FC<RoomImageProps> = ({ image, gallery }) => {
           {selectedImage && (
             <div className="relative">
               <Image
-                src={urlFor(selectedImage).url()}
+                src={selectedImage}
                 alt="Full-Screen Room Image"
                 width={1340}
                 height={960}

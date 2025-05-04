@@ -32,7 +32,7 @@ const CollapsibleCard: React.FC<CollapsibleCardProps> = ({
 
   return (
     <div
-      className={`md:p-4 font-montserrat rounded-lg ${bgColor} ${textColor} 
+      className={`p-4 font-montserrat rounded-lg ${bgColor} ${textColor} 
         ${hideOnMobile ? "hidden md:block" : ""} 
         ${hideOnDesktop ? "md:hidden" : ""}`
       }
@@ -41,8 +41,8 @@ const CollapsibleCard: React.FC<CollapsibleCardProps> = ({
         className={`flex gap-2 items-center justify-between cursor-pointer ${textSize} ${fontWeight}`}
         onClick={() => setIsOpen(!isOpen)}
       >
-        <div className="flex gap-2 items-center">
-          {Icon && <Icon width={20} height={20} />} {/* Render icon if provided */}
+        <div className="flex gap-2 text-sm items-center">
+          {Icon && <Icon width={16} height={16} />} {/* Render icon if provided */}
           {title}
         </div>
         <ChevronDown
@@ -52,7 +52,7 @@ const CollapsibleCard: React.FC<CollapsibleCardProps> = ({
         />
       </div>
       {isOpen && (
-        <p className="text-sm font-normal mt-2">{content}</p>
+        <p className="text-sm font-normal mt-2 text-neutral-700">{content}</p>
       )}
     </div>
   );

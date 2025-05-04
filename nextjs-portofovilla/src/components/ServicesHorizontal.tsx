@@ -4,7 +4,6 @@ import { useCallback, useEffect, useState } from "react";
 import { client } from "@/sanity/client";
 import Image from "next/image";
 import serviceIco from "../../public/service-ico.svg";
-import imageUrlBuilder from "@sanity/image-url";
 import type { SanityDocument } from "next-sanity";
 import HorizontalScroll from "../../components/common/HorizontalScroll"; // Import new component
 
@@ -65,13 +64,13 @@ const ServicesSection = () => {
   }
 
   return (
-    <section className="mx-auto bg-white py-10 md:py-[120px] relative gap-8 pe-4" id="services">
+    <section className="mx-auto bg-white py-20 md:py-[120px] relative gap-8 pe-4" id="services">
       <div className="px-4 md:px-6 absolute left-0">
-      <div className="flex flex-row items-end gap-2 mb-6">
-        <Image src={serviceIco} alt="Asterisk icon" width={44} height={44} />
-        <h2 className="font-krona text-base md:text-lg text-primary font-medium">{serviceData.title}</h2>
+      <div className="flex flex-row items-end gap-2 mb-4">
+        <Image src={serviceIco} alt="Asterisk icon" width={36} height={36} />
+        <h2 className="font-krona text-base text-primary font-medium leading-[100%]">{serviceData.title}</h2>
       </div>          
-      <h3 className="font-montserrat text-2xl md:text-4xl font-bold text-black mb-10 max-w-[990px]">
+      <h3 className="font-montserrat text-2xl md:text-3xl font-semibold text-black mb-10 max-w-[640px]">
         {serviceData.subtitle}
       </h3>
       </div>

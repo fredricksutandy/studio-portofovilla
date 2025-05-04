@@ -82,27 +82,27 @@ const RoomSection = () => {
       <h3 className="text-2xl lg:text-3xl text-black font-semibold mb-10">
       {sectionMetadata.subtitle}</h3> */}
 
-            <div className="flex flex-row items-end gap-2 mb-4 md:mb-6">
-                <Image src={roomsIco} alt="Asterisk icon" width={40} height={40} className="flex items-center" />
-                <h2 className="font-krona text-base md:text-lg text-primary font-medium leading-[100%!important]">
+            <div className="flex flex-row items-end gap-2 mb-4">
+                <Image src={roomsIco} alt="Asterisk icon" width={32} height={32} className="flex items-center" />
+                <h2 className="font-krona text-base text-primary font-medium leading-[100%!important]">
                 {sectionMetadata.title}
                 </h2>
                 
               </div>
-              <h3 className="font-montserrat text-2xl md:text-4xl font-bold text-neutral-800 mb-6 md:mb-10 max-w-[768px]">
+              <h3 className="font-montserrat text-xl md:text-3xl font-semibold text-neutral-800 mb-6 md:mb-10 max-w-[540px]">
       {sectionMetadata.subtitle}</h3>
 
       <div className="flex flex-wrap gap-7">
         {roomData.map((room: any, index: number) => (
           <div key={index} className="w-full lg:w-[calc(50%-16px)]">
             {room.image && (
-                <div className="relative w-full h-[220px] sm:h-[280px] md:h-[360px] overflow-hidden rounded-lg">
+                <div className="relative w-full h-[220px] sm:h-[280px] md:h-[360px] overflow-hidden rounded">
                   <Image
                     src={urlFor(room.image).url()}
                     alt={room.roomName}
                     layout="fill"
                     objectFit="cover"
-                    className="rounded-lg transition-all duration-700 ease-in-out hover:scale-105 "
+                    className="rounded transition-all duration-700 ease-in-out hover:scale-105 "
                   />
                 </div>
               )}
@@ -119,22 +119,22 @@ const RoomSection = () => {
                           className="object-cover"
                         />
                         )}
-                        <h3 className="text-sm md:text-[14px]">{specification.name}</h3>
+                        <h3 className="text-sm">{specification.name}</h3>
                       </li>
                     );
                   })}
                 </ul>
-              <h2 className={`font-krona text-xl md:text-2xl font-semibold text-neutral-800 mb-2 under`}>{room.roomName}</h2>
-              <p className={`text-neutral-500 text-xl font-semibold mb-4`}>IDR {room.price} / malam</p>
+              <h2 className={`font-krona text-xl font-semibold text-neutral-800 mb-2 under`}>{room.roomName}</h2>
+              <p className={`text-primary text-lg font-medium mb-4 leading-relaxed`}>IDR {room.price} / malam</p>
               
-              <p className="text-gray-700 text-base max-w-[560px] mb-6">
+              <p className="text-gray-700 text-sm max-w-[560px] mb-6 leading-relaxed">
                     {summarizeText(room.description)}
                   </p>
               
               <Link
                 href={`/pages/${room.slug.current}`}
-                passHref className="bg-primary flex text-white items-center justify-center transition-all duration-500 ease-in-out hover:translate-x-1 gap-2 w-full md:w-fit px-6 py-4 mb-4 rounded-lg hover:underline hover-rtw group">
-                <p className="block m-0 text-base font-medium">
+                passHref className="bg-primary flex text-white items-center justify-center transition-all duration-500 ease-in-out hover:translate-x-1 gap-2 w-full md:w-fit px-6 py-4 mb-4 rounded hover:underline hover-rtw group">
+                <p className="block m-0 text-sm font-medium">
                   View Details
                 </p>
                 

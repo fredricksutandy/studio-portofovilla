@@ -44,7 +44,7 @@ interface ButtonProps {
   link: string;
   text: string;
   type: 'green' | 'white' | 'transparent' | 'transparent-border';
-  iconType?: string; // Optional icon
+  iconType?: string | React.ReactElement; // Optional icon
   radius: 'full' | 'lg';
   width: 'full' | 'fit';
   displayMobile: boolean;
@@ -68,7 +68,9 @@ interface BookingSectionProps {
   nightsOptions: number[];
   totalPrice: string;
   limitedOfferText: string;
-  bookingMethods: { platform: string; link: string }[];
+  priceDisclaimer: Text;
+  priceRange: string;
+  bookingMethods: { platform: string; link: string; advantage: string; }[];
 }
 
 // splide component

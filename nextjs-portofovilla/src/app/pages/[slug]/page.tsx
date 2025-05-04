@@ -1,8 +1,6 @@
 import { Metadata } from "next";
 import { client } from "@/sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
-import ButtonWa from "../../../../components/common/ButtonWa";
-import WaLogo from '../../../../public/logos_whatsapp-icon.svg'
 import SectionNav from "../../../../components/common/SectionNavigation";
 import FooterSectionalttwo from "../../../../components/layout/Footeralttwo";
 import FacilitiesRoomSection from "../../../../components/common/RoomComponents/Facilities";
@@ -51,7 +49,6 @@ interface RoomData {
     title: string;
     description: string;
   }[];
-  
   extraAmenities?: {
     name: string;
     price: string;
@@ -59,13 +56,27 @@ interface RoomData {
   bookingMethod?: {
     platform: string;
     link: string;
+    advantage: string;
   }[];
   image?: {
-    asset: any;
-    url: string;
-    lqip: string;
+    asset: {
+      url: string;
+      metadata: {
+        lqip: string;
+      };
+    };
   };
-  gallery?: { url: string; lqip: string }[];
+  gallery?: {
+    category: string;
+    images: {
+      asset: {
+        url: string;
+        metadata: {
+          lqip: string;
+        };
+      };
+    }[];
+  }[];
 }
 
 interface Slug {
@@ -124,21 +135,25 @@ async function getRoomData(slug: string): Promise<RoomData | null> {
     },
     bookingMethod[]{
       platform,
-      link
+      link,
+      advantage
     },
     image {
       asset->{
         url,
         metadata {
-          lqip // Include lqip here
+          lqip
         }
       }
     },
     gallery[] {
-      asset->{
-        url,
-        metadata {
-          lqip // Include lqip here
+      category,
+      images[] {
+        asset->{
+          url,
+          metadata {
+            lqip
+          }
         }
       }
     }
@@ -250,7 +265,7 @@ export default async function RoomDetails({ params }: { params: { slug: string }
             })}
           </ul>
           <ExpandableSection maxHeight="200px">
-            <p className="text-sm md:text-base leading-relaxed text-neutral-500 whitespace-pre-line">{room.description}</p>
+            <p className="text-sm leading-relaxed text-neutral-500 whitespace-pre-line">{room.description}</p>
             
           </ExpandableSection>
 
@@ -323,9 +338,9 @@ export default async function RoomDetails({ params }: { params: { slug: string }
               <p>Check-Out : <span className="font-semibold">{room.checkOut} WIB</span> </p>
             </div>
           
-          <ul className="list-decimal ps-10 mb-6">
+          <ul className="list-decimal ps-8 mb-6">
             {room.rulesList?.map((rule: string, index: number) => (
-              <li className="font-semibold text-sm md:text-lg text-black" key={index}>{rule}</li>
+              <li className="font-semibold text-base md:text-lg text-black" key={index}>{rule}</li>
             ))}
           </ul>
 
@@ -344,65 +359,6 @@ export default async function RoomDetails({ params }: { params: { slug: string }
         bookingMethods={room.bookingMethod}
       />
 </div>
-      
-
-      {/* <section className="bg-white rounded-0 mb-0 w-full left-0 fixed bottom-0 top-auto md:bottom-auto md:w-[calc(32%-16px)] md:sticky md:top-[80px] h-fit mt-8 p-4 md:p-6 border border-graymuted md:rounded-xl md:mb-4">
-        <div className="">
-          <p className="text-lg md:text-xl text-center md:text-start font-bold pb-4 border-0 md:border-b border-graymuted mb-0 md:mb-4 font-krona">Rp.{room.price} <span className="text-sm font-normal"> per malam</span></p>
-          
-          <div className="mb-4 hidden md:block">
-            <p className="text-green-700 text-semibold">Free cancellation</p>
-            <p className="text-neutral-700">Sebelum Senin, 23 Oct</p>
-          </div>
-
-          <div className="hidden md:flex gap-4 mb-6">
-          <div className="flex flex-col flex-1">
-            <p className="mb-2 font-semibold">Tamu</p>
-            <select name="" id="" className="w-full p-3 text-sm bg-white rounded-md border border-black">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
-
-          <div className="hidden md:flex flex-col flex-1">
-            <p className="mb-2 font-semibold">Malam</p>
-            <select name="" id="" className="w-full p-3 text-sm bg-white rounded-md border border-black">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
-          </div>
-
-          <div className="total hidden md:flex w-full justify-between mb-8">
-            <p className="font-semibold text-base">
-              Total
-            </p>
-            <p className="font-semibold text-base">
-              3.400.000
-            </p>
-          </div>
-
-          <p className="hidden md:block text-sm text-center text-gray-600 mt-2 bg-amber-100 p-4 rounded-lg mx-auto mb-6">Penawaran terbatas : potongan 10% untuk reservasi 3 malam</p>
-
-          <ButtonWa 
-            link="{contactData.whatsappURL}"
-            text="Book melalui WA"
-            type="green" // or "white"
-            iconType={WaLogo.src}
-            width="full"
-            radius="full"
-            displayMobile={true}
-            displayDesktop={false}
-          />
-
-        </div>
-      </section> */}
   </section>
   
   <section className="pt-14 pb-20 max-w-[1296px] mx-auto px-4 font-montserrat" id="kebijakan">

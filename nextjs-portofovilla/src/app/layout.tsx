@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Montserrat, Krona_One } from "next/font/google";
 import "./globals.css";
 import Head from "next/head";
+import LenisProvider from '@/components/LenisProvider';
+import Lenis from "@studio-freight/lenis/types";
+
 
 // Import the fonts
 const montserrat = Montserrat({
@@ -35,7 +38,9 @@ export default function RootLayout({
       <body
         className={`${montserrat.className} ${kronaOne.className} antialiased`}
       >
+        <LenisProvider>
         {children}
+        </LenisProvider>
       </body>
     </html>
   );

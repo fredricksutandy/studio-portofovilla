@@ -164,7 +164,7 @@ const HorizontalScroll = ({ items = [], contact }: HorizontalScrollProps) => {
               />
 
               <div className="flex flex-col md:flex-row gap-2 md:gap-4 flex-wrap items-start md:items-center">
-                <h3 className="tracking-[2px] text-xl max-w-md lg:text-2xl font-krona font-semibold mb-0 md:mb-2">
+                <h3 className="tracking-[2px] text-xl max-w-md font-krona font-medium mb-0 md:mb-2">
                   {item.serviceTitle}
                 </h3>
                 <p className={`px-3 py-2 rounded-lg w-fit text-sm font-medium h-fit mb-4 md:mb-2
@@ -177,7 +177,7 @@ const HorizontalScroll = ({ items = [], contact }: HorizontalScrollProps) => {
                   : "Gratis!"}
                 </p>
               </div>
-              <p className="text-base mb-4">{item.serviceDescription}</p>
+              <p className="text-sm mb-4">{item.serviceDescription}</p>
 
               {item.serviceLink && item.serviceLink.trim() !== "" && (
                 <Link
@@ -185,7 +185,7 @@ const HorizontalScroll = ({ items = [], contact }: HorizontalScrollProps) => {
                   passHref
                   className="flex items-center justify-center transition-all duration-500 ease-in-out hover:translate-x-2 gap-2 w-full md:w-fit mb-4 rounded border border-primary md:border-0 p-3 md:p-0 underline group"
                 >
-                  <p className="block m-0 text-base font-medium">View Details</p>
+                  <p className="block m-0 text-sm font-medium">View Details</p>
                   <div className="w-fit overflow-hidden">
                   <ArrowRight width={16} height={16} className="mt-[2px] transition-all duration-500 -translate-x-4 opacity-0 group-hover:opacity-100 group-hover:-translate-x-0"/>
                   
