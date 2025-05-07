@@ -20,6 +20,19 @@ export const CTA = defineType({
       rows: 3,
     }),
     defineField({
+      name: 'region',
+      title: 'Region',
+      type: 'string',
+      description: 'Region di mana layanan ini tersedia.',
+      options: {
+        list: [
+          { title: 'bali', value: 'bali' },
+          { title: 'jogja', value: 'jogja' },
+        ],
+      },
+      validation: (rule) => rule.required().error('Region wajib diisi.'),
+    }),
+    defineField({
       name: 'buttonName',
       title: 'Nama Tombol',
       description: 'Teks pada tombol CTA (misal: Pesan Sekarang)',

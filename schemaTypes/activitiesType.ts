@@ -21,6 +21,17 @@ export const activities = defineType({
       validation: (rule) => rule.required().error('Sub-judul wajib diisi.'),
     }),
     defineField({
+      name: 'region',
+      title: 'Daerah Kegiatan',
+      type: 'text',
+      options: {
+        list: ['jogja', 'bali'],
+        layout: 'dropdown'
+      },
+      description: 'Berikan daerah terkait dimana villa berada (Bali atau Jogja)',
+      validation: (rule) => rule.required().error('Daerah wajib diisi.'),
+    }),
+    defineField({
       name: 'activities',
       title: 'Daftar Kegiatan',
       type: 'array',

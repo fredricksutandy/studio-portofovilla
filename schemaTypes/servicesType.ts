@@ -21,6 +21,19 @@ export const service = defineType({
       validation: (rule) => rule.required().error('Sub-judul wajib diisi.'),
     }),
     defineField({
+      name: 'region',
+      title: 'Region',
+      type: 'string',
+      description: 'Region di mana layanan ini tersedia.',
+      options: {
+        list: [
+          { title: 'Bali', value: 'bali' },
+          { title: 'Jogja', value: 'jogja' },
+        ],
+      },
+      validation: (rule) => rule.required().error('Region wajib diisi.'),
+    }),
+    defineField({
       name: 'services',
       title: 'Daftar Layanan',
       type: 'array',

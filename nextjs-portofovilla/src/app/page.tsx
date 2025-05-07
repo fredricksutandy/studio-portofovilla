@@ -1,6 +1,7 @@
 import Heroaltone from "../../components/Heroaltone";
 import { Montserrat } from "next/font/google";
 
+import About from "../components/About";
 import AboutSectionaltone from "../../components/Aboutaltone";
 import AboutSectionalttwo from "../../components/Aboutalttwo";
 import AboutSectionaltthree from "../../components/Aboutaltthree";
@@ -85,14 +86,19 @@ export default function IndexPage() {
       {/* <RoomSectionaltthree /> */}
       {/* <RoomSectionalttwo /> */}
       {/* <RoomSectionaltone /> */}
+
+      <About />
+
       <Room />
 
       {/* <AboutSectionaltone /> */}
-      <AboutSectionalttwo />
+
+      {/* <AboutSectionalttwo /> */}
       {/* <AboutSectionaltthree /> */}
 
       {/* <TriviaSectionaltone /> kyny ga pake, jelek juga */}
-      <TriviaSectionalttwo />
+      {/* <TriviaSectionalttwo /> */}
+
       {/* <TriviaSectionaltthree /> */}
 
       <CertificateAward />

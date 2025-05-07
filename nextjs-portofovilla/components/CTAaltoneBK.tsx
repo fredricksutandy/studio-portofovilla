@@ -13,29 +13,27 @@ interface CTAType {
   image: any;
 }
 
+
 const builder = imageUrlBuilder(client);
 const urlFor = (source: any) => builder.image(source).auto('format').fit('max');
 
-// Adjust the CTA query to filter by region
-const CTA_QUERY = (regionId: string) => `
-  *[_type == "CTA" && region == "${regionId}"][0]{
-    title,
-    subtitle,
-    buttonName,
-    image
-  }
-`;
+const CTA_QUERY = `*[_type == "CTA"][0]{
+  title,
+  subtitle,
+  buttonName,
+  image
+}`;
 
 const CONTACT_QUERY = `*[_type == "multipleContact"][0]{ phoneInfo }`;
 
-const CTASection = ({ regionId }: { regionId: string }) => {
+const CTASection = () => {
   const [ctaData, setCtaData] = useState<CTAType | null>(null);
   const [contact, setContact] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       const [cta, contactData] = await Promise.all([
-        client.fetch<CTAType>(CTA_QUERY(regionId)),
+        client.fetch<CTAType>(CTA_QUERY),
         client.fetch<SanityDocument>(CONTACT_QUERY)
       ]);
       setCtaData(cta);
@@ -43,7 +41,7 @@ const CTASection = ({ regionId }: { regionId: string }) => {
     };
 
     fetchData();
-  }, [regionId]); // Re-fetch data when regionId changes
+  }, []);
 
   if (!ctaData || !contact) return <div>Loading...</div>;
 

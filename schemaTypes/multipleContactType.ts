@@ -95,7 +95,7 @@ export const multipleContact = defineType({
             }),
             defineField({
               name: 'phoneNumber',
-              title: 'NomorKontak',
+              title: 'Nomor Kontak',
               type: 'string',
               description: 'Masukkan detail kontak. Contoh: "081234567890"',
               validation: (rule) => rule.required().error('nomor kontak wajib diisi.'),
@@ -107,6 +107,17 @@ export const multipleContact = defineType({
               description: 'Masukkan link nomor Whatsapp pemilik kontak.',
               validation: (rule) =>
                 rule.uri({ allowRelative: false }).error('Link harus berupa URL valid.'),
+            }),
+            defineField({
+              name: 'region',
+              title: 'Daerah Kegiatan',
+              type: 'text',
+              options: {
+                list: ['jogja', 'bali'],
+                layout: 'dropdown'
+              },
+              description: 'Berikan daerah terkait dimana villa berada (Bali atau Jogja)',
+              validation: (rule) => rule.required().error('Daerah wajib diisi.'),
             }),
           ],
           preview: {
