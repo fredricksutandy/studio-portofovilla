@@ -5,8 +5,7 @@ import { client } from "@/sanity/client"; // Adjust the import as per your file 
 import imageUrlBuilder from "@sanity/image-url";
 import type { SanityDocument } from "next-sanity";
 import Image from "next/image";
-import aboutico from '../public/about-ico.svg'
-import aboutdum from '../../public/aboutdum.png'
+import asteriskico from '../../public/asterisk-ico.svg'
 
 const builder = imageUrlBuilder(client);
 const urlFor = (source: any) => builder.image(source).auto('format').fit('max');
@@ -30,20 +29,38 @@ const AboutSection = () => {
   }
 
   return (
-    <section className="w-full py-40 px-6 " id="about">
-    
+    <section className="w-full py-40 px-6 max-w-[1296px] mx-auto" id="about">
+      {/* <div className="flex flex-row md:flex-col items-center gap-4 mb-6 md:mb-12">
+        <Image src={asteriskico} alt="Asterisk icon" width={28} height={28} className=""/>
+        <h2 className="font-libre text-base md:text-lg text-primary font-medium leading-[100%!important]">{aboutData.title}</h2>
+      </div> */}
+    <div className="flex flex-row items-center gap-2 md:gap-4 md:mb-6">
+        <Image src={asteriskico} alt="Asterisk icon" width={24} height={24} className=""/>
+        <h2 className="font-montserrat text-base md:text-lg text-primary font-medium leading-[100%!important]">{aboutData.title}</h2>
+      </div>
     <div className="relative w-full md:w-auto mt-10 md:mt-0 mb-6">
-    <h1 className="text-[40px] md:text-[80px] font-medium leading-tight text-center w-full max-w-[560px] mx-auto absolute left-[50%] top-[50%] translate-y-[-50%] translate-x-[-50%] z-20">
-        Seppenggal surga, di tepi Jogjakarta
+    {/* <h1 className="text-[48px] sm:text-[72px] md:text-[80px] font-medium font-libre leading-relaxed md:text-center w-full max-w-[580px] mx-auto relative md:absolute md:left-[50%] md:top-[50%] md:translate-y-[-50%] md:translate-x-[-50%] z-20">
+    {aboutData.subtitle}
     </h1>
     <Image
       src={aboutdum}
       alt="Decorative"
-      className=" h-[500px] w-[370px] object-cover rounded-t-full mx-auto opacity-60"
+      className="h-[220px] sm:h-[540px] w-10/12 sm:w-10/12 max-w-[400px] object-cover md:rounded-t-full ms-auto me-0 md:mx-auto opacity-60 -mt-8 md:mt-0"
+    /> */}
+
+<h1 className="text-[48px] sm:text-[64px] md:text-[80px] font-bold font-libre w-full max-w-[580px] relative z-20">
+    {aboutData.subtitle}
+    </h1>
+    <Image
+      src={urlFor(aboutData.aboutImage).url()}
+      width={1000}
+      height={400}
+      alt="Decorative"
+      className="h-[220px] sm:h-[400px] w-9/12 object-cover me-0 ms-auto opacity-75 -mt-7 md:-mt-12"
     />
   </div>
-    <p className="text-[16px] text-gray-600 text-center max-w-[720px] mx-auto">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi quaerat, alias voluptas porro recusandae atque. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eum atque, dolore ipsam rem molestias beatae soluta odit ut eos laborum?
+    <p className="text-sm md:text-base text-gray-600 max-w-[720px] md:text-end ms-auto">
+    {aboutData.aboutDescription}    
     </p>
 
   

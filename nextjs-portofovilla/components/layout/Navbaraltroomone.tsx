@@ -204,7 +204,7 @@ const Navbar = () => {
         </ul>
 
         {/* Contact Button (Desktop) */}
-        {/* {contact && (
+        {contact && (
           <Link
             href={contact}
             className={`hidden lg:flex font-semibold gap-2 p-3 ${
@@ -215,23 +215,8 @@ const Navbar = () => {
             Hubungi kami
           </Link>
         )}
-      </div> */}
-
-      {/* cobacoba */}
-      {contact && (
-        <Link
-        href="pages/region/bali"
-        className={`hidden lg:flex font-semibold gap-2 p-3 ${
-          isMenuOpen || isRoomsOpen || isScrolled ? 'bg-secondary text-white' : 'bg-white text-black'
-        } text-sm rounded items-center`}
-      >
-        <Image src={WaLogo} alt="WAlogo" width={20} height={20} />
-        Lihat Villa Bali
-      </Link>
-      
-        
-        )}
       </div>
+
       <div
   className={`
      w-full flex-col gap-4 shadow-2xl justify-between 

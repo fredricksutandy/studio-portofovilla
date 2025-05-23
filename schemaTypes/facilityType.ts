@@ -21,26 +21,6 @@ export const facility = defineType({
       validation: (rule) => rule.required().error('Sub-judul wajib diisi.'),
     }),
     defineField({
-      name: 'region',
-      title: 'Daerah kegiatan',
-      type: 'text',
-      options: {
-        list: [
-          { title: 'AirBNB', value: 'Airbnb' },
-          { title: 'Booking.com', value: 'Booking.com' },
-          { title: 'Tiket.com', value: 'Tiket.com' },
-          { title: 'Agoda', value: 'Agoda' },
-          { title: 'Trip.com', value: 'Trip.com' },
-          { title: 'Traveloka', value: 'Traveloka' },
-          { title: 'Google', value: 'Google' },
-          { title: 'Whatsapp', value: 'Whatsapp' },
-        ],
-        layout: 'dropdown',
-      },
-      description: 'Berikan daerah terkait dimana villa berada (Bali atau Jogja)',
-      validation: (rule) => rule.required().error('Daerah wajib diisi.'),
-    }),
-    defineField({
       name: 'facilities',
       title: 'Daftar Fasilitas',
       type: 'array',

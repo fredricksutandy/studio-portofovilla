@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Montserrat, Krona_One } from "next/font/google";
+import { Montserrat, Krona_One, Libre_Baskerville } from "next/font/google";
 import "./globals.css";
 import Head from "next/head";
 import LenisProvider from '@/components/LenisProvider';
@@ -10,6 +10,12 @@ import Lenis from "@studio-freight/lenis/types";
 const montserrat = Montserrat({
   weight: ['100', '400', '500', '600', '700', '900'],
   subsets: ['latin'],
+  display: 'swap',
+});
+
+const libreBaskerville = Libre_Baskerville({
+  subsets: ['latin'],
+  weight: ['400', '700'], // Choose weights you plan to use
   display: 'swap',
 });
 
@@ -36,7 +42,7 @@ export default function RootLayout({
         />
       </Head>
       <body
-        className={`${montserrat.className} ${kronaOne.className} antialiased`}
+        className={`${montserrat.className} ${kronaOne.className} ${libreBaskerville.className} antialiased`}
       >
         <LenisProvider>
         {children}

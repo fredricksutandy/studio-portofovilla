@@ -44,7 +44,7 @@ const CertificateAwardSection = () => {
     <section className="flex justify-between flex-col lg:flex-row max-w-[1296px] mx-auto bg-white px-4 py-[144px] gap-4 lg:gap-8">
       <div className="flex flex-col lg:flex-row  items-center gap-10">
       <div className="w-full lg:w-[calc(60%-12px)]">
-      <h2 className="font-krona text-base text-primary font-medium mb-2">{certifAwardData.title}</h2>
+      <h2 className="font-libre text-lg text-primary font-bold mb-2">{certifAwardData.title}</h2>
 
       <h3 className="font-medium text-xl max-w-[600px]">
         {certifAwardData.subtitle}

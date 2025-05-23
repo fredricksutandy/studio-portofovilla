@@ -12,6 +12,7 @@ const config: Config = {
       fontFamily: {
         krona: ['"Krona One"', 'sans-serif'], // Add Krona One
         montserrat: ['"Montserrat"', 'sans-serif'], // Add Montserrat
+        libre: ['Libre Baskerville', 'serif'],
       },
       colors: {
         background: "var(--background)",

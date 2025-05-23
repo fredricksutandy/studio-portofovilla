@@ -10,7 +10,7 @@ export const activities = defineType({
       name: 'title',
       title: 'Judul',
       type: 'string',
-      description: 'Masukkan judul utama untuk section kegiatan ini. Contoh: "Kegiatan Menarik di Sekitar Villa".',
+      description: 'Masukkan judul utama untuk bagian kegiatan. Contoh: "Kegiatan Menarik di Sekitar Villa".',
       validation: (rule) => rule.required().error('Judul wajib diisi.'),
     }),
     defineField({
@@ -19,17 +19,6 @@ export const activities = defineType({
       type: 'text',
       description: 'Berikan sub-judul untuk memperkenalkan berbagai kegiatan yang tersedia. Contoh: "Temukan berbagai aktivitas yang dapat melengkapi liburan Anda".',
       validation: (rule) => rule.required().error('Sub-judul wajib diisi.'),
-    }),
-    defineField({
-      name: 'region',
-      title: 'Daerah Kegiatan',
-      type: 'text',
-      options: {
-        list: ['jogja', 'bali'],
-        layout: 'dropdown'
-      },
-      description: 'Berikan daerah terkait dimana villa berada (Bali atau Jogja)',
-      validation: (rule) => rule.required().error('Daerah wajib diisi.'),
     }),
     defineField({
       name: 'activities',

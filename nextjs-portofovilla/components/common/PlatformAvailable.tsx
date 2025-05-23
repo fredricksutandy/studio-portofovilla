@@ -7,14 +7,16 @@ import { platformData } from '../../src/constant/platforms';
 
 // Expected Sanity schema result type
 type PlatformSectionType = {
+  title?: string;
+  subtitle?: string;
   platforms: { platformName: string; platformUrl?: string }[];
 };
 
 // Sanity query
-const PLATFORM_QUERY = `*[_type == "platformAvailable"][0]{ platforms }`;
+const PLATFORM_QUERY = `*[_type == "platformAvailable"][0]{ title, subtitle, platforms }`;
 
 export default function PlatformAvailable() {
-  const [platforms, setPlatforms] = useState<{ platformName: string; platformUrl?: string }[]>([]);
+  const [platformSection, setPlatformSection] = useState<PlatformSectionType | null>(null);
 
   const [angleOffset, setAngleOffset] = useState(0);
   const lastScrollY = useRef(0);
@@ -26,7 +28,7 @@ export default function PlatformAvailable() {
     const fetchData = async () => {
       try {
         const data: PlatformSectionType = await client.fetch(PLATFORM_QUERY);
-        setPlatforms(data?.platforms ?? []);
+        setPlatformSection(data ?? null);
       } catch (error) {
         console.error("Failed to fetch platforms:", error);
       }
@@ -67,13 +69,11 @@ export default function PlatformAvailable() {
       {/* Center title */}
 
       <div className="text-center md:absolute inset-0 flex flex-col gap-2 items-center justify-center z-10 pointer-events-none">
-      <h2 className="font-krona mb-2 text-base text-primary font-medium leading-[100%!important]">Platform Booking</h2>
+      <h1 className="font-libre mb-2 text-lg text-primary font-bold leading-[100%!important]">{platformSection?.title}</h1>
 
-        <h1 className="text-4xl font-semibold">
-          Kami ada
-          <br />
-          di mana-mana!
-        </h1>
+        <h2 className="text-4xl font-semibold whitespace-break-spaces">
+          {platformSection?.subtitle}
+        </h2>
         <p className="text-sm text-neutral-400">*klik salah satu platform</p>
       </div>
 
@@ -81,7 +81,7 @@ export default function PlatformAvailable() {
       <div className="md:absolute inset-0 w-full h-fit md:h-full z-10">
         {/* Mobile layout */}
         <div className="md:hidden flex flex-wrap justify-center items-center gap-2 h-full px-4">
-          {platforms.map((item, index) => {
+          {platformSection?.platforms.map((item, index) => {
             const platform = platformData[item.platformName];
             if (!platform) return null;
 
@@ -99,7 +99,7 @@ export default function PlatformAvailable() {
                   backgroundColor: platform.bgColor,
                   color: platform.textColor,
                   transform: `rotate(${rotation}deg)`,
-                  zIndex: isEvenRow ? platforms.length - row : row,
+                  zIndex: isEvenRow ? platformSection.platforms.length - row : row,
                 }}
               >
                 {platform.logo ? (
@@ -127,8 +127,8 @@ export default function PlatformAvailable() {
 
         {/* Desktop orbit layout */}
         <div className="hidden md:block">
-          {platforms.map((item, index) => {
-            const count = platforms.length;
+          {platformSection?.platforms.map((item, index) => {
+            const count = platformSection.platforms.length;
             const baseAngle = (360 / count) * index;
             const totalAngle = baseAngle + angleOffset * 360;
             const radians = (totalAngle * Math.PI) / 180;

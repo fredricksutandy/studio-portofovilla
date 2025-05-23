@@ -9,7 +9,8 @@ export const trivia = defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
-      description: 'isi dengan : "Trivia"',
+      description: 'Tulis judul tentang pengalaman atau keunggulan villa, contoh: “Ahli dalam liburan istimewa.”',
+      validation: (rule) => rule.required().error('Judul wajib diisi.'),
     }),
     defineField({
       name: 'triviaSection',

@@ -38,20 +38,20 @@ const ContactSection = () => {
   }
 
   return (
-    <section className="max-w-full h-fit px-4 py-20 lg:py-[120px] bg-contact-bg-2 bg-no-repeat bg-fixed bg-cover bg-top" id="contact">
+    <section className="max-w-full h-fit px-4 py-10 lg:py-[120px] bg-contact-bg-2 bg-no-repeat bg-fixed bg-cover bg-top" id="contact">
       <div className="max-w-[1296px] m-auto w-full">
-          <div className="mb-10 md:mb-16">
-              <h2 className="font-krona text-3xl lg:text-4xl  text-white font-semibold mb-2" >{contactData.title}</h2>
-              <p className="text-base text-gray-300 max-w-[520px]">{contactData.subTitle}</p>
+          <div className="mb-14">
+              <h2 className="font-libre text-3xl lg:text-4xl  text-white font-bold mb-2" >{contactData.title}</h2>
+              <p className="text-sm text-gray-300 max-w-[520px]">{contactData.subTitle}</p>
           </div>
           
-          <div className="flex flex-col md:flex-row flex-wrap mb-10 gap-4">
+          <div className="flex flex-col md:flex-row flex-wrap mb-14 gap-3">
             <div className="mb-6 flex gap-1 flex-col flex-1 min-w-[180px] max-w-sm">
               {contactData.phoneInfo.map((phone: { phoneNumber: string | undefined; phoneName: string | undefined; phoneUrl: string | undefined;  }, index: Key | null | undefined) => (
                   <div key={index} className="mb-1">
                     <p className="block text-sm font-krona w-fit text-white mb-2">{phone.phoneName}</p>
                     <div className="flex gap-3">
-                      <a href={phone.phoneNumber} className="mb-0 break-all lg:mb-2 block text-xl hover:underline w-fit text-neutral-200">{phone.phoneNumber}</a>
+                      <a href={phone.phoneNumber} className="mb-0 break-all lg:mb-2 block text-base md:text-xl hover:underline w-fit text-neutral-200">{phone.phoneNumber}</a>
                       <Copy onClick={() => handleCopy(phone.phoneNumber ?? '')} size={20} className="text-white cursor-pointer mt-1"/>
                     </div>
 
@@ -87,7 +87,7 @@ const ContactSection = () => {
                   <div key={index} className="mb-1">
                     <p className="block text-sm font-krona w-fit text-white mb-2">{address.addressName}</p>
                     <div className="flex gap-3">
-                    <a href={address.addressUrl} className="mb-0 break-all lg:mb-2 block text-xl hover:underline w-fit text-neutral-200">{address.addressDetail}</a>
+                    <a href={address.addressUrl} className="mb-0 break-all lg:mb-2 block text-base md:text-xl hover:underline w-fit text-neutral-200">{address.addressDetail}</a>
                     <Copy onClick={() => handleCopy(address.addressDetail ?? '')} size={20} className="text-white cursor-pointer mt-1"/>
                     </div>
                   </div>

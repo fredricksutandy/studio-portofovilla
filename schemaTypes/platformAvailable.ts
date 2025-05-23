@@ -10,7 +10,14 @@ export const platformAvailable = defineType({
       name: 'title',
       title: 'Judul Tengah',
       type: 'string',
-      description: 'Teks utama yang muncul di tengah, misalnya: "Kami ada di mana-mana!"',
+      description: 'Masukkan judul utama untuk bagian platform. Contoh: "Platform Booking".',
+    }),
+    defineField({
+      name: 'subtitle',
+      title: 'Sub-judul',
+      type: 'text',
+      description: 'Berikan sub-judul untuk menggambarkan bagian platform. Contoh: "Kami ada di mana-mana!".',
+      validation: (rule) => rule.required().error('Sub-judul wajib diisi.'),
     }),
     defineField({
       name: 'platforms',

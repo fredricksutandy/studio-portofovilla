@@ -17,6 +17,7 @@ import Contact from "../../components/Contact";
 import MultipleContact from "../../components/MultipleContact";
 import MultipleContactnoemail from "../../components/MultipleContactnoemail";
 
+import Trivia from "../components/Trivia";
 import TriviaSectionaltone from "../../components/Triviaaltone";
 import TriviaSectionalttwo from "../../components/Triviaalttwo";
 import TriviaSectionaltthree from "../../components/Triviaaltthree";
@@ -39,6 +40,7 @@ import RoomSectionaltfour from "../components/Roomaltfour";
 import RoomSectionalttwo from "../../components/Roomalttwo";
 import RoomSectionaltone from "../../components/Roomaltone";
 import Room from "../../components/Room";
+import RoomSection from "../components/Room";
 
 import FooterSection from "../../components/layout/Footer";
 import FooterSectionaltone from "../../components/layout/Footeraltone";
@@ -89,15 +91,21 @@ export default function IndexPage() {
 
       <About />
 
-      <Room />
-
+      {/* <Room /> */}
+      <RoomSection />
       {/* <AboutSectionaltone /> */}
+
+      {/* <AboutSectionalttwo />
+
+      <TriviaSectionalttwo /> */}
+      
 
       {/* <AboutSectionalttwo /> */}
       {/* <AboutSectionaltthree /> */}
 
       {/* <TriviaSectionaltone /> kyny ga pake, jelek juga */}
-      {/* <TriviaSectionalttwo /> */}
+      <Trivia />
+      
 
       {/* <TriviaSectionaltthree /> */}
 

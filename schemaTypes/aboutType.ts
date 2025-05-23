@@ -9,14 +9,14 @@ export const about = defineType({
       name: 'title',
       title: 'Judul',
       type: 'string',
-      description: 'Tuliskan slogan atau tagline yang mewakili villa Anda. [Contoh: "Liburan Mewah di Surga Tropis"]',
+      description: 'Tuliskan judul dari bagian ini. Contoh: "Tentang kami"',
       validation: (rule) => rule.required().error('Judul wajib diisi.'),
     }),
     defineField({
       name: 'subtitle',
       title: 'Sub-judul',
       type: 'string',
-      description: 'Tambahkan tagline atau kutipan singkat yang menggambarkan villa Anda. [Contoh: "Keindahan alam dan villa menawan"]',
+      description: 'Tambahkan tagline atau kutipan singkat yang menggambarkan villa Anda. Contoh: "Keindahan alam dan villa menawan"',
       validation: (rule) => rule.required().error('Sub-judul wajib diisi.'),
     }),
     defineField({
@@ -30,7 +30,6 @@ export const about = defineType({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
-      description: 'Slug digunakan sebagai URL unik untuk halaman ini. Klik "Generate" untuk membuat slug otomatis berdasarkan judul.',
       options: {
         source: 'title',
         maxLength: 96,
@@ -41,7 +40,7 @@ export const about = defineType({
       name: 'aboutImage',
       title: 'Gambar tentang villa ',
       type: 'image',
-      description: 'Unggah gambar yang mewakili villa Anda. Gambar ini akan ditampilkan di sebelah kiri dalam halaman.',
+      description: 'Unggah gambar yang mewakili villa Anda.',
       options: {
         hotspot: true,
       },
@@ -51,11 +50,10 @@ export const about = defineType({
       name: 'secondAboutImage',
       title: 'Gambar kedua tentang villa ',
       type: 'image',
-      description: 'Unggah gambar kedua yang mewakili villa Anda. Gambar ini akan ditampilkan di sebelah kiri dalam halaman.',
+      description: 'Unggah gambar kedua yang mewakili villa Anda.',
       options: {
         hotspot: true,
       },
-      validation: (rule) => rule.required().error('Gambar wajib diunggah.'),
     }),
   ],
 });
